@@ -1,0 +1,19 @@
+package mvc.service;
+
+/**
+ * Created by xiaxing
+ * At 2019/3/11 14:53
+ */
+
+public interface TransportationDataAccessService {
+    //车辆信息
+    String getVehicleInformation(String vehiNo, String companyName,String region,String currentPage,String pageSize);
+    //驾驶员信息
+    String getDriverInformation(String vehiNo, String name, String idNumber, String areaName,String currentPage,String pageSize);
+    //公司信息
+    String getCompanyInformation(String companyName, String type, String region, String minNum, String maxNum);
+    //交班信息
+    String getHandoverInfo(String vehicle,String currentPage,String pageSize);
+    //服务质量平台
+    String getServiceQualityPlatform(String companyName, String grade, String year);
+}
