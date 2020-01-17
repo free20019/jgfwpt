@@ -1,0 +1,18 @@
+package mvc.service;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/18
+ */
+public interface TerminalService {
+    String getVehicle();
+
+    String getHostfailure(String lPNumber, String time, String faultType);
+
+    Integer audit(String vehicle, String time,Integer type,Integer sh);
+
+    String terminalerror();
+
+    String goodrate(String companyName, String stime, String etime);
+}

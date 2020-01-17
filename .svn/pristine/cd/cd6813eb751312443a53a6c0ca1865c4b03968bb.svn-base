@@ -1,0 +1,29 @@
+package mvc.service;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 9:35
+ */
+public interface IndustryOperationService {
+    String getCyclingOperation(String cphm,String zgs,String startTime,String endTime,String page,String pageSize);
+
+    String getIndustryOperations(String startTime,String endTime);
+
+    String getIndustryOperation(String startTime,String endTime);
+
+    String getTransportationCapacityHotspot();
+
+    String getTaxiHotspot();
+
+    String getOperationTrend();
+
+    String getVehicleOperation();
+
+    String getIncomeAnalysis();
+
+    String getVehicleRunningRanking();
+
+    String getDriverIllegalStatistics();
+
+    String getComplaintsStatistics();
+}

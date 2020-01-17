@@ -1,0 +1,325 @@
+package mvc.service.impl;
+
+import mvc.service.TerminalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/18
+ */
+@Service("terminalService")
+public class TerminalServiceImpl implements TerminalService {
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    @Override
+    public String getVehicle() {
+        String sql = "select distinct vehicle_no from tb_alarm_jtwx@db69";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getHostfailure(String lPNumber, String time, String faultType) {
+        //sql1判断条件
+        String tj="";
+        //sql2判断条件：时间
+        String time2="";
+        //sql3判断条件：时间
+        String time3="";
+        //sql2判断条件
+        String tj2="";
+        //sql2判断条件
+        String tj3="";
+        //sql3判断条件
+        String tj4="";
+        String sql2="";
+        String sql3="";
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        if(lPNumber!=null&&!lPNumber.isEmpty()&&!lPNumber.equals("null")&&lPNumber.length()>0){
+            tj += " and al.vehicle_no='"+lPNumber+"'";
+            tj3 += " and vehicle_no='"+lPNumber+"'";
+            tj4 += " and v.vehi_no ='"+lPNumber+"'";
+        }
+        if(time!=null&&!time.isEmpty()&&!time.equals("null")&&time.length()>0){
+            tj += " and al.db_time <=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            tj2 += " and al.db_time <=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            tj4 += " and al.ALT_TIME <=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            tj4 += " and al.ALT_TIME >=to_date('"+time.substring(0,10)+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+            try {
+                time2=sdf.format(sdf.parse(time).getTime()-7*60*60*1000*24);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(new Date());
+            time3=sdf.format(ca.getTime());
+            ca.add(Calendar.DAY_OF_MONTH, -7);
+            time2=sdf.format(ca.getTime());
+            tj4 += " and al.ALT_TIME <=to_date('"+time3+" 23:59:59','yyyy-MM-dd hh24:mi:ss')";
+            tj4 += " and al.ALT_TIME >=to_date('"+time3+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        }
+        tj2 +=" and al.db_time >=to_date('"+time2+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        if(faultType!=null&&!faultType.isEmpty()&&!faultType.equals("null")&&faultType.length()>0){
+            if(faultType.indexOf("1")>-1){
+                sql2 +="select al.vehicle_no,v.comp_name from (select distinct vehicle_no from tb_alarm_jtwx_history@db69 where 1=1";
+                sql2 +=tj3;
+                sql2 += " minus select distinct vehicle_no from tb_alarm_jtwx_history@db69 al where 1=1";
+                sql2 +=tj2;
+                sql2 +=") al left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no";
+            }
+            if(faultType.indexOf("4")>-1){
+                sql3 +="select distinct max(al.alt_time) db_time,v.vehi_no vehicle_no,v.comp_name from TB_ALERT@db69 al,vw_vehicle@db69 v where al.vehi_id = v.vehi_id and ALT_CAUSE='紧急报警' ";
+                sql3 +=tj4;
+                sql3 += "group by vehi_no,v.comp_name";
+            }
+            if(faultType.indexOf("2")>-1||faultType.indexOf("3")>-1||faultType.indexOf("5")>-1){
+                tj +=" and ( 1=0";
+                if(faultType.indexOf("2")>-1){
+                    tj +=" or al.GPS_INACCURATE='1' or al.NO_GPS='1'";
+                }
+                if(faultType.indexOf("3")>-1){
+                    tj +=" or al.EMPTY_HEAVY='1'";
+                }
+                if(faultType.indexOf("5")>-1){
+                    tj +=" or al.JJQ_ALARM='1'";
+                }
+                tj +=")";
+            }else{
+                tj +=" and 1=0";
+            }
+
+        }else{
+            sql2 +="select al.vehicle_no,v.comp_name from (select distinct vehicle_no from tb_alarm_jtwx_history@db69 where 1=1";
+            sql2 +=tj3;
+            sql2 += " minus select distinct vehicle_no from tb_alarm_jtwx_history@db69 al where 1=1";
+            sql2 +=tj2;
+            sql2 +=") al left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no";
+
+            sql3 +="select distinct max(al.alt_time) db_time,v.vehi_no vehicle_no,v.comp_name from TB_ALERT@db69 al,vw_vehicle@db69 v where al.vehi_id = v.vehi_id and ALT_CAUSE='紧急报警'";
+            sql3 +=tj4;
+            sql3 += "group by vehi_no,v.comp_name";
+        }
+        String sql1 = "select al.VEHICLE_NO,al.GPS_INACCURATE,al.NO_GPS,al.EMPTY_HEAVY,al.JJQ_ALARM,to_char(al.DB_TIME, 'yyyy-MM-dd hh24:mi:ss') DB_TIME,v.comp_name,sh.* from tb_alarm_jtwx@db69 al" +
+                " left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no " +
+                " left join tb_alarm_jtwx_sh@db69 sh on al.vehicle_no=sh.vehicle_no_sh and al.db_time=sh.db_time_sh where 1=1";
+        sql1 +=tj;
+        //查询终端故障（除了主机无通讯故障,紧急报警异常）
+        List<Map<String, Object>>list1=jdbcTemplate.queryForList(sql1);
+        //查询主机无通讯故障
+        List<Map<String, Object>>list2=null;
+        if(sql2!=""){
+            list2=jdbcTemplate.queryForList(sql2);
+        }
+        //查询紧急报警故障
+        List<Map<String, Object>>list3=null;
+        if(sql3!=""){
+            list3=jdbcTemplate.queryForList(sql3);
+        }
+        //list1和list2整合
+        if(list2==null){
+            for(int i=0;i<list1.size();i++){
+                list1.get(i).put("HOST_NO_COMMUNICATION","0");
+            }
+        }else{
+            for(int i=0;i<list2.size();i++){
+                int count=0;
+                for (int j=0;j<list1.size();j++){
+                    if (list1.get(j).get("VEHICLE_NO").equals(list1.get(i).get("VEHICLE_NO"))){
+                        list1.get(j).put("HOST_NO_COMMUNICATION","1");
+                        count++;
+                        break;
+                    }
+                }
+                if(count==0){
+                    Map<String, Object> map=new HashMap<String, Object>();
+                    map.put("VEHICLE_NO", list2.get(i).get("VEHICLE_NO"));
+                    map.put("COMP_NAME", list2.get(i).get("COMP_NAME"));
+                    map.put("GPS_INACCURATE","0");
+                    map.put("NO_GPS","0");
+                    map.put("EMPTY_HEAVY","0");
+                    map.put("JJQ_ALARM","0");
+                    map.put("HOST_NO_COMMUNICATION","1");
+                    list1.add(map);
+                }
+            }
+        }
+        //list1和list3整合
+        if(list3==null){
+            for(int i=0;i<list1.size();i++){
+                list1.get(i).put("EMERGENCY_ALARM","0");
+            }
+        }else{
+            for(int i=0;i<list3.size();i++){
+                int count=0;
+                for (int j=0;j<list1.size();j++){
+                    if (list1.get(j).get("VEHICLE_NO").equals(list3.get(i).get("VEHICLE_NO"))){
+                        list1.get(j).put("EMERGENCY_ALARM","1");
+                        count++;
+                        break;
+                    }
+                }
+                if(count==0){
+                    Map<String, Object> map=new HashMap<String, Object>();
+                    map.put("VEHICLE_NO", list3.get(i).get("VEHICLE_NO"));
+                    map.put("COMP_NAME", list3.get(i).get("COMP_NAME"));
+                    map.put("GPS_INACCURATE","0");
+                    map.put("NO_GPS","0");
+                    map.put("EMPTY_HEAVY","0");
+                    map.put("JJQ_ALARM","0");
+                    map.put("EMERGENCY_ALARM","1");
+                    list1.add(map);
+                }
+            }
+        }
+        for(int i=0;i<list1.size();i++){
+            if(!list1.get(i).containsKey("HOST_NO_COMMUNICATION")){
+                list1.get(i).put("HOST_NO_COMMUNICATION","0");
+            }
+            if(!list1.get(i).containsKey("EMERGENCY_ALARM")){
+                list1.get(i).put("EMERGENCY_ALARM","0");
+            }
+        }
+        return jacksonUtil.toJson(list1);
+    }
+
+    @Override
+    public Integer audit(String vehicle,String time,Integer type,Integer sh) {
+        if(vehicle==null&&vehicle.isEmpty()&&vehicle.equals("null")&&vehicle.length()==0){
+            return 0;
+        }
+        if(time==null&&time.isEmpty()&&time.equals("null")&&time.length()==0){
+            return 0;
+        }
+        String cx="select * from tb_alarm_jtwx_sh@db69 where VEHICLE_NO_SH='"+vehicle+"' and DB_TIME_SH=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(cx);
+        int count =0;
+        String sql="";
+        if(list.size()>0){
+            if(type==1){
+            }else if(type==2){
+                sql="update tb_alarm_jtwx_sh@db69 set GPS_INACCURATE_SH='"+sh+"',NO_GPS_SH='"+sh+"' where VEHICLE_NO_SH ='"+vehicle+"' and DB_TIME_SH=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            }else if(type==3){
+                sql="update tb_alarm_jtwx_sh@db69 set EMPTY_HEAVY_SH='"+sh+"' where VEHICLE_NO_SH ='"+vehicle+"' and DB_TIME_SH=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            }else if(type==4){
+//                sql="update tb_alarm_jtwx_sh@db69 set  where VEHICLE_NO_SH ='"+vehicle+"' and DB_TIME_SH=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            }else if(type==5){
+                sql="update tb_alarm_jtwx_sh@db69 set JJQ_ALARM_SH='"+sh+"' where VEHICLE_NO_SH ='"+vehicle+"' and DB_TIME_SH=to_date('"+time+"','yyyy-MM-dd hh24:mi:ss')";
+            }
+        }else{
+            if(type==1){
+            }else if(type==2){
+                sql="insert into tb_alarm_jtwx_sh@db69 (VEHICLE_NO_SH,GPS_INACCURATE_SH,NO_GPS_SH,DB_TIME_SH) values ('"+vehicle+"','"+sh+"','"+sh+"',to_date('"+time+"','yyyy-MM-dd hh24:mi:ss'))";
+            }else if(type==3){
+                sql="insert into tb_alarm_jtwx_sh@db69 (VEHICLE_NO_SH,EMPTY_HEAVY_SH,DB_TIME_SH) values ('"+vehicle+"','"+sh+"',to_date('"+time+"','yyyy-MM-dd hh24:mi:ss'))";
+            }else if(type==4){
+//                sql="insert into tb_alarm_jtwx_sh@db69 (VEHICLE_NO_SH,NO_GPS_SH,DB_TIME_SH) values ('"+vehicle+"','"+sh+"',to_date('"+time+"','yyyy-MM-dd hh24:mi:ss'))";
+            }else if(type==5){
+                sql="insert into tb_alarm_jtwx_sh@db69 (VEHICLE_NO_SH,JJQ_ALARM_SH,DB_TIME_SH) values ('"+vehicle+"','"+sh+"',to_date('"+time+"','yyyy-MM-dd hh24:mi:ss'))";
+            }
+        }
+        count=jdbcTemplate.update(sql);
+        return count;
+    }
+
+    @Override
+    public String terminalerror() {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(new Date());
+        String time=sdf.format(ca.getTime());
+        ca.add(Calendar.DAY_OF_MONTH, -7);
+        String time2=sdf.format(ca.getTime());
+        //查询定位异常,空重车异常,计价器异常数量
+        String sql1="select a.*,b.*,c.*,d.* from " +
+                " (select count(*) GPS_INACCURATE from tb_alarm_jtwx@db69 where GPS_INACCURATE='1') a" +
+                " ,(select count(*) NO_GPS from tb_alarm_jtwx@db69 a where NO_GPS='1') b"+
+                " ,(select count(*) EMPTY_HEAVY from tb_alarm_jtwx@db69 a where EMPTY_HEAVY='1') c"+
+                " ,(select count(*) JJQ_ALARM from tb_alarm_jtwx@db69 a where JJQ_ALARM='1') d";
+        //查询主机无通讯数量
+        String sql2 ="select count(vehicle_no) HOST_NO_COMMUNICATION from (select distinct vehicle_no from tb_alarm_jtwx_history@db69 " +
+                " minus select distinct vehicle_no from tb_alarm_jtwx_history@db69 al" +
+                " where al.db_time <=to_date('"+time+" 23:59:59','yyyy-MM-dd hh24:mi:ss') and al.db_time >=to_date('"+time2+" 00:00:00','yyyy-MM-dd hh24:mi:ss')) al";
+        //查询紧急报警异常数量
+        String sql3="select count(distinct vehi_id) EMERGENCY_ALARM from TB_ALERT@db69 where ALT_CAUSE='紧急报警' and" +
+                " ALT_TIME <=to_date('"+time+" 23:59:59','yyyy-MM-dd hh24:mi:ss') and ALT_TIME >=to_date('"+time+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        List<Map<String, Object>>list1=jdbcTemplate.queryForList(sql1);
+        List<Map<String, Object>>list2=jdbcTemplate.queryForList(sql2);
+        List<Map<String, Object>>list3=jdbcTemplate.queryForList(sql3);
+        list1.get(0).put("HOST_NO_COMMUNICATION",list2.get(0).get("HOST_NO_COMMUNICATION"));
+        list1.get(0).put("EMERGENCY_ALARM",list3.get(0).get("EMERGENCY_ALARM"));
+
+        list1.get(0).put("spdx",0);
+        list1.get(0).put("sphp",0);
+        list1.get(0).put("spyw",0);
+        list1.get(0).put("spxz",0);
+        return jacksonUtil.toJson(list1);
+    }
+
+    @Override
+    public String goodrate(String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        String tj3="";
+        String tj4="";
+        int count=0;
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj1 +=" and a.comp_name='"+companyName+"'";
+            tj4 +=" and comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            count ++;
+            tj2 +=" and db_time <=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and rr_time <=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            count ++;
+            tj2 +=" and db_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and rr_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(count==0){
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(new Date());
+            String time=sdf.format(ca.getTime());
+            tj2 +=" and to_char(db_time,'yyyy-MM') ='"+time+"'";
+            tj3 +=" and to_char(rr_time,'yyyy-MM') ='"+time+"'";
+        }
+        //查询数据
+        String sql= "select a.*,nvl(b.gzzs,0) gzzs,nvl(c.wxzs,0) wxzs,CONCAT(ROUND(nvl(b.gzzs,0)*100/a.zs,2),'%') gzl,CONCAT(ROUND(nvl(c.wxzs,0)*100/nvl(b.gzzs,1),2),'%') xcl from (select count(vehi_no) zs,comp_name from vw_vehicle@db69 group by comp_name)a" +
+                " left join (select count(distinct v.vehi_no) gzzs,comp_name from vw_vehicle@db69 v,TB_ALARM_JTWX_HISTORY@db69 al where v.VEHI_NO=al.vehicle_no ";
+        sql +=tj2;
+        sql += " group by comp_name)b on b.comp_name=a.comp_name" +
+                " left join (select count(distinct v.vehi_no) wxzs,comp_name from vw_vehicle@db69 v,tb_repair_record@db69 r where v.VEHI_NO=r.VEHI_NO";
+        sql +=tj3;
+        sql += " group by comp_name)c on c.comp_name=a.comp_name where 1=1";
+        sql +=tj1;
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        //eharts图表
+        String cx="select a.*, b.*, c.* from (select count(distinct vehi_no) zs from vw_vehicle@db69 where 1=1";
+        cx +=tj4;
+        cx +=") a left join (select count(distinct v.vehi_no) gzzs from vw_vehicle@db69 v,TB_ALARM_JTWX_HISTORY@db69 al where v.VEHI_NO=al.vehicle_no ";
+        cx +=tj2;
+        cx +=tj4;
+        cx += ")b on 1=1" +
+                " left join (select count(distinct v.vehi_no) wxzs from vw_vehicle@db69 v,tb_repair_record@db69 r where v.VEHI_NO=r.VEHI_NO";
+        cx +=tj3;
+        cx +=tj4;
+        cx += ")c on 1=1";
+        List<Map<String, Object>> echart=jdbcTemplate.queryForList(cx);
+        Map<String, Object> map=new HashMap<String, Object> ();
+        map.put("list",list);
+        map.put("echart",echart);
+        return jacksonUtil.toJson(map);
+    }
+}

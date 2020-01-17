@@ -1,0 +1,66 @@
+package mvc.service.impl;
+
+import mvc.service.IndustryOperationService;
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 9:36
+ */
+@Service
+public class IndustryOperationServiceImpl implements IndustryOperationService {
+    @Override
+    public String getCyclingOperation() {
+        return null;
+    }
+
+    @Override
+    public String getIndustryOperations() {
+        return null;
+    }
+
+    @Override
+    public String getIndustryOperation() {
+        return null;
+    }
+
+    @Override
+    public String getTransportationCapacityHotspot() {
+        return null;
+    }
+
+    @Override
+    public String getTaxiHotspot() {
+        return null;
+    }
+
+    @Override
+    public String getOperationTrend() {
+        return null;
+    }
+
+    @Override
+    public String getVehicleOperation() {
+        return null;
+    }
+
+    @Override
+    public String getIncomeAnalysis() {
+        return null;
+    }
+
+    @Override
+    public String getVehicleRunningRanking() {
+        return null;
+    }
+
+    @Override
+    public String getDriverIllegalStatistics() {
+        return null;
+    }
+
+    @Override
+    public String getComplaintsStatistics() {
+        return null;
+    }
+}

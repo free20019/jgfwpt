@@ -1,0 +1,191 @@
+package mvc.service.impl;
+
+import mvc.service.ServicePlatformUsageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 8:49
+ */
+@Service
+public class ServicePlatformUsageServiceImpl implements ServicePlatformUsageService {
+
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    //维修管理查询
+    @Override
+    public String getMaintenanceManageInquiry(String realName, String userName, String stime, String etime) {
+        String sql = "select u.USER_NAME,u.REAL_NAME,to_char(l.LOGIN_TIME,'yyyy-mm-dd hh24:mi:ss') time from TB_LOGIN_HISTORY l , TB_USER_WX u where l.USER_ID = u.USER_ID ";
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += "and u.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += "and u.REAL_NAME = '"+realName+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += "and l.LOGIN_TIME >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            sql += "and l.LOGIN_TIME <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //维修管理统计
+    @Override
+    public String getMaintenanceManageStatistics(String realName, String userName, String stime, String etime) {
+        String sql = "select w.REAL_NAME,w.USER_NAME,tt.count from TB_USER_WX w,(select USER_ID,count(USER_ID) count from TB_LOGIN_HISTORY where 1 = 1";
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += "and LOGIN_TIME > to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            sql += "and LOGIN_TIME < to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += "and w.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += "and w.REAL_NAME = '"+realName+"'";
+        }
+        sql += "GROUP BY USER_ID) tt where w.USER_ID = tt.USER_ID";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //获取企业名称
+    @Override
+    public String getCompanyName() {
+        String sql = "select REAL_NAME from TB_USER GROUP BY REAL_NAME";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //企业分中心查询
+    @Override
+    public String GetEnterpriseSubCenterQuery(String realName, String userName, String stime, String etime) {
+        String sql = "select u.REAL_NAME,u.USER_NAME,to_char(l.LOGIN_TIME,'yyyy-mm-dd hh24:mi:ss') time from TB_LOGIN_HISTORY l,TB_USER u where l.USER_ID = u.USER_ID";
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += " and u.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += " and u.REAL_NAME = '"+realName+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += " and l.LOGIN_TIME >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            sql += " and l.LOGIN_TIME <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        System.out.println(sql);
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //企业分中心统计
+    @Override
+    public String getEnterpriseSubCenterStatistics(String realName, String userName, String stime, String etime) {
+        String sql = "select u.REAL_NAME,u.USER_NAME,l.count from TB_USER u,(select USER_ID,COUNT(USER_ID) count from TB_LOGIN_HISTORY where 1 = 1";
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("")&&stime.length()>0){
+            sql += " and LOGIN_TIME > to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("")&&etime.length()>0){
+            sql +="and LOGIN_TIME < to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += "and u.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += "and u.REAL_NAME = '"+realName+"'";
+        }
+        sql += "GROUP BY USER_ID) l where u.USER_ID = l.USER_ID";
+        System.out.println(sql);
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //查询车牌号
+    @Override
+    public String getVehiNo() {
+        String sql = "select vehi_no from TB_VEHICLE group by vehi_no";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //终端未安装查询
+    @Override
+    public String getTerminalInstalled(String plateNumber,String stime,String etime) {
+        //创建时间,业户名称,行政区划名称,经营范围名称,经营许可证号,证照是否过期,车牌号码,车牌颜色,车辆类型,厂牌,型号,更新时间,购车日期,车辆识别代码/车架号,燃料类型,道路运输证号,道路运输证核发机关,道路运输证有效期起,道路运输证有效期止,年审有效期起,年审有效期止,初次发证时间
+        String sql = "select to_char(CREATED_TIME,'yyyy-mm-dd hh24:mi:ss') CREATED_TIME,COMPANY_NAME,AREA_NAME,BUSINESS_SCOPE_NAME,COMPANY_LICENSE_NUMBER,IS_EXPIRED,PLATE_NUMBER,PLATE_COLOR,PLATE_TYPE,BRAND,MODEL,to_char(UPDATED_TIME,'yyyy-mm-dd hh24:mi:ss') UPDATED_TIME,to_char(PURCHASE_DATE,'yyyy-mm-dd hh24:mi:ss') PURCHASE_DATE,VIN,FUEL_TYPE,LICENSE_ISSUING_AUTHORITY,to_char(LICENSE_VALID_PERIOD_FROM,'yyyy-mm-dd hh24:mi:ss') LICENSE_VALID_PERIOD_FROM,to_char(LICENSE_VALID_PERIOD_END,'yyyy-mm-dd hh24:mi:ss') LICENSE_VALID_PERIOD_END,to_char(ANNUAL_REVIEW_VALID_PERIOD_S,'yyyy-mm-dd hh24:mi:ss') ANNUAL_REVIEW_VALID_PERIOD_S,to_char(ANNUAL_REVIEW_VALID_PERIOD_END,'yyyy-mm-dd hh24:mi:ss') ANNUAL_REVIEW_VALID_PERIOD_END from TB_GLOBAL_VEHICLE where BUSINESS_SCOPE_NAME = '客运：出租车客运。' AND STATUS_NAME = '营运' AND PLATE_NUMBER LIKE '浙A%' and plate_number not in (select vehi_no from TB_VEHICLE group by vehi_no) ";
+        if(plateNumber != null&&!plateNumber.isEmpty()&&!plateNumber.equals("null")&&plateNumber.length()>0){
+            sql += " and PLATE_NUMBER = '"+plateNumber+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += " and UPDATED_TIME >= to_date('" + stime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0) {
+            sql += " and UPDATED_TIME <= to_date('" + etime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //安装情况统计
+    @Override
+    public String getInstallationStatistics() {
+        String sql = "select g.c1 count1,v.c2 count2,(g.c1-v.c2) count3,round(v.c2/g.c1*100,2) || '%' rate from (select count(DISTINCT(PLATE_NUMBER)) as c1 from TB_GLOBAL_VEHICLE where BUSINESS_SCOPE_NAME = '客运：出租车客运。' AND STATUS_NAME = '营运' AND PLATE_NUMBER LIKE '浙A%') g,(select count(DISTINCT(vehi_no)) as c2 from TB_VEHICLE) v\n";
+        String sql1 = "select t1.COMP_NAME,t1.count1 || '辆' count1,case when t2.count2 > t1.count1 then t1.count1 || '辆' else t2.count2 || '辆' end count2,case when to_char(t1.count1-t2.count2) < '0' then 0 || '辆' else t1.count1-t2.count2 || '辆' end count3,case when round(t2.count2/t1.count1*100,2) >100 then 100 || '%' else round(t2.count2/t1.count1*100,2) || '%' end rate from \n" +
+                "(select COMP_NAME,count(COMP_NAME) count1 from VW_VEHICLE GROUP BY COMP_NAME) t1,\n" +
+                "(select COMPANY_NAME,count(COMPANY_NAME) count2 from TB_GLOBAL_VEHICLE where BUSINESS_SCOPE_NAME = '客运：出租车客运。' AND STATUS_NAME = '营运' AND PLATE_NUMBER LIKE '浙A%' GROUP BY COMPANY_NAME)t2\n" +
+                "where t1.COMP_NAME=t2.COMPANY_NAME";
+        List list = jdbcTemplate.queryForList(sql);
+        List list1 = jdbcTemplate.queryForList(sql1);
+        Map<String,Object> map = new HashMap<>();
+        map.put("list",list);
+        map.put("list1",list1);
+        return jacksonUtil.toJson(map);
+    }
+
+    //安装情况月度分析图表
+    @Override
+    public String getMonthInstallAnalysis(String stime,String etime) {
+        if(stime==null){
+            stime = "2002-09";
+        }
+        System.out.println(stime);
+        int syear = Integer.parseInt(stime.substring(0,4));
+        int eyear = Integer.parseInt(etime.substring(0,4));
+        int m = Integer.parseInt(stime.substring(5,7));//1
+        int n = Integer.parseInt(etime.substring(5,7));//2
+        List<Map<String,Object>> countList = new ArrayList<Map<String,Object>>();
+        while(true){
+            //count1:车辆总数,count2:已安装数,count3:新增安装,count4:新增占比,count5:已安装占比
+            String sql = "select  count1,count2,count3 from (select count(DISTINCT(PLATE_NUMBER)) count1 from TB_GLOBAL_VEHICLE where BUSINESS_SCOPE_NAME = '客运：出租车客运。' AND STATUS_NAME = '营运' AND PLATE_NUMBER LIKE '浙A%' and to_date(to_char(CREATED_TIME,'yyyy-mm'),'yyyy-mm') <= to_date('"+syear+"-"+m+"','yyyy-mm')),(select count(DISTINCT(VEHI_NO)) count2 from TB_VEHICLE where to_date(to_char(MTN_TIME,'yyyy-mm'),'yyyy-mm') <= to_date('"+syear+"-"+m+"','yyyy-mm')),(select count(DISTINCT(VEHI_NO)) count3 from TB_VEHICLE where to_date(to_char(MTN_TIME,'yyyy-mm'),'yyyy-mm') = to_date('"+syear+"-"+m+"','yyyy-mm'))";
+            System.out.println(sql);
+            List<Map<String,Object>> sqlList = jdbcTemplate.queryForList(sql);
+            for (int i = 0; i < sqlList.size(); i++) {
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("time",syear+"-"+m);
+                map.put("count1",sqlList.get(i).get("count1"));
+                map.put("count2",sqlList.get(i).get("count2"));
+                map.put("count3",sqlList.get(i).get("count3"));
+                map.put("count4",String.format("%.2f",Double.parseDouble(String.valueOf(sqlList.get(i).get("count3")))/Double.parseDouble(String.valueOf(sqlList.get(i).get("count1")))*100)+"%");
+                map.put("count5",String.format("%.2f",Double.parseDouble(String.valueOf(sqlList.get(i).get("count2")))/Double.parseDouble(String.valueOf(sqlList.get(i).get("count1")))*100)+"%");
+                countList.add(map);
+            }
+            if(syear == eyear && m == n){
+                break;
+            }
+            if(m==12){
+                syear += 1;
+                m = 0;
+            }
+            m++;
+        }
+        return jacksonUtil.toJson(countList);
+    }
+}

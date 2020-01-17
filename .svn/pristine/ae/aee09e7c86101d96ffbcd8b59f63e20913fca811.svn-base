@@ -1,0 +1,311 @@
+package mvc.service.impl;
+
+import mvc.service.TerminalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/18
+ */
+@Service("terminalService")
+public class TerminalServiceImpl implements TerminalService {
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    @Override
+    public String getVehicle() {
+        String sql = "select distinct vehicle_no from tb_taxi_gzfx";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getHostfailure(String lPNumber, String faultType) {
+        String tj="";
+        if(lPNumber!=null&&!lPNumber.isEmpty()&&!lPNumber.equals("null")&&lPNumber.length()>0){
+            tj += " and al.vehicle_no='"+lPNumber+"'";
+        }
+        if(faultType!=null&&!faultType.isEmpty()&&!faultType.equals("null")&&faultType.length()>0){
+            List type=Arrays.asList(faultType.split(","));
+            tj +=" and ( 1=0";
+            if(type.contains("1")){
+                tj +=" or al.NO_GPS='1'";
+            }
+            if(type.contains("2")){
+                tj +=" or al.NO_JJQ='1'";
+            }
+            if(type.contains("3")){
+                tj +=" or al.NO_GPS_JJQ='1'";
+            }
+            if(type.contains("4")){
+                tj +=" or al.SEVEN_GPS_JJQ='1'";
+            }
+            if(type.contains("5")){
+                tj +=" or al.EMPTY_HEAVY='1'";
+            }
+            if(type.contains("6")){
+                tj +=" or al.SCREEN_BLACK='1'";
+            }
+            if(type.contains("7")){
+                tj +=" or al.MOVE_ON='1'";
+            }
+            if(type.contains("8")){
+                tj +=" or al.BREAK_OFF='1'";
+            }
+            tj +=")";
+
+        }
+        String sql = "select al.*,v.comp_name,sh.order_result from tb_taxi_gzfx al" +
+                " left join vw_vehicle v on al.vehicle_no=v.vehi_no " +
+                " left join tb_taxi_gzfx_examine sh on al.vehicle_no=sh.vehicle_no where 1=1";
+        sql +=tj;
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer audit(String vehicle, String fields,String type) {
+        if(vehicle==null&&vehicle.isEmpty()&&vehicle.equals("null")&&vehicle.length()==0){
+            return 0;
+        }
+        if(fields==null&&fields.isEmpty()&&fields.equals("null")&&fields.length()==0){
+            return 0;
+        }
+        String sql="";
+        int count=0;
+        if(type.equals("0")){
+        }else if(type.equals("1")){
+            sql +="update tb_taxi_gzfx set IF_CHECK='"+type+"' where VEHICLE_NO ='"+vehicle+"'";
+            String insert="insert into tb_taxi_gzfx_examine (vehicle_no,fault_type,fault_time,order_result)" +
+                    " values('"+vehicle+"','"+fields+"',sysdate,'0')";
+            jdbcTemplate.update(insert);
+        }
+        count=jdbcTemplate.update(sql);
+        return count;
+    }
+
+    @Override
+    public String terminalerror() {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(new Date());
+        String time=sdf.format(ca.getTime());
+        ca.add(Calendar.DAY_OF_MONTH, -7);
+        String time2=sdf.format(ca.getTime());
+        //查询定位异常,空重车异常,计价器异常数量
+        String sql="select a.*,b.*,c.*,d.*,e.*,f.*,g.*,h.* from " +
+                " (select count(*) NO_GPS from tb_taxi_gzfx where NO_GPS='1') a" +
+                " ,(select count(*) NO_JJQ from tb_taxi_gzfx a where NO_JJQ='1') b"+
+                " ,(select count(*) NO_GPS_JJQ from tb_taxi_gzfx a where NO_GPS_JJQ='1') c"+
+                " ,(select count(*) SEVEN_GPS_JJQ from tb_taxi_gzfx a where SEVEN_GPS_JJQ='1') d"+
+                " ,(select count(*) EMPTY_HEAVY from tb_taxi_gzfx a where EMPTY_HEAVY='1') e"+
+                " ,(select count(*) SCREEN_BLACK from tb_taxi_gzfx a where SCREEN_BLACK='1') f"+
+                " ,(select count(*) MOVE_ON from tb_taxi_gzfx a where MOVE_ON='1') g"+
+                " ,(select count(*) BREAK_OFF from tb_taxi_gzfx a where BREAK_OFF='1') h";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String goodrate(String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        String tj3="";
+        String tj4="";
+        int count=0;
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj1 +=" and a.comp_name='"+companyName+"'";
+            tj4 +=" and comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            count ++;
+            tj2 +=" and db_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and rr_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            count ++;
+            tj2 +=" and db_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and rr_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(count==0){
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(new Date());
+            String time=sdf.format(ca.getTime());
+            tj2 +=" and to_char(db_time,'yyyy-MM') ='"+time+"'";
+            tj3 +=" and to_char(rr_time,'yyyy-MM') ='"+time+"'";
+        }
+        //查询数据
+        String sql= "select a.*,nvl(b.gzzs,0) gzzs,nvl(c.wxzs,0) wxzs,CONCAT(ROUND(nvl(b.gzzs,0)*100/a.zs,2),'%') gzl,CONCAT(ROUND(nvl(c.wxzs,0)*100/a.zs,2),'%') xcl from (select count(vehi_no) zs,comp_name from vw_vehicle group by comp_name)a" +
+                " left join (select count(distinct v.vehi_no) gzzs,comp_name from vw_vehicle v,TB_TAXI_GZFX_HISTORY al where v.VEHI_NO=al.vehicle_no ";
+        sql +=tj2;
+        sql += " group by comp_name)b on b.comp_name=a.comp_name" +
+                " left join (select count(distinct v.vehi_no) wxzs,comp_name from vw_vehicle v,tb_repair_record r where v.VEHI_NO=r.VEHI_NO";
+        sql +=tj3;
+        sql += " group by comp_name)c on c.comp_name=a.comp_name where 1=1";
+        sql +=tj1;
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        //eharts图表
+        String cx="select a.*, b.*, c.* from (select count(distinct vehi_no) zs from vw_vehicle where 1=1";
+        cx +=tj4;
+        cx +=") a left join (select count(distinct v.vehi_no) gzzs from vw_vehicle v,TB_TAXI_GZFX_HISTORY al where v.VEHI_NO=al.vehicle_no ";
+        cx +=tj2;
+        cx +=tj4;
+        cx += ")b on 1=1" +
+                " left join (select count(distinct v.vehi_no) wxzs from vw_vehicle v,tb_repair_record r where v.VEHI_NO=r.VEHI_NO";
+        cx +=tj3;
+        cx +=tj4;
+        cx += ")c on 1=1";
+        List<Map<String, Object>> echart=jdbcTemplate.queryForList(cx);
+        Map<String, Object> map=new HashMap<String, Object> ();
+        map.put("list",list);
+        map.put("echart",echart);
+        return jacksonUtil.toJson(map);
+    }
+
+    @Override
+    public String online(String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj1 +=" and a.comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj2 +=" and db_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj2 +=" and db_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql= "select a.*,nvl(b.zxzs,0) zxzs,CONCAT(ROUND(nvl(b.zxzs,0)*100/a.zs,2),'%') zxl from (select count(vehi_no) zs,comp_name,ba_name from vw_vehicle group by comp_name,ba_name)a" +
+                " left join (select count(distinct v.vehi_no) zxzs,comp_name,ba_name from vw_vehicle v,tb_taxi_not_online o where v.VEHI_NO=o.VEHI_NO ";
+        sql +=tj2;
+        sql += " group by comp_name,ba_name)b on b.comp_name=a.comp_name where 1=1";
+        sql +=tj1;
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String notonline(String vehicle, String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        String tj3="";
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj2 +=" and v.vehi_no='"+vehicle+"'";
+        }
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj2 +=" and v.comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj1 +=" and ONLINE_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and ONLINE_TIME <to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj1 +=" and ONLINE_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and ONLINE_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql = " select  t.*,to_char(d.ONLINE_TIME,'yyyy-MM-dd hh24:mi:ss') TIME from (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE"
+                + " FROM VW_VEHICLE  v"
+                + " left join (select vehi_no cphm from TB_TAXI_NOT_ONLINE  where 1=1 ";
+        sql += tj1;
+        sql += " ) l on l.cphm=v.VEHI_NO where  l.cphm is null and v.VEHI_NO like '浙A%' ";
+        sql += tj2;
+        sql += " ) t "
+                + " left join (select VEHI_NO,max(ONLINE_TIME) ONLINE_TIME from TB_TAXI_NOT_ONLINE where 1=1";
+        sql += tj3;
+        sql +=  " group by VEHI_NO) d on d.VEHI_NO=t.VEHI_NO order by case when d.ONLINE_TIME IS null then to_date('1900-01-01 00:00:00','yyyy-MM-dd hh24:mi:ss') else d.ONLINE_TIME end desc";
+
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String workorderinquiry(String vehicle, String stime, String etime) {
+        String tj="";
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj +=" and al.vehicle_no='"+vehicle+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj +=" and al.fault_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj +=" and al.fault_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql = "select al.*,v.comp_name,to_char(al.fault_time,'yyyy-MM-dd hh24:mi:ss') time from tb_taxi_gzfx_examine al" +
+                " left join vw_vehicle v on al.vehicle_no=v.vehi_no  where 1=1";
+        sql +=tj;
+        sql +=" order by al.fault_time desc";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer workorderaudit(String vehicle) {
+        if(vehicle==null&&vehicle.isEmpty()&&vehicle.equals("null")&&vehicle.length()==0){
+            return 0;
+        }
+        String sql="update tb_taxi_gzfx_examine set order_result='1' where vehicle_no='"+vehicle+"' and order_result='0'";
+        int count=jdbcTemplate.update(sql);
+        if(count>0){
+            String delete="delete from tb_taxi_gzfx where vehicle_no='"+vehicle+"'";
+            jdbcTemplate.update(delete);
+        }
+        return count;
+    }
+
+    @Override
+    public String hostfailurehistory(String lPNumber, String time, String faultType) {
+        String tj="";
+        if(lPNumber!=null&&!lPNumber.isEmpty()&&!lPNumber.equals("null")&&lPNumber.length()>0){
+            tj += " and al.vehicle_no='"+lPNumber+"'";
+        }
+        if(time!=null&&!time.isEmpty()&&!time.equals("null")&&time.length()>0){
+            tj +=" and al.db_time =to_date('"+time+"','yyyy-MM-dd')";
+        }
+        if(faultType!=null&&!faultType.isEmpty()&&!faultType.equals("null")&&faultType.length()>0){
+            List type=Arrays.asList(faultType.split(","));
+            tj +=" and ( 1=0";
+            if(type.contains("1")){
+                tj +=" or al.NO_GPS='1'";
+            }
+            if(type.contains("2")){
+                tj +=" or al.NO_JJQ='1'";
+            }
+            if(type.contains("3")){
+                tj +=" or al.NO_GPS_JJQ='1'";
+            }
+            if(type.contains("4")){
+                tj +=" or al.SEVEN_GPS_JJQ='1'";
+            }
+            if(type.contains("5")){
+                tj +=" or al.EMPTY_HEAVY='1'";
+            }
+            if(type.contains("6")){
+                tj +=" or al.SCREEN_BLACK='1'";
+            }
+            if(type.contains("7")){
+                tj +=" or al.MOVE_ON='1'";
+            }
+            if(type.contains("8")){
+                tj +=" or al.BREAK_OFF='1'";
+            }
+            tj +=")";
+
+        }
+        String sql = "select al.*,v.comp_name,to_char(db_time,'yyyy-MM-dd') time from tb_taxi_gzfx_history al" +
+                " left join vw_vehicle v on al.vehicle_no=v.vehi_no  where 1=1";
+        sql +=tj;
+        sql +="order by db_time desc";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+}

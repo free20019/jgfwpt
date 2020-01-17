@@ -1,0 +1,162 @@
+package mvc.controller;
+
+import mvc.service.ServicePlatformUsageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.DownloadAct;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 8:28
+ */
+//服务平台使用情况分析
+@Controller
+@RequestMapping("/servicePlatformUsage")
+public class ServicePlatformUsageController {
+
+    @Autowired
+    private ServicePlatformUsageService servicePlatformUsageService;
+    private DownloadAct downloadAct = new DownloadAct();
+
+    //手持分中心查询
+    @RequestMapping("/getHandheldMonitoringQuery")
+    @ResponseBody
+    public String GetHandheldMonitoringQuery(String userName,String stime,String etime){
+        return servicePlatformUsageService.getHandheldMonitoringQuery(userName,stime,etime);
+    }
+
+    //手持分中心统计
+    @RequestMapping("/getHandheldMonitoringStatistics")
+    @ResponseBody
+    public String GetHandheldMonitoringStatistics(String userName,String stime,String etime){
+        return servicePlatformUsageService.GetHandheldMonitoringStatistics(userName,stime,etime);
+    }
+
+    //维修管理查询
+    @RequestMapping("/getMaintenanceManageInquiry")
+    @ResponseBody
+    public String GetMaintenanceManageInquiry(String realName, String userName, String stime, String etime) throws UnsupportedEncodingException {
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            realName = new String(realName.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.getMaintenanceManageInquiry(realName,userName,stime,etime);
+    }
+    //维修管理统计
+    @RequestMapping("/getMaintenanceManageStatistics")
+    @ResponseBody
+    public String GetMaintenanceManageStatistics(String realName, String userName, String stime, String etime) throws UnsupportedEncodingException {
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            realName = new String(realName.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.getMaintenanceManageStatistics(realName,userName,stime,etime);
+    }
+
+    //获取企业名称105 ELECTRIC_TRICK_CAR 下 TB_USER
+    @RequestMapping("/getCompanyName")
+    @ResponseBody
+    public String GetCompanyName(){
+        return servicePlatformUsageService.getCompanyName();
+    }
+
+    //企业分中心查询
+    @RequestMapping("/getEnterpriseSubCenterQuery")
+    @ResponseBody
+    public String GetEnterpriseSubCenterQuery(String realName, String userName, String stime, String etime) throws UnsupportedEncodingException {
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            realName = new String(realName.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.GetEnterpriseSubCenterQuery(realName,userName,stime,etime);
+    }
+
+    //企业分中心统计
+    @RequestMapping("/getEnterpriseSubCenterStatistics")
+    @ResponseBody
+    public String GetEnterpriseSubCenterStatistics(String realName, String userName, String stime, String etime) throws UnsupportedEncodingException {
+        if(realName!=null&&!realName.isEmpty()&&realName.length()>0&&!realName.equals("")){
+            realName = new String(realName.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.getEnterpriseSubCenterStatistics(realName,userName,stime,etime);
+    }
+
+    //查询车牌号
+    @RequestMapping("/getVehiNo")
+    @ResponseBody
+    public String getVehiNo(){
+        return servicePlatformUsageService.getVehiNo();
+    }
+
+    //终端未安装查询
+    @RequestMapping("/getTerminalInstalled")
+    @ResponseBody
+    public String getTerminalInstalled(String plateNumber,String stime,String etime,String region) throws UnsupportedEncodingException {
+        if(plateNumber != null&&!plateNumber.isEmpty()&&plateNumber.length()>0&&!plateNumber.equals("")){
+            plateNumber = new String(plateNumber.getBytes("iso-8859-1"),"utf-8");
+        }
+        if(region!=null&&!region.isEmpty()&&region.length()>0&&!region.equals("")){
+            region = new String(region.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.getTerminalInstalled(plateNumber,stime,etime,region);
+    }
+
+    //终端未安装查询导出
+    @RequestMapping("/getTerminalInstalledExcel")
+    @ResponseBody
+    public String getTerminalInstalledExcel(HttpServletRequest request, HttpServletResponse response,String plateNumber,String stime,String etime,String region) throws IOException {
+        String a[] = {"业户名称","行政区划名称","经营范围名称","经营许可证号","证照是否过期","车牌号码","车牌颜色","车辆类型","厂牌","型号","更新时间","购车日期","车辆识别代码","燃料类型","道路运输证核发机关","道路运输证有效期起","道路运输证有效期止","年审有效期起","年审有效期止"};//导出列明
+        String b[] = {"COMPANY_NAME","AREA_NAME","BUSINESS_SCOPE_NAME","COMPANY_LICENSE_NUMBER","IS_EXPIRED","PLATE_NUMBER","PLATE_COLOR","PLATE_TYPE","BRAND","MODEL","UPDATED_TIME","PURCHASE_DATE","VIN","FUEL_TYPE","LICENSE_ISSUING_AUTHORITY","LICENSE_VALID_PERIOD_FROM","LICENSE_VALID_PERIOD_END","ANNUAL_REVIEW_VALID_PERIOD_S","ANNUAL_REVIEW_VALID_PERIOD_END"};//导出map中的key
+        String gzb = "终端未安装查询导出";//导出sheet名和导出的文件名
+        if(plateNumber!= null&&!plateNumber.isEmpty()&&plateNumber.length()>0&&!plateNumber.equals("")){
+            plateNumber = new String(plateNumber.getBytes("iso-8859-1"),"utf-8");
+        }
+        if(region!=null&&!region.isEmpty()&&region.length()>0&&!region.equals("")){
+            region = new String(region.getBytes("iso-8859-1"),"utf-8");
+        }
+        String msg = servicePlatformUsageService.getTerminalInstalled(plateNumber,stime,etime,region);
+        System.out.println(msg);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //安装情况统计
+    @RequestMapping("/getInstallationStatistics")
+    @ResponseBody
+    public String getInstallationStatistics(String companyName) throws UnsupportedEncodingException {
+        if(companyName!=null&&companyName.length()>0&&!companyName.isEmpty()&&!companyName.equals("")){
+            companyName = new String(companyName.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.getInstallationStatistics(companyName);
+    }
+
+    //安装情况月度分析图表
+    @RequestMapping("/getMonthInstallAnalysis")
+    @ResponseBody
+    public String getMonthInstallAnalysis(String stime,String etime){
+        return servicePlatformUsageService.getMonthInstallAnalysis(stime,etime);
+    }
+
+    //报停车辆统计
+    @RequestMapping("/getReportingVehicleStatistics")
+    @ResponseBody
+    public String ReportingVehicleStatistics(String vehicle,String companyName,String stime,String etime,String area) throws UnsupportedEncodingException {
+        if(vehicle!=null&&vehicle.length()>0&&!vehicle.isEmpty()&&!vehicle.equals("")){
+            vehicle = new String(vehicle.getBytes("iso-8859-1"),"utf-8");
+        }
+        if(companyName!=null&&companyName.length()>0&&!companyName.isEmpty()&&!companyName.equals("")){
+            companyName = new String(companyName.getBytes("iso-8859-1"),"utf-8");
+        }
+        if(area!=null&&area.length()>0&&!area.isEmpty()&&!area.equals("")){
+            area = new String(area.getBytes("iso-8859-1"),"utf-8");
+        }
+        return servicePlatformUsageService.getReportingVehicleStatistics(vehicle,companyName,stime,etime,area);
+    }
+}

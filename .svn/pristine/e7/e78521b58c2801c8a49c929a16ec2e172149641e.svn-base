@@ -1,0 +1,44 @@
+package mvc.service;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author: xianlehuang
+ * @Description:重点区域
+ * @date: 2019/9/27 - 15:05
+ */
+public interface KeyAreaService {
+
+    String findarea();
+
+    Integer addarea(String name, String describe, String coordinates, String size, String warning);
+
+    Integer updatearea(String id, String name, String describe, String coordinates, String size, String warning);
+
+    Integer deletearea(String id);
+
+    String getKeyAreasVehicleQuantityMonthlyReport(String area, String time);
+
+    String getKeyAreasVehicleQuantityHalfAYearReport(String area, String time, String type);
+
+    List<Map<String, Object>> getAreaMonitor();
+
+    List<Map<String, Object>> getVehicleMonitor();
+
+    String qyjk();
+
+    String getDoubtfulDeck(String vehicle, String type, String point, String stime, String etime, Integer currentPage, Integer pageSize);
+
+    String getSuspectedBlackCar(String vehicle, String type, String point, String stime, String etime, Integer currentPage, Integer pageSize);
+
+    String getAbnormalOperationValuatorAnalysis(String vehicle, String stime, String etime, Integer currentPage, Integer pageSize);
+
+    String getAbnormalOperatingMileageAnalysis(String time, Integer low, Integer high);
+
+    String getAbnormalOperatingMileageAnalysisDetails(String time, Integer low, Integer high);
+
+    String getSingleOperationAnomalyAnalysis(String time, Integer low, Integer high);
+
+    String getSingleOperationAnomalyAnalysisDetails(String time, Integer low, Integer high);
+}

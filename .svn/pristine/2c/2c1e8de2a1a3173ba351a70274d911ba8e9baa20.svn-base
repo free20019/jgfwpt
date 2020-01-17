@@ -1,0 +1,283 @@
+package mvc.controller;
+
+import mvc.service.TerminalService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.DownloadAct;
+import util.JacksonUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/18
+ */
+
+@Controller
+@RequestMapping("/terminal")
+public class TerminalController {
+
+	@Autowired
+	private TerminalService terminalService;
+	private DownloadAct downloadAct = new DownloadAct();
+	private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+	@RequestMapping("/vehicle")
+	@ResponseBody
+	public String getVehicle(){
+		return terminalService.getVehicle();
+	}
+	//主机故障查询
+	@RequestMapping("/hostfailure")
+	@ResponseBody
+	public String getHostfailure(String lPNumber, String faultType,String area){
+		return terminalService.getHostfailure(lPNumber,  faultType ,area);
+	}
+	//主机故障导出
+	@RequestMapping("/hostfailuredc")
+	@ResponseBody
+	public String getHostfailuredc(HttpServletRequest request,HttpServletResponse response, String lPNumber, String time, String faultType, String area) throws IOException {
+		String a[] = {"车牌号","业户","区域","有定位无营运","有营运无定位","有抓拍无定位无营运","7天无定位无营运","空重车无变化","视频黑屏","视频移位","视频断线"};//导出列明
+		String b[] = {"VEHICLE_NO","COMP_NAME","AREA_NAME","NO_GPS","NO_JJQ","NO_GPS_JJQ","SEVEN_GPS_JJQ","EMPTY_HEAVY","SCREEN_BLACK","MOVE_ON","BREAK_OFF"};//导出map中的key
+		String gzb = "主机故障";//导出sheet名和导出的文件名
+		String msg = terminalService.getHostfailure(lPNumber, faultType, area);
+		List<Map<String, Object>> list = downloadAct.strlist(msg);
+		if(list.size()>0){
+			list=findDetail(list);
+		}
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//主机故障审核
+	@RequestMapping("/audit")
+	@ResponseBody
+	public Integer audit(String vehicle, String fields,String type){
+		return terminalService.audit(vehicle,fields,type);
+	}
+	//终端异常告警查询
+	@RequestMapping("/terminalerror")
+	@ResponseBody
+	public String terminalerror(){
+		return terminalService.terminalerror();
+	}
+	//终端异常告警导出
+	@RequestMapping("/terminalerrordc")
+	@ResponseBody
+	public String terminalerrordc(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String a[] = {"有定位无营运","有营运无定位","有抓拍无定位无营运","7天无定位无营运","空重车无变化","视频黑屏","视频移位","视频断线"};//导出列明
+		String b[] = {"NO_GPS","NO_JJQ","NO_GPS_JJQ","SEVEN_GPS_JJQ","EMPTY_HEAVY","SCREEN_BLACK","MOVE_ON","BREAK_OFF"};//导出map中的key
+		String gzb = "终端异常告警";//导出sheet名和导出的文件名
+		String msg = terminalService.terminalerror();
+		List<Map<String, Object>> list = downloadAct.strlist(msg);
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//完好率统计分析查询
+	@RequestMapping("/goodrate")
+	@ResponseBody
+	public String goodrate(String companyName,String stime,String etime){
+		return terminalService.goodrate(companyName,stime,etime);
+	}
+	//完好率统计分析导出
+	@RequestMapping("/goodratedc")
+	@ResponseBody
+	public String goodratedc(HttpServletRequest request,HttpServletResponse response,String companyName,String stime,String etime) throws IOException {
+		String a[] = {"公司名称","故障车辆数","故障率","已维修车辆数","修车率"};//导出列明
+		String b[] = {"COMP_NAME","GZZS","GZL","WXZS","XCL"};//导出map中的key
+		String gzb = "完好率统计分析";//导出sheet名和导出的文件名
+		String msg = terminalService.goodrate(companyName,stime,etime);
+		List<Map<String, Object>> list = (List<Map<String, Object>>) parseJSON2Map(msg).get("list");
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//在线车辆统计查询
+	@RequestMapping("/online")
+	@ResponseBody
+	public String online(String companyName,String stime,String etime){
+		return terminalService.online(companyName,stime,etime);
+	}
+	//在线车辆统计导出
+	@RequestMapping("/onlinedc")
+	@ResponseBody
+	public String onlinedc(HttpServletRequest request,HttpServletResponse response,String companyName,String stime,String etime) throws IOException {
+		String a[] = {"公司名称","分公司名称","车辆总数","上线总数","上线率"};//导出列明
+		String b[] = {"COMP_NAME","BA_NAME","ZS","ZXZS","ZXL"};//导出map中的key
+		String gzb = "在线车辆统计";//导出sheet名和导出的文件名
+		String msg = terminalService.online(companyName,stime,etime);
+		List<Map<String, Object>> list = downloadAct.strlist(msg);
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//未上线车辆查询
+	@RequestMapping("/notonline")
+	@ResponseBody
+	public String notonline(String vehicle,String companyName,String area,String stime,String etime,Integer currentPage,Integer pageSize){
+		return terminalService.notonline(vehicle, companyName,area,stime,etime,currentPage,pageSize);
+	}
+	//未上线车辆导出
+	@RequestMapping("/notonlinedc")
+	@ResponseBody
+	public String notonlinedc(HttpServletRequest request,HttpServletResponse response,String vehicle,String companyName,String area,String stime,String etime) throws IOException {
+		String a[] = {"公司名称","车牌号码","区域","SIM卡号","终端类型","终端子类型","联系人","联系电话","最后上线时间"};//导出列明
+		String b[] = {"COMP_NAME","VEHI_NO","AREA_NAME","VEHI_SIM","MT_NAME","MDT_SUB_TYPE","OWN_NAME","HOME_TEL","TIME"};//导出map中的key
+		String gzb = "未上线车辆";//导出sheet名和导出的文件名
+		Integer currentPage =1,pageSize=10000000;
+		String msg = terminalService.notonline(vehicle, companyName,area,stime,etime, currentPage, pageSize);
+		List<Map<String, Object>> list = downloadAct.str2list(msg);
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//维修工单查询
+	@RequestMapping("/workorderinquiry")
+	@ResponseBody
+	public String workorderinquiry(String vehicle,String area,String stime,String etime){
+		return terminalService.workorderinquiry(vehicle,area,stime,etime);
+	}
+	//维修工单导出
+	@RequestMapping("/workorderinquirydc")
+	@ResponseBody
+	public String workorderinquirydc(HttpServletRequest request,HttpServletResponse response,String vehicle,String area,String companyName,String stime,String etime) throws IOException {
+		String a[] = {"公司名称","车牌号码","区域","故障类型","故障时间","第一次催告时间","第二次催告时间","第三次催告时间","反馈时间","是否维修","维修时间","维修结果","备注",""};//导出列明
+		String b[] = {"COMP_NAME","VEHICLE_NO","AREA_NAME","FAULT_TYPE","TIME","ONCE","TWICE","THIRD","FGSJ","IS_REPAIR","WXSJ","REPAIR_RESULT","DESCRIPTION"};//导出map中的key
+		String gzb = "维修工单";//导出sheet名和导出的文件名
+		String msg = terminalService.workorderinquiry(vehicle,area,stime,etime);
+		List<Map<String, Object>> list = downloadAct.strlist(msg);
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//维修工单审核
+	@RequestMapping("/workorderaudit")
+	@ResponseBody
+	public Integer workorderaudit(String vehicle,String remarks){
+		return terminalService.workorderaudit(vehicle,remarks);
+	}
+
+    //主机故障历史查询
+    @RequestMapping("/hostfailurehistory")
+    @ResponseBody
+    public String hostfailurehistory(String lPNumber,String area,String time, String faultType,Integer currentPage,Integer pageSize){
+        return terminalService.hostfailurehistory(lPNumber, area,time, faultType,currentPage,pageSize);
+    }
+    //主机故障历史导出
+    @RequestMapping("/hostfailurehistorydc")
+    @ResponseBody
+    public String hostfailurehistorydc(HttpServletRequest request,HttpServletResponse response, String lPNumber, String area,String time, String faultType) throws IOException {
+        String a[] = {"车牌号","业户","区域","时间","有定位无营运","有营运无定位","有抓拍无定位无营运","7天无定位无营运","空重车无变化","视频黑屏","视频移位","视频断线"};//导出列明
+        String b[] = {"VEHICLE_NO","COMP_NAME","AREA_NAME","TIME","NO_GPS","NO_JJQ","NO_GPS_JJQ","SEVEN_GPS_JJQ","EMPTY_HEAVY","SCREEN_BLACK","MOVE_ON","BREAK_OFF"};//导出map中的key
+        String gzb = "主机故障历史";//导出sheet名和导出的文件名
+		Integer currentPage =1,pageSize=10000000;
+        String msg = terminalService.hostfailurehistory(lPNumber,area,time,faultType, currentPage, pageSize);
+        List<Map<String, Object>> list = downloadAct.str2list(msg);
+        if(list.size()>0){
+            list=findDetail(list);
+        }
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+	//视频移位巡检
+	@RequestMapping("/videoshift")
+	@ResponseBody
+	public String videoshift(String vehicle){
+		return terminalService.videoshift(vehicle);
+	}
+
+	//视频移位巡检审核
+	@RequestMapping("/videoaudit")
+	@ResponseBody
+	public Integer videoaudit(String id, String vehicle, String mdt_no, String times, String road_e1, String road_e2, String road_e3, String road_e4){
+		return terminalService.videoaudit(id, vehicle, mdt_no, times, road_e1, road_e2, road_e3, road_e4);
+	}
+
+	//将查询出的0,1字段转化为无故障，故障
+	private List<Map<String, Object>> findDetail(List<Map<String, Object>> list) {
+		for(int i=0;i<list.size();i++){
+			if(String.valueOf(list.get(i).get("NO_GPS")).equals("1")){
+				list.get(i).put("NO_GPS","故障");
+			}else if(String.valueOf(list.get(i).get("NO_GPS")).equals("0")){
+				list.get(i).put("NO_GPS","无故障");
+			}else{
+				list.get(i).put("NO_GPS","");
+			}
+			if(String.valueOf(list.get(i).get("NO_JJQ")).equals("1")){
+				list.get(i).put("NO_JJQ","故障");
+			}else if(String.valueOf(list.get(i).get("NO_JJQ")).equals("0")){
+				list.get(i).put("NO_JJQ","无故障");
+			}else{
+				list.get(i).put("NO_JJQ","");
+			}
+			if(String.valueOf(list.get(i).get("NO_GPS_JJQ")).equals("1")){
+				list.get(i).put("NO_GPS_JJQ","故障");
+			}else if(String.valueOf(list.get(i).get("NO_GPS_JJQ")).equals("0")){
+				list.get(i).put("NO_GPS_JJQ","无故障");
+			}else{
+				list.get(i).put("NO_GPS_JJQ","");
+			}
+			if(String.valueOf(list.get(i).get("SEVEN_GPS_JJQ")).equals("1")){
+				list.get(i).put("SEVEN_GPS_JJQ","故障");
+			}else if(String.valueOf(list.get(i).get("SEVEN_GPS_JJQ")).equals("0")){
+				list.get(i).put("SEVEN_GPS_JJQ","无故障");
+			}else{
+				list.get(i).put("SEVEN_GPS_JJQ","");
+			}
+			if(String.valueOf(list.get(i).get("EMPTY_HEAVY")).equals("1")){
+				list.get(i).put("EMPTY_HEAVY","故障");
+			}else if(String.valueOf(list.get(i).get("EMPTY_HEAVY")).equals("0")){
+				list.get(i).put("EMPTY_HEAVY","无故障");
+			}else{
+				list.get(i).put("EMPTY_HEAVY","");
+			}
+			if(String.valueOf(list.get(i).get("SCREEN_BLACK")).equals("1")){
+				list.get(i).put("SCREEN_BLACK","故障");
+			}else if(String.valueOf(list.get(i).get("SCREEN_BLACK")).equals("0")){
+				list.get(i).put("SCREEN_BLACK","无故障");
+			}else{
+				list.get(i).put("SCREEN_BLACK","");
+			}
+			if(String.valueOf(list.get(i).get("MOVE_ON")).equals("1")){
+				list.get(i).put("MOVE_ON","故障");
+			}else if(String.valueOf(list.get(i).get("SCREEN_BLACK")).equals("0")){
+				list.get(i).put("MOVE_ON","无故障");
+			}else{
+				list.get(i).put("MOVE_ON","");
+			}
+			if(String.valueOf(list.get(i).get("BREAK_OFF")).equals("1")){
+				list.get(i).put("BREAK_OFF","故障");
+			}else if(String.valueOf(list.get(i).get("SCREEN_BLACK")).equals("0")){
+				list.get(i).put("BREAK_OFF","无故障");
+			}else{
+				list.get(i).put("BREAK_OFF","");
+			}
+		}
+		return list;
+	}
+	//json to map
+	public static Map<String, Object> parseJSON2Map(String jsonStr){
+		Map<String, Object> map = new HashMap<String, Object>();
+		JSONObject json = JSONObject.fromObject(jsonStr);
+		for(Object k : json.keySet()){
+			Object v = json.get(k);
+			if(v instanceof JSONArray){
+				List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+				Iterator<JSONObject> it = ((JSONArray)v).iterator();
+				while(it.hasNext()){
+					JSONObject json2 = it.next();
+					list.add(parseJSON2Map(json2.toString()));
+				}
+				map.put(k.toString(), list);
+			} else {
+				map.put(k.toString(), v);
+			}
+		}
+		return map;
+	}
+
+}

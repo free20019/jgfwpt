@@ -1,0 +1,13 @@
+package mvc.service;
+
+public interface ServicePlatformUsageService {
+    String getMaintenanceManagement(String userName, String realName, String loginTime, String logoutTime,String page,String pageSize);
+
+    String getCompanyCenter(String userName, String realName, String loginTime, String logoutTime);
+
+    String getTerminalInstalled(String plateNumber,String startTime,String endTime,String page,String pageSize);
+
+    String getInstallationStatistics();
+
+    String getMonthInstallAnalysis(String startTime,String endTime);
+}

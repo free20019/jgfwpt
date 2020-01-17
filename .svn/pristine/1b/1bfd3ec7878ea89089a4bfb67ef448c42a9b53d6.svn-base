@@ -1,0 +1,433 @@
+package mvc.service.impl;
+
+import mvc.service.TerminalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/18
+ */
+@Service("terminalService")
+public class TerminalServiceImpl implements TerminalService {
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    private Map<String, Object> map;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    @Override
+    public String getVehicle() {
+        String sql = "select distinct vehicle_no from tb_taxi_gzfx@db69";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getHostfailure(String lPNumber, String faultType, String area) {
+        String tj="";
+        if(lPNumber!=null&&!lPNumber.isEmpty()&&!lPNumber.equals("null")&&lPNumber.length()>0){
+            tj += " and al.vehicle_no='"+lPNumber+"'";
+        }
+        if(faultType!=null&&!faultType.isEmpty()&&!faultType.equals("null")&&faultType.length()>0){
+            List type=Arrays.asList(faultType.split(","));
+            tj +=" and ( 1=0";
+            if(type.contains("1")){
+                tj +=" or al.NO_GPS='1'";
+            }
+            if(type.contains("2")){
+                tj +=" or al.NO_JJQ='1'";
+            }
+            if(type.contains("3")){
+                tj +=" or al.NO_GPS_JJQ='1'";
+            }
+            if(type.contains("4")){
+                tj +=" or al.SEVEN_GPS_JJQ='1'";
+            }
+            if(type.contains("5")){
+                tj +=" or al.EMPTY_HEAVY='1'";
+            }
+            if(type.contains("6")){
+                tj +=" or al.SCREEN_BLACK='1'";
+            }
+            if(type.contains("7")){
+                tj +=" or al.MOVE_ON='1'";
+            }
+            if(type.contains("8")){
+                tj +=" or al.BREAK_OFF='1'";
+            }
+            tj +=")";
+
+        }else{
+            tj +=" and (al.NO_GPS='1' or al.NO_JJQ='1' or al.NO_GPS_JJQ='1' or al.SEVEN_GPS_JJQ='1'"
+                    + " or al.EMPTY_HEAVY='1' or al.SCREEN_BLACK='1' or al.MOVE_ON='1' or al.BREAK_OFF='1')";
+        }
+        if(area!=null&&!area.isEmpty()&&!area.equals("null")&&area.length()>0){
+            if(area.equals("主城区")){
+                tj += " and (g.AREA_NAME like '%上城%' or g.AREA_NAME like '%下城%' "
+                        + "or g.AREA_NAME like '%江干%' or g.AREA_NAME like '%拱墅%' "
+                        + "or g.AREA_NAME like '%下沙%' "
+                        + "or g.AREA_NAME like '%西湖%' or g.AREA_NAME like '%滨江%')";
+            } else {
+                tj += " and g.AREA_NAME like '%"+area+"%'";
+            }
+        }
+        String sql = "select distinct al.*,v.comp_name,sh.order_result,g.area_name from tb_taxi_gzfx@db69 al" +
+                " left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no " +
+                " left join tb_taxi_gzfx_examine@db69 sh on al.vehicle_no=sh.vehicle_no " +
+                " left join  (select * from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on al.vehicle_no=g.plate_number " +
+                " where 1=1";
+        sql +=tj;
+        sql +="order by al.vehicle_no";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer audit(String vehicle, String fields,String type) {
+        if(vehicle==null&&vehicle.isEmpty()&&vehicle.equals("null")&&vehicle.length()==0){
+            return 0;
+        }
+        if(fields==null&&fields.isEmpty()&&fields.equals("null")&&fields.length()==0){
+            return 0;
+        }
+        String sql="";
+        int count=0;
+        if(type.equals("0")){
+        }else if(type.equals("1")){
+            sql +="update tb_taxi_gzfx@db69 set IF_CHECK='"+type+"' where VEHICLE_NO ='"+vehicle+"'";
+            String insert="insert into tb_taxi_gzfx_examine@db69 (vehicle_no,fault_type,fault_time,order_result)" +
+                    " values('"+vehicle+"','"+fields+"',sysdate,'0')";
+            jdbcTemplate.update(insert);
+        }
+        count=jdbcTemplate.update(sql);
+        return count;
+    }
+
+    @Override
+    public String terminalerror() {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(new Date());
+        String time=sdf.format(ca.getTime());
+        ca.add(Calendar.DAY_OF_MONTH, -7);
+        String time2=sdf.format(ca.getTime());
+        //查询定位异常,空重车异常,计价器异常数量
+        String sql="select a.*,b.*,c.*,d.*,e.*,f.*,g.*,h.* from " +
+                " (select count(*) NO_GPS from tb_taxi_gzfx@db69 where NO_GPS='1') a" +
+                " ,(select count(*) NO_JJQ from tb_taxi_gzfx@db69 a where NO_JJQ='1') b"+
+                " ,(select count(*) NO_GPS_JJQ from tb_taxi_gzfx@db69 a where NO_GPS_JJQ='1') c"+
+                " ,(select count(*) SEVEN_GPS_JJQ from tb_taxi_gzfx@db69 a where SEVEN_GPS_JJQ='1') d"+
+                " ,(select count(*) EMPTY_HEAVY from tb_taxi_gzfx@db69 a where EMPTY_HEAVY='1') e"+
+                " ,(select count(*) SCREEN_BLACK from tb_taxi_gzfx@db69 a where SCREEN_BLACK='1') f"+
+                " ,(select count(*) MOVE_ON from tb_taxi_gzfx@db69 a where MOVE_ON='1') g"+
+                " ,(select count(*) BREAK_OFF from tb_taxi_gzfx@db69 a where BREAK_OFF='1') h";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String goodrate(String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        String tj3="";
+        String tj4="";
+        int count=0;
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj1 +=" and a.comp_name='"+companyName+"'";
+            tj4 +=" and comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            count ++;
+            tj2 +=" and db_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and rr_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            count ++;
+            tj2 +=" and db_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and rr_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(count==0){
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(new Date());
+            String time=sdf.format(ca.getTime());
+            tj2 +=" and to_char(db_time,'yyyy-MM') ='"+time+"'";
+            tj3 +=" and to_char(rr_time,'yyyy-MM') ='"+time+"'";
+        }
+        //查询数据
+        String sql= "select a.*,nvl(b.gzzs,0) gzzs,nvl(c.wxzs,0) wxzs,CONCAT(ROUND(nvl(b.gzzs,0)*100/a.zs,2),'%') gzl,CONCAT(ROUND(nvl(c.wxzs,0)*100/a.zs,2),'%') xcl from (select count(vehi_no) zs,comp_name from vw_vehicle@db69 group by comp_name)a" +
+                " left join (select count(distinct v.vehi_no) gzzs,comp_name from vw_vehicle@db69 v,TB_TAXI_GZFX_HISTORY@db69 al where v.VEHI_NO=al.vehicle_no ";
+        sql +=tj2;
+        sql += " group by comp_name)b on b.comp_name=a.comp_name" +
+                " left join (select count(distinct v.vehi_no) wxzs,comp_name from vw_vehicle@db69 v,tb_repair_record@db69 r where v.VEHI_NO=r.VEHI_NO";
+        sql +=tj3;
+        sql += " group by comp_name)c on c.comp_name=a.comp_name where 1=1";
+        sql +=tj1;
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        //eharts图表
+        String cx="select a.*, b.*, c.* from (select count(distinct vehi_no) zs from vw_vehicle@db69 where 1=1";
+        cx +=tj4;
+        cx +=") a left join (select count(distinct v.vehi_no) gzzs from vw_vehicle@db69 v,TB_TAXI_GZFX_HISTORY@db69 al where v.VEHI_NO=al.vehicle_no ";
+        cx +=tj2;
+        cx +=tj4;
+        cx += ")b on 1=1" +
+                " left join (select count(distinct v.vehi_no) wxzs from vw_vehicle@db69 v,tb_repair_record@db69 r where v.VEHI_NO=r.VEHI_NO";
+        cx +=tj3;
+        cx +=tj4;
+        cx += ")c on 1=1";
+        List<Map<String, Object>> echart=jdbcTemplate.queryForList(cx);
+        Map<String, Object> map=new HashMap<String, Object> ();
+        map.put("list",list);
+        map.put("echart",echart);
+        return jacksonUtil.toJson(map);
+    }
+
+    @Override
+    public String online(String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj1 +=" and a.comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj2 +=" and db_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj2 +=" and db_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql= "select a.*,nvl(b.zxzs,0) zxzs,CONCAT(ROUND(nvl(b.zxzs,0)*100/a.zs,2),'%') zxl from (select count(vehi_no) zs,comp_name,ba_name from vw_vehicle@db69 group by comp_name,ba_name)a" +
+                " left join (select count(distinct v.vehi_no) zxzs,comp_name,ba_name from vw_vehicle@db69 v,tb_taxi_not_online@db69 o where v.VEHI_NO=o.VEHI_NO ";
+        sql +=tj2;
+        sql += " group by comp_name,ba_name)b on b.comp_name=a.comp_name where 1=1";
+        sql +=tj1;
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String notonline(String vehicle, String companyName, String area, String stime, String etime, Integer currentPage, Integer pageSize) {
+        String tj1="";
+        String tj2="";
+        String tj3="";
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj2 +=" and v.vehi_no='"+vehicle+"'";
+        }
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj2 +=" and v.comp_name='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj1 +=" and ONLINE_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and ONLINE_TIME <to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj1 +=" and ONLINE_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj3 +=" and ONLINE_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(area!=null&&!area.isEmpty()&&!area.equals("null")&&area.length()>0){
+            if(area.equals("主城区")){
+                tj2 += " and (g.AREA_NAME like '%上城%' or g.AREA_NAME like '%下城%' "
+                        + "or g.AREA_NAME like '%江干%' or g.AREA_NAME like '%拱墅%' "
+                        + "or g.AREA_NAME like '%下沙%' "
+                        + "or g.AREA_NAME like '%西湖%' or g.AREA_NAME like '%滨江%')";
+            } else {
+                tj2 += " and g.AREA_NAME like '%"+area+"%'";
+            }
+        }
+        String sql = " select (SELECT count (distinct VEHI_NO) FROM VW_VEHICLE@db69  v"
+                + " left join  (select plate_number,area_name from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on v.VEHI_NO=g.plate_number "
+                + " left join (select vehi_no cphm from TB_TAXI_NOT_ONLINE@db69  where 1=1 ";
+        sql += tj1;
+        sql += " ) l on l.cphm=v.VEHI_NO where  l.cphm is null and v.VEHI_NO like '浙A%' ";
+        sql += tj2;
+        sql += " ) as COUNT,tt.* from (select t.*,rownum rn from (select a.*,to_char(d.ONLINE_TIME,'yyyy-MM-dd hh24:mi:ss') TIME from (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE,g.AREA_NAME"
+                + " FROM VW_VEHICLE@db69  v"
+                + " left join  (select plate_number,area_name from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on v.VEHI_NO=g.plate_number "
+                + " left join (select vehi_no cphm from TB_TAXI_NOT_ONLINE@db69  where 1=1 ";
+        sql += tj1;
+        sql += " ) l on l.cphm=v.VEHI_NO where  l.cphm is null and v.VEHI_NO like '浙A%' ";
+        sql += tj2;
+        sql += " ) a left join (select VEHI_NO,max(ONLINE_TIME) ONLINE_TIME from TB_TAXI_NOT_ONLINE@db69  where 1=1";
+        sql += tj3;
+        sql += " group by VEHI_NO) d on d.VEHI_NO=a.VEHI_NO order by case when d.ONLINE_TIME IS null then to_date('1900-01-01 00:00:00','yyyy-MM-dd hh24:mi:ss') else d.ONLINE_TIME end desc";
+        sql += " )t where rownum <= "+(currentPage*pageSize);
+        sql += " ) tt where tt.rn >"+((currentPage-1)*pageSize);
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        map = new HashMap ();
+        int count = 0;
+        if( list!=null && list.size() >0){
+            count = Integer.parseInt(String.valueOf(list.get(0).get("COUNT")));
+        }
+        map.put("count", count);
+        map.put("datas",list);
+        return jacksonUtil.toJson(map);
+    }
+
+    @Override
+    public String workorderinquiry(String vehicle, String area,String stime, String etime) {
+        String tj="";
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj +=" and al.vehicle_no='"+vehicle+"'";
+        }
+        if(area!=null&&!area.isEmpty()&&!area.equals("null")&&area.length()>0){
+            if(area.equals("主城区")){
+                tj += " and (g.AREA_NAME like '%上城%' or g.AREA_NAME like '%下城%' "
+                        + "or g.AREA_NAME like '%江干%' or g.AREA_NAME like '%拱墅%' "
+                        + "or g.AREA_NAME like '%下沙%' "
+                        + "or g.AREA_NAME like '%西湖%' or g.AREA_NAME like '%滨江%')";
+            } else {
+                tj += " and g.AREA_NAME like '%"+area+"%'";
+            }
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj +=" and al.fault_time >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj +=" and al.fault_time <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql = "select distinct al.*,v.comp_name,to_char(al.fault_time,'yyyy-MM-dd hh24:mi:ss') time,to_char(al.ONCE_TIME,'yyyy-MM-dd hh24:mi:ss') ONCE,to_char(al.TWICE_TIME,'yyyy-MM-dd hh24:mi:ss') TWICE," +
+                " to_char(al.THIRD_TIME,'yyyy-MM-dd hh24:mi:ss') THIRD, to_char(al.WD_FEEDBACK_TIME,'yyyy-MM-dd hh24:mi:ss') fgsj,to_char(al.REPAIR_TIME,'yyyy-MM-dd hh24:mi:ss') wxsj,g.AREA_NAME from tb_taxi_gzfx_examine@db69 al" +
+                " left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no" +
+                " left join  (select plate_number,area_name from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on al.vehicle_no=g.plate_number " +
+                " where 1=1";
+        sql +=tj;
+        sql +=" order by al.fault_time desc";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer workorderaudit(String vehicle,String remarks) {
+        if(vehicle==null&&vehicle.isEmpty()&&vehicle.equals("null")&&vehicle.length()==0){
+            return 0;
+        }
+        String sql="update tb_taxi_gzfx_examine@db69 set order_result='1',description='"+remarks+"' where vehicle_no='"+vehicle+"' and order_result='0'";
+        int count=jdbcTemplate.update(sql);
+        if(count>0){
+            String delete="delete from tb_taxi_gzfx@db69 where vehicle_no='"+vehicle+"'";
+            jdbcTemplate.update(delete);
+        }
+        return count;
+    }
+
+    @Override
+    public String hostfailurehistory(String lPNumber, String area, String time, String faultType, Integer currentPage, Integer pageSize) {
+        String tj="";
+        if(lPNumber!=null&&!lPNumber.isEmpty()&&!lPNumber.equals("null")&&lPNumber.length()>0){
+            tj += " and al.vehicle_no='"+lPNumber+"'";
+        }
+        if(area!=null&&!area.isEmpty()&&!area.equals("null")&&area.length()>0){
+            if(area.equals("主城区")){
+                tj += " and (g.AREA_NAME like '%上城%' or g.AREA_NAME like '%下城%' "
+                        + "or g.AREA_NAME like '%江干%' or g.AREA_NAME like '%拱墅%' "
+                        + "or g.AREA_NAME like '%下沙%' "
+                        + "or g.AREA_NAME like '%西湖%' or g.AREA_NAME like '%滨江%')";
+            } else {
+                tj += " and g.AREA_NAME like '%"+area+"%'";
+            }
+        }
+        if(time!=null&&!time.isEmpty()&&!time.equals("null")&&time.length()>0){
+            tj +=" and al.db_time =to_date('"+time+"','yyyy-MM-dd')";
+        }
+        if(faultType!=null&&!faultType.isEmpty()&&!faultType.equals("null")&&faultType.length()>0){
+            List type=Arrays.asList(faultType.split(","));
+            tj +=" and ( 1=0";
+            if(type.contains("1")){
+                tj +=" or al.NO_GPS='1'";
+            }
+            if(type.contains("2")){
+                tj +=" or al.NO_JJQ='1'";
+            }
+            if(type.contains("3")){
+                tj +=" or al.NO_GPS_JJQ='1'";
+            }
+            if(type.contains("4")){
+                tj +=" or al.SEVEN_GPS_JJQ='1'";
+            }
+            if(type.contains("5")){
+                tj +=" or al.EMPTY_HEAVY='1'";
+            }
+            if(type.contains("6")){
+                tj +=" or al.SCREEN_BLACK='1'";
+            }
+            if(type.contains("7")){
+                tj +=" or al.MOVE_ON='1'";
+            }
+            if(type.contains("8")){
+                tj +=" or al.BREAK_OFF='1'";
+            }
+            tj +=")";
+
+        }else{
+            tj +=" and (al.NO_GPS='1' or al.NO_JJQ='1' or al.NO_GPS_JJQ='1' or al.SEVEN_GPS_JJQ='1'"
+                    + " or al.EMPTY_HEAVY='1' or al.SCREEN_BLACK='1' or al.MOVE_ON='1' or al.BREAK_OFF='1')";
+        }
+        String sql = "select (select count(*) from tb_taxi_gzfx_history@db69 al" +
+                " left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no  " +
+                " left join  (select plate_number,area_name from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on al.vehicle_no=g.plate_number " +
+                "where 1=1";
+        sql +=tj;
+        sql += ") COUNT,tt.* from (select t.*,rownum as rn from (select al.*,v.comp_name,to_char(db_time,'yyyy-MM-dd') time,g.area_name from tb_taxi_gzfx_history@db69 al" +
+                " left join vw_vehicle@db69 v on al.vehicle_no=v.vehi_no  " +
+                " left join  (select plate_number,area_name from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on al.vehicle_no=g.plate_number " +
+                "where 1=1";
+        sql +=tj;
+        sql +="order by db_time desc) t where rownum <= "+(currentPage*pageSize);
+        sql +=")tt where tt.rn >"+((currentPage-1)*pageSize);
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        map = new HashMap ();
+        int count = 0;
+        if( list!=null && list.size() >0){
+            count = Integer.parseInt(String.valueOf(list.get(0).get("COUNT")));
+        }
+        map.put("count", count);
+        map.put("datas",list);
+        return jacksonUtil.toJson(map);
+    }
+
+    @Override
+    public String videoshift(String vehicle) {
+        String tj="";
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(new Date());
+        String time=sdf.format(ca.getTime());
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj += " and v.vehi_no='"+vehicle+"'";
+        }
+        String sql = "select v.VEHI_NO,vi.equipment_id equipment,s.* from TB_VIDEO@db69 vi" +
+                " left join vw_vehicle@db69 v on vi.equipment_id=v.MDT_NO" +
+                " left join (select * from TB_VIDEO_SHIFT@db69 where one_time>=to_date('"+time+"-01 00:00:00','yyyy-MM-dd hh24:mi:ss'))s" +
+                " on vi.equipment_id=s.equipment_id where 1=1";
+        sql +=tj;
+        sql +="order by TWO_TIME desc nulls last,ONE_TIME desc nulls last,VEHI_NO";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer videoaudit(String id, String vehicle, String mdt_no, String times, String road_e1, String road_e2, String road_e3, String road_e4) {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(new Date());
+        String time=sdf.format(ca.getTime());
+        int count=0;
+        String sql="";
+        if(times.equals("")){
+            sql +="insert into TB_VIDEO_SHIFT@db69 (ONE_ROAD_ONE,ONE_ROAD_TWO,ONE_ROAD_THREE,ONE_ROAD_FOUR,VEHICLE_NO,EQUIPMENT_ID,ONE_TIME) values " +
+                    "('"+road_e1+"','"+road_e2+"','"+road_e3+"','"+road_e4+"','"+vehicle+"','"+mdt_no+"',to_date('"+time+"-01 00:00:00','yyyy-MM-dd hh24:mi:ss'))";
+
+        }else{
+            sql +="update TB_VIDEO_SHIFT@db69 set TWO_ROAD_ONE='"+road_e1+"',TWO_ROAD_TWO='"+road_e2+"',TWO_ROAD_THREE='"+road_e3+"',TWO_ROAD_FOUR='"+road_e4+"',TWO_TIME=to_date('"+time+"-15 00:00:00','yyyy-MM-dd hh24:mi:ss') where id ='"+id+"'";
+
+        }
+        count=jdbcTemplate.update(sql);
+        return count;
+    }
+}

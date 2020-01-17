@@ -1,0 +1,287 @@
+package mvc.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.vividsolutions.jts.geom.Geometry;
+import mvc.service.KeyAreaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.DownloadAct;
+import util.GeometryHandler;
+import util.JacksonUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+
+/**
+ * @author: xianlehuang
+ * @Description:重点区域
+ * @date: 2019/9/27 - 15:04
+ */
+@Controller
+@RequestMapping("/keyArea")
+public class KeyAreaController {
+
+    @Autowired
+    private KeyAreaService keyAreaService;
+    private DownloadAct downloadAct = new DownloadAct();
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    //区域查询
+    @RequestMapping("/findarea")
+    @ResponseBody
+    public String findarea(){
+        return keyAreaService.findarea();
+    }
+
+    //区域添加
+    @RequestMapping("/addarea")
+    @ResponseBody
+    public Integer addarea(String name,String describe,String coordinates,String size,String warning){
+        return keyAreaService.addarea(name,describe,coordinates,size,warning);
+    }
+
+    //区域添加
+    @RequestMapping("/updatearea")
+    @ResponseBody
+    public Integer updatearea(String id,String name,String describe,String coordinates,String size,String warning){
+        return keyAreaService.updatearea(id,name,describe,coordinates,size, warning);
+    }
+
+    //区域删除
+    @RequestMapping("/deletearea")
+    @ResponseBody
+    public Integer deletearea(String id){
+        return keyAreaService.deletearea(id);
+    }
+
+    //重点区域车辆数量月报表查询
+    @RequestMapping("/getKeyAreasVehicleQuantityMonthlyReport")
+    @ResponseBody
+    public String getKeyAreasVehicleQuantityMonthlyReport(String area, String time){
+        return keyAreaService.getKeyAreasVehicleQuantityMonthlyReport(area, time);
+    }
+
+    //重点区域车辆数量月报表导出
+    @RequestMapping("/getKeyAreasVehicleQuantityMonthlyReportExcel")
+    @ResponseBody
+    public String getKeyAreasVehicleQuantityMonthlyReportExcel(HttpServletRequest request, HttpServletResponse response, String area, String time) throws IOException {
+
+        String gzb = "重点区域车辆数量月报表";//导出sheet名和导出的文件名
+        //计算一个月最大的天数
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, Integer.parseInt(time.split("-")[0])); //年
+        c.set(Calendar.MONTH, Integer.parseInt(time.split("-")[1])-1); //月-1
+        Integer maxDate = c.getActualMaximum(Calendar.DATE);
+        String a[] = new String[maxDate+1];//导出列明
+        String b[] = new String[maxDate+1];//导出map中的key
+        a[0]="区域";
+        b[0]="AREA_NAME";
+        for(int i=1;i<=maxDate;i++){
+            if (i<10){
+                a[i]=time+"-0"+i;
+            }else{
+                a[i]=time+"-"+i;
+            }
+            b[i]="D"+i;
+        }
+        String msg = keyAreaService.getKeyAreasVehicleQuantityMonthlyReport( area, time);
+        List<Map<String, Object>> list = DownloadAct.strlist(String.valueOf(JSON.parseObject(msg, Map.class).get("all")));
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //重点区域车辆数量半年报表查询
+    @RequestMapping("/getKeyAreasVehicleQuantityHalfAYearReport")
+    @ResponseBody
+    public String getKeyAreasVehicleQuantityHalfAYearReport(String area, String time, String type){
+        return keyAreaService.getKeyAreasVehicleQuantityHalfAYearReport(area, time, type);
+    }
+
+    //重点区域车辆数量半年报表导出
+    @RequestMapping("/getKeyAreasVehicleQuantityHalfAYearReportExcel")
+    @ResponseBody
+    public String getKeyAreasVehicleQuantityHalfAYearReportExcel(HttpServletRequest request, HttpServletResponse response, String area, String time, String type) throws IOException {
+
+        String gzb = "重点区域车辆数量半年报表";//导出sheet名和导出的文件名
+        Integer math = 6;
+        if(type.equals("1")||type.equals("2")){
+            math = 6;
+            gzb = "重点区域车辆数量半年报表";
+        }else if(type.equals("0")){
+            math = 12;
+            gzb = "重点区域车辆数量年报表";
+        }
+        String a[] = new String[math+1];//导出列明
+        String b[] = new String[math+1];//导出map中的key
+        a[0]="区域";
+        b[0]="AREA_NAME";
+        if(type.equals("1")){
+            for (int i = 1; i < 7; i++) {
+                a[i]=time+"-0"+i;
+                b[i]="D"+i;
+            }
+        }else if(type.equals("2")){
+            for (int i = 7; i < 13; i++) {
+                b[i-6]="D"+(i-6);
+                if(i<10){
+                    a[i-6]=time+"-0"+i;
+                }else{
+                    a[i-6]=time+"-"+i;
+                }
+            }
+        }else if(type.equals("0")){
+            for (int i = 1; i < 13; i++) {
+                b[i]="D"+i;
+                if(i<10){
+                    a[i]=time+"-0"+i;
+                }else{
+                    a[i]=time+"-"+i;
+                }
+            }
+        }
+        String msg = keyAreaService.getKeyAreasVehicleQuantityHalfAYearReport(area, time, type);
+        List<Map<String, Object>> list = DownloadAct.strlist(String.valueOf(JSON.parseObject(msg, Map.class).get("all")));
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //区域监控
+    @RequestMapping("/getAreaMonitor")
+    @ResponseBody
+    public String getAreaMonitor(){
+        String msg = keyAreaService.qyjk();
+        return msg;
+    }
+
+    //疑似套牌查询
+    @RequestMapping("/getDoubtfulDeck")
+    @ResponseBody
+    public String getDoubtfulDeck(String vehicle,String type,String point, String stime,String etime, Integer currentPage,Integer pageSize){
+        return keyAreaService.getDoubtfulDeck(vehicle, type, point, stime, etime, currentPage, pageSize);
+    }
+
+    //疑似套牌导出
+    @RequestMapping("/getDoubtfulDeckExcel")
+    @ResponseBody
+    public String getDoubtfulDeckExcel(HttpServletRequest request,HttpServletResponse response,String vehicle, String type,String point, String stime,String etime) throws IOException {
+        String a[] = {"车牌号","采集地点","异常类型","采集时间"};//导出列明
+        String b[] = {"VEHICLE_NO","ERROR_ADDRESS","ERROR_TYPE","ERROR_TIME"};//导出map中的key
+        String gzb = "疑似套牌";//导出sheet名和导出的文件名
+        Integer currentPage =1,pageSize=10000000;
+        String msg = keyAreaService.getDoubtfulDeck(vehicle, type, point, stime, etime, currentPage, pageSize);
+        List<Map<String, Object>> list = DownloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //疑似黑车查询
+    @RequestMapping("/getSuspectedBlackCar")
+    @ResponseBody
+    public String getSuspectedBlackCar(String vehicle,String type,String point, String stime,String etime, Integer currentPage,Integer pageSize){
+        return keyAreaService.getSuspectedBlackCar(vehicle, type, point, stime, etime, currentPage, pageSize);
+    }
+
+    //疑似黑车导出
+    @RequestMapping("/getSuspectedBlackCarExcel")
+    @ResponseBody
+    public String getSuspectedBlackCarExcel(HttpServletRequest request,HttpServletResponse response,String vehicle, String type,String point, String stime,String etime) throws IOException {
+        String a[] = {"车牌号","采集地点","异常类型","采集时间"};//导出列明
+        String b[] = {"VEHICLE_NO","ERROR_ADDRESS","ERROR_TYPE","ERROR_TIME"};//导出map中的key
+        String gzb = "疑似黑车";//导出sheet名和导出的文件名
+        Integer currentPage =1,pageSize=10000000;
+        String msg = keyAreaService.getSuspectedBlackCar(vehicle, type, point, stime, etime, currentPage, pageSize);
+        List<Map<String, Object>> list = DownloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //计价器异常营运分析查询
+    @RequestMapping("/getAbnormalOperationValuatorAnalysis")
+    @ResponseBody
+    public String getAbnormalOperationValuatorAnalysis(String vehicle,String type,String point, String stime,String etime, Integer currentPage,Integer pageSize){
+        return keyAreaService.getAbnormalOperationValuatorAnalysis(vehicle, stime, etime, currentPage, pageSize);
+    }
+
+    //计价器异常营运分析导出
+    @RequestMapping("/getAbnormalOperationValuatorAnalysisExcel")
+    @ResponseBody
+    public String getAbnormalOperationValuatorAnalysisExcel(HttpServletRequest request,HttpServletResponse response,String vehicle, String type,String point, String stime,String etime) throws IOException {
+        String a[] = {"车牌号","开始时间","结束时间","计价器里程","GPS里程","计价器里程/GPS里程"};//导出列明
+        String b[] = {"VHIC","S_TIME","E_TIME","J_MILE","S_MILE","RDONE"};//导出map中的key
+        String gzb = "计价器异常营运分析";//导出sheet名和导出的文件名
+        Integer currentPage =1,pageSize=10000000;
+        String msg = keyAreaService.getAbnormalOperationValuatorAnalysis(vehicle, stime, etime, currentPage, pageSize);
+        List<Map<String, Object>> list = DownloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //营运里程异常分析查询
+    @RequestMapping("/getAbnormalOperatingMileageAnalysis")
+    @ResponseBody
+    public String getAbnormalOperatingMileageAnalysis(String time, Integer low,Integer high){
+        return keyAreaService.getAbnormalOperatingMileageAnalysis(time, low, high);
+    }
+
+    //营运里程异常分析详情查询
+    @RequestMapping("/getAbnormalOperatingMileageAnalysisDetails")
+    @ResponseBody
+    public String getAbnormalOperatingMileageAnalysisDetails(String time, Integer low,Integer high){
+        return keyAreaService.getAbnormalOperatingMileageAnalysisDetails(time, low, high);
+    }
+
+    //营运里程异常分析导出
+    @RequestMapping("/getAbnormalOperatingMileageAnalysisDetailsExcel")
+    @ResponseBody
+    public String getAbnormalOperatingMileageAnalysisDetailsExcel(HttpServletRequest request,HttpServletResponse response,String time, Integer low,Integer high) throws IOException {
+        String a[] = { "车牌", "里程", "日期","总公司", "分公司"};// 导出列明
+        String b[] = { "CPHM", "S", "DAY","ZGS", "FGS"};// 导出map中的key
+        String gzb = "营运里程异常分析";// 导出sheet名和导出的文件名
+        if(high!=null&&high>=0){
+            gzb +="("+low+"-"+high+")";
+        }else{
+            gzb +="("+low+"以上)";
+        }
+        String msg = keyAreaService.getAbnormalOperatingMileageAnalysisDetails(time, low, high);
+        List<Map<String, Object>> list = DownloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //营运单次异常分析查询
+    @RequestMapping("/getSingleOperationAnomalyAnalysis")
+    @ResponseBody
+    public String getSingleOperationAnomalyAnalysis(String time, Integer low,Integer high){
+        return keyAreaService.getSingleOperationAnomalyAnalysis(time, low, high);
+    }
+
+    //营运单次异常分析详情查询
+    @RequestMapping("/getSingleOperationAnomalyAnalysisDetails")
+    @ResponseBody
+    public String getSingleOperationAnomalyAnalysisDetails(String time, Integer low,Integer high){
+        return keyAreaService.getSingleOperationAnomalyAnalysisDetails(time, low, high);
+    }
+
+    //营运单次异常分析导出
+    @RequestMapping("/getSingleOperationAnomalyAnalysisDetailsExcel")
+    @ResponseBody
+    public String getSingleOperationAnomalyAnalysisDetailsExcel(HttpServletRequest request,HttpServletResponse response,String time, Integer low,Integer high) throws IOException {
+        String a[] = { "车牌", "单次", "日期","总公司", "分公司"};// 导出列明
+        String b[] = { "CPHM", "C", "DAY","ZGS", "FGS"};// 导出map中的key
+        String gzb = "营运单次异常分析";// 导出sheet名和导出的文件名
+        if(high!=null&&high>=0){
+            gzb +="("+low+"-"+high+")";
+        }else{
+            gzb +="("+low+"以上)";
+        }
+        String msg = keyAreaService.getSingleOperationAnomalyAnalysisDetails(time, low, high);
+        List<Map<String, Object>> list = DownloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+}

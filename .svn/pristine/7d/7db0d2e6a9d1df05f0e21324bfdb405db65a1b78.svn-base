@@ -1,0 +1,72 @@
+package mvc.service.impl;
+
+import mvc.service.PowerSchedulingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by donghuibin on 2019-03-04
+ * At 09:55
+ */
+
+@Service
+public class PowerSchedulingServiceImpl implements PowerSchedulingService {
+
+	@Autowired
+	protected JdbcTemplate jdbcTemplate;
+
+	private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+	@Override
+	public String query(String username, String disptype, String stime, String etime) {
+		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
+		String sql1="select to_char(t.disp_time,'yyyy-mm-dd hh24:mi:ss') sendtime,to_char(t.vehi_count) nums,t.content,o.full_name username,'场站扬招' disptype " +
+				"from tb_dispatch_station t,tb_operator o " +
+				"where t.mobile=o.mobile " +
+				"and t.disp_time>=to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and t.disp_time<=to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and o.full_name like '%"+username+"%' ";
+		String sql2="select to_char(db_time,'yyyy-mm-dd hh24:mi:ss') sendtime,numbers nums,msg content,user_account username,'手持扬招' disptype " +
+				"from TB_ISSUED@TAXILINK105 " +
+				"where db_time>=to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and db_time<=to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and user_account like '%"+username+"%' ";
+		if("1".equals(disptype)){
+			result=jdbcTemplate.queryForList(sql1+"order by t.disp_time");
+		}else if("2".equals(disptype)){
+			result=jdbcTemplate.queryForList(sql2+"order by db_time");
+		}else if("0".equals(disptype)){
+			result=jdbcTemplate.queryForList(sql1+" UNION "+sql2+"order by sendtime");
+		}
+		return jacksonUtil.toJson(result);
+	}
+
+	@Override
+	public String count(String username, String disptype, String stime, String etime) {
+		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
+		String sql1="select sum(t.vehi_count) nums,count(*) ts,o.full_name username,'场站扬招' disptype " +
+				"from tb_dispatch_station t,tb_operator o " +
+				"where t.mobile=o.mobile " +
+				"and t.disp_time>=to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and t.disp_time<=to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and o.full_name like '%"+username+"%' group by o.full_name";
+		String sql2="select sum(numbers) nums,count(*) ts,user_account username,'手持扬招' disptype " +
+				"from TB_ISSUED@TAXILINK105 " +
+				"where db_time>=to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and db_time<=to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') " +
+				"and user_account like '%"+username+"%' group by user_account";
+		if("1".equals(disptype)){
+			result=jdbcTemplate.queryForList(sql1);
+		}else if("2".equals(disptype)){
+			result=jdbcTemplate.queryForList(sql2);
+		}else if("0".equals(disptype)){
+			result=jdbcTemplate.queryForList(sql1+" UNION "+sql2);
+		}
+		return jacksonUtil.toJson(result);
+	}
+}

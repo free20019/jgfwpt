@@ -1,0 +1,9 @@
+package mvc.service;
+
+public interface CommonService  {
+    String getVehicle();
+
+    String getCompany();
+
+    String getNumber();
+}

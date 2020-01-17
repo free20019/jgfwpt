@@ -1,0 +1,87 @@
+package mvc.controller;
+
+import mvc.service.AreaService;
+import mvc.service.CaptureDataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.DownloadAct;
+import util.JacksonUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/03/19
+ */
+
+@Controller
+@RequestMapping("/area")
+public class AreaController {
+    @Autowired
+    private AreaService areaService;
+    private DownloadAct downloadAct = new DownloadAct();
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    //区域查询
+    @RequestMapping("/findarea")
+    @ResponseBody
+    public String findarea(){
+        return areaService.findarea();
+    }
+
+    //区域添加
+    @RequestMapping("/addarea")
+    @ResponseBody
+    public Integer addarea(String name,String describe,String coordinates,String size){
+        return areaService.addarea(name,describe,coordinates,size);
+    }
+
+    //区域添加
+    @RequestMapping("/updatearea")
+    @ResponseBody
+    public Integer updatearea(String id,String name,String describe,String coordinates,String size){
+        return areaService.updatearea(id,name,describe,coordinates,size);
+    }
+
+    //区域删除
+    @RequestMapping("/deletearea")
+    @ResponseBody
+    public Integer deletearea(String id){
+        return areaService.deletearea(id);
+    }
+
+    //回场公司查询
+    @RequestMapping("/returncompany")
+    @ResponseBody
+    public String returnCompany(String company,String area){
+        return areaService.returnCompany(company,area);
+    }
+
+    //回场公司添加
+    @RequestMapping("/addreturncompany")
+    @ResponseBody
+    public Integer addreturncompany(String company,String area,String time){
+        return areaService.addreturncompany(company,area,time);
+    }
+
+    //回场公司修改
+    @RequestMapping("/updatereturncompany")
+    @ResponseBody
+    public Integer updatereturncompany(String id,String company,String area,String time){
+        return areaService.updatereturncompany(id,company,area,time);
+    }
+
+    //回场公司删除
+    @RequestMapping("/deletereturncompany")
+    @ResponseBody
+    public Integer deletereturncompany(String id){
+        return areaService.deletereturncompany(id);
+    }
+}

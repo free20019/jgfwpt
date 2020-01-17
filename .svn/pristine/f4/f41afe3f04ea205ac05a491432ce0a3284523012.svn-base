@@ -1,0 +1,115 @@
+package mvc.service.impl;
+
+import mvc.service.IndustryOperationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 9:36
+ */
+@Service
+public class IndustryOperationServiceImpl implements IndustryOperationService {
+
+    @Autowired
+    protected JdbcTemplate jdbcTemplate2;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    //单车营运情况分析
+    @Override
+    public String getCyclingOperation(String cphm,String zgs,String startTime,String endTime,String page,String pageSize) {
+        String str = startTime.substring(0,4)+startTime.substring(5,7);
+        String sql = "select * from (select tt.*,ROWNUM RN from (select * from JJQ_TJ_"+str+"_DAY where type = 5 ";
+        if(cphm != null){
+            sql += "and cphm = '"+cphm+"' ";
+        }
+        if(zgs != null){
+            sql += "and zgs = '"+zgs+"'";
+        }
+        if(startTime != null){
+            sql += " and KSYYSJ > to_date('" + startTime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(endTime != null){
+            sql += " and JSYYSJ < to_date('" + endTime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        sql += ") tt where ROWNUM <= "+Integer.parseInt(page)*Integer.parseInt(pageSize)+") where RN >= "+(Integer.parseInt(page)-1)*Integer.parseInt(pageSize);
+        return jacksonUtil.toJson(jdbcTemplate2.queryForList(sql));
+    }
+
+    //行业营运情况分析
+    @Override
+    public String getIndustryOperations(String stime,String etime) {
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        String sql = "select day,sum(tjcs) tjcs,sum(zlc) zlc,sum(dhsj) dhsj,sum(yssc) yssc,sum(jine) jine from JJQ_TJ_"+str+"_DAY where type = 5 ";
+        if(stime != null){
+            sql += " and day > " + stime;
+        }
+        if(etime != null){
+            sql += " and day < " + etime;
+        }
+        sql += " GROUP BY day order by day asc";
+        return jacksonUtil.toJson(jdbcTemplate2.queryForList(sql));
+    }
+
+    //行业平均运行情况分析
+    @Override
+    public String getIndustryOperation(String stime,String etime) {
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        String sql = "select count(DISTINCT(cphm)) from JJQ_TJ_"+str+"_DAY where type = 5";
+        //查询车辆总数
+        String s = jacksonUtil.toJson(jdbcTemplate2.queryForList(sql));
+        String sql1 = "select day,sum(tjcs)/"+s+" tjcs,sum(zlc)/"+s+" zlc,sum(dhsj)/"+s+" dhsj,sum(yssc)/"+s+" yssc,sum(jine)/"+s+" jine from JJQ_TJ_"+str+"_DAY where type = 5 ";
+        if(stime != null){
+            sql1 += " and day > " + stime;
+        }
+        if(etime != null){
+            sql1 += " and day < " + etime;
+        }
+        sql1 += " GROUP BY day order by day asc";
+
+        return jacksonUtil.toJson(jdbcTemplate2.queryForList(sql1));
+    }
+
+    @Override
+    public String getTransportationCapacityHotspot() {
+        return null;
+    }
+
+    @Override
+    public String getTaxiHotspot() {
+        return null;
+    }
+
+    @Override
+    public String getOperationTrend() {
+        return null;
+    }
+
+    @Override
+    public String getVehicleOperation() {
+        return null;
+    }
+
+    @Override
+    public String getIncomeAnalysis() {
+        return null;
+    }
+
+    @Override
+    public String getVehicleRunningRanking() {
+        return null;
+    }
+
+    @Override
+    public String getDriverIllegalStatistics() {
+        return null;
+    }
+
+    @Override
+    public String getComplaintsStatistics() {
+        return null;
+    }
+}

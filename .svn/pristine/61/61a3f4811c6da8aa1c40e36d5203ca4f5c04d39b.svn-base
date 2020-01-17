@@ -1,0 +1,339 @@
+package mvc.service.impl;
+
+import mvc.service.IndustryOperationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 9:36
+ */
+@Service
+public class IndustryOperationServiceImpl implements IndustryOperationService {
+
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    //单车营运情况分析
+    @Override
+    public String getCyclingOperation(String vehiNo,String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String str = stime.substring(0,4) + stime.substring(5,7);
+        //车牌,营运时长,实载里程,空驶里程,等候时长,金额,开始营运时间,结束营运时间
+        String sql = "select t1.*,t2.ZGS from (select '浙' || CPHM_NEW CPHM_NEW,YINGYUN,to_char(SHANGCHE,'yyyy-mm-dd hh24:mi:ss') SHANGCHE,to_char(XIACHE,'yyyy-mm-dd hh24:mi:ss') XIACHE,round(to_number(XIACHE-SHANGCHE)*24*60)||'分钟' YYSJ,to_number(JICHENG)/10 || '公里' JICHENG,to_number(KONGSHI)/10 || '公里' KONGSHI,to_number(DENGHOU) || '秒' DENGHOU,JIAOYITYPE,to_number(JINE)/100 || '元' JINE from JJQ201903_1@jjq89 where flag = '1000000000' ";
+        if(vehiNo != null&&!vehiNo.isEmpty()&&!vehiNo.equals("null")&&vehiNo.length()>0){
+            vehiNo = vehiNo.substring(1);
+            sql += "and CPHM_NEW = '"+vehiNo+"' ";
+        }
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += " and SHANGCHE >= to_date('" + stime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            sql += " and XIACHE <= to_date('" + etime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //行业营运情况分析
+    @Override
+    public String getIndustryOperations(String vehiNo,String companyName,String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        String sql = "select substr(day,0,4) || '-' || substr(day,5,2) || '-' || substr(day,7,2) day,count(DISTINCT(CPHM)) || '辆' CPHM,sum(tjcs) || '次' tjcs,sum(jine) || '元' jine,sum(SZLC) || '公里' SZLC,sum(KSLC) || '公里' KSLC,replace(lpad(round(sum(YSSC)/60/60,2),4),' ','0') || '小时' YSSC,replace(lpad(round(sum(DHSJ)/60/60,2),4),' ','0') || '小时' DHSJ from JJQ_TJ_"+str+"_DAY@jjq89 where type = 5 ";
+        if(stime != null){
+            sql += " and ksyysj >= to_date('" + stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null){
+            sql += " and jsyysj <= to_date('" + etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(vehiNo != null&&!vehiNo.isEmpty()&&vehiNo.length()>0&&!vehiNo.equals("")){
+            vehiNo = vehiNo.substring(1);
+            sql += "and CPHM_NEW = '"+vehiNo+"'";
+        }
+        if(companyName != null&&!companyName.isEmpty()&&companyName.length()>0&&!companyName.equals("")){
+            sql += "and ZGS = '"+companyName+"'";
+        }
+        sql += " GROUP BY day order by day asc";
+        List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //行业平均运行情况分析
+    @Override
+    public String getIndustryOperation(String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        String sql = "select count(DISTINCT(cphm)) count from JJQ_TJ_"+str+"_DAY@jjq89 where type = 5";
+        //查询车辆总数
+        int s = Integer.parseInt(jdbcTemplate.queryForList(sql).get(0).get("count").toString());
+        String sql1 = "select substr(day,0,4) || '-' || substr(day,5,2) || '-' || substr(day,7,2) day,round(sum(jine)/"+s+",2) || '元' jine,round(sum(szlc)/"+s+",2) || '公里' szlc,round(sum(kslc)/"+s+",2) || '公里' kslc,round(sum(yssc)/"+s+",2) || '分钟' yssc,round(sum(dhsj)/"+s+",2) || '分钟' dhsj from JJQ_TJ_"+str+"_DAY@jjq89 where type = 5 ";
+        if(stime != null){
+            sql1 += " and ksyysj > to_date('" + stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null){
+            sql1 += " and jsyysj < to_date('" + etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        sql1 += " GROUP BY day order by day asc";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql1));
+    }
+
+    @Override
+    public String getTransportationCapacityHotspot() {
+        return null;
+    }
+
+    @Override
+    public String getTaxiHotspot() {
+        return null;
+    }
+
+    @Override
+    public String getOperationTrend() {
+        return null;
+    }
+
+    //企业车辆营运情况分析
+    @Override
+    public String getVehicleOperation(String companyName,String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        //公司名称,营运车辆数,营运次数,营运金额,总里程,载客里程,空驶里程,实载率,营运时长,等候时长
+        String sql = "select ZGS,count(DISTINCT(CPHM)) vehiNumber,sum(TJCS) TJCS,sum(JINE) || '元' JINE,sum(ZLC) || '公里' ZLC,sum(SZLC) || '公里' SZLC,sum(KSLC) || '公里' KSLC,round(sum(SZLC)/sum(ZLC)*100,2) || '%' RATE ,sum(YSSC)|| '分钟' YSSC ,sum(DHSJ) || '分钟' DHSJ from JJQ_TJ_"+str+"_DAY@jjq89 where type = 5 ";
+        if(companyName != null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            sql += "and ZGS = '"+companyName+"'";
+        }
+        if(stime != null){
+            sql += " and ksyysj > to_date('" + stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null){
+            sql += " and jsyysj < to_date('" + etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        sql += "GROUP BY ZGS";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //驾驶员收入情况分析
+    @Override
+    public String getIncomeAnalysis(String cardNumber,String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        String sql = "select tb.name,tt.* from (select YINGYUN,count(YINGYUN) || '次' YYCS,sum(JINE)/100 || '元' JINE,sum(JICHENG)+sum(KONGSHI) || '公里' ZLC,sum(JICHENG) || '公里' JICHENG,sum(KONGSHI) || '公里' KONGSHI, case when sum(JICHENG)+sum(KONGSHI) = '0' then '0%' else round(sum(JICHENG)/(sum(JICHENG)+sum(KONGSHI))*100,2) || '%' end rate,round(sum((XIACHE-SHANGCHE)*24*60*60),0) || '秒' ZKSJ,sum(DENGHOU) || '秒' DHSJ from JJQ"+str+"_1@jjq89 where FLAG = '1000000000' ";
+        if(cardNumber != null&&!cardNumber.isEmpty()&&cardNumber.length()>0&&!cardNumber.equals("")){
+            sql += "and YINGYUN = '"+cardNumber+"'";
+        }
+        if(stime != null){
+            sql += "and SHANGCHE > to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null){
+            sql += "and XIACHE < to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        sql += " GROUP BY YINGYUN) tt,TB_GLOBAL_PERSON_CERTIFICATE@db69 tb where tt.YINGYUN = substr(tb.SERIAL_NUMBER,-6)";
+        System.out.println(sql);
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+    //车辆运行排行
+    @Override
+    public String getVehicleRunningRanking(String companyName,String cardNumber,String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String str = stime.substring(0,4)+stime.substring(5,7);
+        String sql = "select v.BA_NAME,v.VEHI_SIM,t.* from (select case when substr(CPHM_NEW,1,1) = 'A' then '浙'||CPHM_NEW else '浙A'||CPHM_NEW end cp,sum(TJCS) || '次' TJCS,sum(JINE) || '元' JINE,sum(ZLC) || '公里' ZLC,sum(SZLC) || '公里' SZLC,sum(KSLC) || '公里' KSLC,case when sum(ZLC) = '0' then '0%' else round(sum(SZLC)/sum(ZLC)*100,2) || '%' end rate,sum(YSSC) || '分钟' YSSC,sum(DHSJ) || '分钟' DHSJ from JJQ_TJ_"+str+"_DAY@jjq89 where TYPE = 5 ";
+        if(stime != null){
+            sql += "and ksyysj > to_date('" + stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null){
+            sql += "and jsyysj < to_date('" + etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        sql += " GROUP BY CPHM_NEW) t,VW_VEHICLE v where t.cp=v.VEHI_NO ";
+        if(companyName != null&&!companyName.isEmpty()&&companyName.length()>0&&!companyName.equals("")){
+            sql += "and v.BA_NAME = '"+companyName+"'";
+        }
+        if(cardNumber != null&&!cardNumber.isEmpty()&&cardNumber.length()>0&&!cardNumber.equals("")){
+            sql += "and t.cp = '"+cardNumber+"'";
+        }
+        System.out.println(sql);
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //驾驶员违法统计
+    @Override
+    public String getDriverIllegalStatistics(String vehicle,String partyName,String stime,String etime) {
+        if(stime == null||stime == ""){
+            stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String sql = "select tt.*,replace(INTEGRAL,'-','') INTEGRAL,to_char(PARTY_BIRTHDAY,'yyyy-mm-dd hh24:mi:ss') PARTY_BIRTHDAY,to_char(UPD_DATE,'yyyy-mm-dd hh24:mi:ss') UPD_DATE,to_char(ILLEGAL_TIME,'yyyy-mm-dd hh24:mi:ss') ILLEGAL_TIME,to_char(LEGAL_TIME,'yyyy-mm-dd hh24:mi:ss') LEGAL_TIME from TB_TAXI_ILLEGAL_INFO_OUT tt where 1 = 1 ";
+        if(vehicle != null&&!vehicle.isEmpty()&&vehicle.length()>0&&!vehicle.equals("")){
+            vehicle = vehicle.substring(0,2) + "." +vehicle.substring(2);
+            sql += "and AUTO_NUM = '"+vehicle+"'";
+        }
+        if(partyName != null&&!partyName.isEmpty()&&partyName.length()>0&&!partyName.equals("")){
+            sql += "and PARTY_NAME = '"+partyName+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&stime.length()>0&&!stime.equals("")){
+            sql += "and LEGAL_TIME >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&etime.length()>0&&!etime.equals("")){
+            sql += "and LEGAL_TIME <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        System.out.println(sql);
+
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //投诉查询
+    @Override
+    public String getComplaintsStatistics(String typeComplaint,String stime,String etime) {
+        String sql = "select CALL_NAME,BUSINESS_ITEMTYPE_NAME,CALLER_ID,VEHICLE_PLATE_NUMBER,BUSINESS_STATUS_NAME,ACCEPT_TIME,ARCHIVE_TIME from global_complaint_12328@db69 where 1 = 1 ";
+        if(typeComplaint != null&&!typeComplaint.isEmpty()&&typeComplaint.length()>0&&!typeComplaint.equals("")){
+            sql += "and BUSINESS_ITEMTYPE_NAME = '"+typeComplaint+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&stime.length()>0&&!stime.equals("")){
+            sql += "and ACCEPT_TIME <= to_date(''"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&etime.length()>0&&!etime.equals("")){
+            sql += "and ACCEPT_TIME <= to_date(''"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //OD营运数据分析
+    @Override
+    public String getODOperationDataAnalysis(String SJD,String stime,String etime,String QD) {
+        String qyid = "3288";
+        if(!QD.equals("火车东站"))
+            qyid = "3289";
+        String table = stime.substring(0, 4) + stime.substring(5, 7);
+        List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+        List<Map<String, Object>> list1 = new ArrayList<Map<String,Object>>();
+        int count = 0;
+        if(SJD.equals("全天")){
+            String sql = "select tjcs,cphm,ROUND(yssc/tjcs,2) yssc,ROUND(dhsj/tjcs,2) dhsj,ROUND(jine/tjcs,2) jine,"
+                    + "ROUND(szlc/tjcs,2) szlc from (select sum(tjcs) tjcs,count(distinct(cphm)) cphm,sum(yssc) yssc,sum(dhsj) dhsj"
+                    + ",sum(jine) jine,sum(szlc) szlc"
+                    + " from jjq.JJQ_TJ_"+table+"_DAY@db89.twkj where cphm in(select vhic from TB_ORDER_DETAIL"
+                    + " where dep_id = '"+qyid+"' and dep_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')"
+                    + " and dep_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')) and type = '5'"
+                    + " and day >= '"+stime.replaceAll("-", "")+"' and day <= '"+etime.replaceAll("-", "")+"')";
+            list1 = jdbcTemplate.queryForList(sql);
+            String sql1 = "select t.* from jjq.JJQ"+table+"_1@DB89.TWKJ t where cbid in (select cbid from"
+                    + " TB_ORDER_DETAIL t where dep_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')"
+                    + " and dep_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and dep_id = '"+qyid+"')"
+                    + " and flag = '1000000000'";
+            list = jdbcTemplate.queryForList(sql1);
+            count = jdbcTemplate.queryForObject("select count(1) c from jjq.JJQ"+table+"_1@DB89.TWKJ t where cbid in (select cbid from"
+                    + " TB_ORDER_DETAIL t where dep_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')"
+                    + " and dep_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and dep_id = '"+qyid+"')"
+                    + " and flag = '1000000000'", Integer.class);
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).put("JICHENG", Double.parseDouble(list.get(i).get("JICHENG").toString())/10);
+                list.get(i).put("DENGHOU", (Integer.parseInt(list.get(i).get("DENGHOU").toString().substring(0, 2))*3600+Integer.parseInt(list.get(i).get("DENGHOU").toString().substring(2, 4))*60+Integer.parseInt(list.get(i).get("DENGHOU").toString().substring(4, 6)))/60);
+                list.get(i).put("JINE", Integer.parseInt(list.get(i).get("JINE").toString())/100);
+                list.get(i).put("KONGSHI", Double.parseDouble(list.get(i).get("KONGSHI").toString())/10);
+                list.get(i).put("SCSJ", list.get(i).get("SHANGCHE").toString());
+                list.get(i).put("XCSJ", list.get(i).get("XIACHE").toString());
+            }
+        }else{
+            String sql = "select tjcs,cphm,ROUND(yssc/tjcs,2) yssc,ROUND(dhsj/tjcs,2) dhsj,ROUND(jine/tjcs,2) jine,"
+                    + "ROUND(szlc/tjcs,2) szlc from (select count(1) tjcs,count(distinct(vhic)) cphm,sum(to_number(jine))/100 jine"
+                    + ",sum((xiache-shangche)*24*60) yssc,sum(jicheng)/10 szlc,"
+                    + "sum(substr(denghou,0,2)*60+substr(denghou,2,4)+substr(denghou,4,6)/60) dhsj"
+                    + " from jjq.JJQ"+table+"_1@DB89.TWKJ t where cbid in (select cbid from TB_ORDER_DETAIL t where"
+                    + " flag = '1' and dep_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') and"
+                    + " dep_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and dep_id = '"+qyid+"')"
+                    + " and flag = '1000000000')";
+            list1 = jdbcTemplate.queryForList(sql);
+            String sql1 = "select t.* from jjq.JJQ"+table+"_1@DB89.TWKJ t where cbid in (select cbid from"
+                    + " TB_ORDER_DETAIL t where flag = '1' and dep_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')"
+                    + " and dep_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and dep_id = '"+qyid+"')"
+                    + " and flag = '1000000000'";
+            list = jdbcTemplate.queryForList(sql1);
+            count = jdbcTemplate.queryForObject("select count(1) c from jjq.JJQ"+table+"_1@DB89.TWKJ t where cbid in (select cbid from"
+                    + " TB_ORDER_DETAIL t where flag = '1' and dep_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')"
+                    + " and dep_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and dep_id = '"+qyid+"')"
+                    + " and flag = '1000000000'", Integer.class);
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).put("JICHENG", Double.parseDouble(list.get(i).get("JICHENG").toString())/10);
+                list.get(i).put("DENGHOU", (Integer.parseInt(list.get(i).get("DENGHOU").toString().substring(0, 2))*3600+Integer.parseInt(list.get(i).get("DENGHOU").toString().substring(2, 4))*60+Integer.parseInt(list.get(i).get("DENGHOU").toString().substring(4, 6)))/60);
+                list.get(i).put("JINE", Integer.parseInt(list.get(i).get("JINE").toString())/100);
+                list.get(i).put("KONGSHI", Double.parseDouble(list.get(i).get("KONGSHI").toString())/10);
+                list.get(i).put("SCSJ", list.get(i).get("SHANGCHE").toString());
+                list.get(i).put("XCSJ", list.get(i).get("XIACHE").toString());
+            }
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("mx", list);
+        map.put("tj", list1);
+        map.put("count", count);
+        return jacksonUtil.toJson(map);
+    }
+
+    //OD流向统计
+    @Override
+    public String getODFlowStatistics(String SJD,String stime,String etime,String QD) {
+        String flag = "0";
+        if(!SJD.equals("全天"))
+            flag = "1";
+        String qyid = "3288";
+        if(!QD.equals("火车东站"))
+            qyid = "3289";
+        String sql = "select area_name,sum(count_num) count_num,a.area_id from TB_ORDER_DETAIL_OD t,TB_ORDER_AREA_PLUS a"
+                + " where t.dest_id = a.area_id and db_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') and"
+                + " db_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and flag = '"+flag+"'"
+                + " and dep_id = '"+qyid+"' group by a.area_id,a.area_name order by count_num desc";
+        System.out.println(sql);
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    //OD流向图
+    @Override
+    public String getODFlowDiagram(String SJD,String stime,String etime,String QD) {
+        String flag = "0";
+        if(!SJD.equals("全天"))
+            flag = "1";
+        String qyid = "3288";
+        if(!QD.equals("火车东站"))
+            qyid = "3289";
+        String sql = "select t1.*,a1.area_coordinates from(select * from (select area_name,sum(count_num) count_num"
+                + ",A.AREA_ID from TB_ORDER_DETAIL_OD t,TB_ORDER_AREA_PLUS a where t.dest_id = a.area_id"
+                + " and db_time >= to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss') and"
+                + " db_time <= to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss') and flag = '"+flag+"'"
+                + " and dep_id = '"+qyid+"' group by area_name,A.AREA_ID order by count_num desc) t2 where rownum <=20) t1,"
+                + "TB_ORDER_AREA_PLUS a1 where t1.AREA_ID = a1.area_id order by count_num desc";
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+        String qd = "select * from TB_ORDER_AREA_PLUS where area_id = '"+qyid+"'";
+        List<Map<String, Object>> qdlist = jdbcTemplate.queryForList(qd);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("qd", qdlist);
+        map.put("zd", list);
+        return jacksonUtil.toJson(map);
+    }
+
+    //夜间停放位置分析
+    @Override
+    public String getParkingPlaceAtNight(String time) {
+        if(time == null||time == ""){
+            time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        String sql = "select * from tb_taxi_park_hot@db69 where DBTIME = to_date('"+time+"','yyyy-mm-dd hh24:mi:ss') ORDER BY AREA_COUNT desc";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+}

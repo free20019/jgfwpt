@@ -1,0 +1,18 @@
+package mvc.service;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/22
+ */
+public interface MaintenanceManageService {
+    String qualityreport(String companyName, String stime, String etime);
+
+    String qualityreportechart(String companyName, String stime, String etime);
+
+    String recordinquiry(String vehicle, String companyName, String stime, String etime);
+
+    Integer evaluate(String id, String jobNum, String satisfaction, String remarks);
+
+    String recordstatistics(String companyName, String stime, String etime);
+}

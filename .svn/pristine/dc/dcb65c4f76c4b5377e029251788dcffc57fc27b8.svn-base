@@ -1,0 +1,30 @@
+package mvc.service;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 9:35
+ */
+public interface IndustryOperationService {
+    //单车营运情况分析
+    String getCyclingOperation(String cphm,String zgs,String startTime,String endTime,String page,String pageSize);
+    //行业营运情况分析
+    String getIndustryOperations(String stime,String etime);
+    //行业平均运行情况分析
+    String getIndustryOperation(String stime,String etime);
+
+    String getTransportationCapacityHotspot();
+
+    String getTaxiHotspot();
+
+    String getOperationTrend();
+
+    String getVehicleOperation();
+
+    String getIncomeAnalysis();
+
+    String getVehicleRunningRanking();
+
+    String getDriverIllegalStatistics();
+
+    String getComplaintsStatistics();
+}

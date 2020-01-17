@@ -1,0 +1,1846 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="jgfwpt:war" />
+      <artifact name="jgfwpt:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="29c28177-dc69-4b0f-a0d1-20a1863002b5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cache/DataItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mvc/controller/KeyAreaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mvc/service/KeyAreaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mvc/service/impl/KeyAreaServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/spring/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/spring/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/spring/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/spring/spring-mvc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/filter/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/filter/Router.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/AreaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/AreaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/CaptureDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/CaptureDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/CommonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/IndustryOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/IndustryOperationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/MaintenanceManageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/MaintenanceManageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/PaymentServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/PaymentServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/ServicePlatformUsageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/ServicePlatformUsageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/TerminalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/TerminalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/TransportationDataAccessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/TransportationDataAccessController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/AreaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/AreaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/CommonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/CommonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/IndustryOperationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/IndustryOperationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/TerminalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/TerminalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/impl/AreaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/impl/AreaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/impl/CommonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/impl/CommonServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/impl/IndustryOperationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/impl/IndustryOperationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/impl/PowerSchedulingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/impl/PowerSchedulingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/impl/TerminalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/impl/TerminalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/service/impl/TransportationDataAccessImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/service/impl/TransportationDataAccessImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DownloadAct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DownloadAct.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="jgfwpt">
+      <favorite_root url="file://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode">
+        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+          <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+            <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/ant" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/ant/GeneratorAntTask.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/ant/AntProgressCallback.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/xml" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/xml/Element.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/xml/Document.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/xml/Attribute.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/xml/XmlElement.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/xml/TextElement.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/Field.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/Method.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/InnerEnum.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/Interface.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/Parameter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/InnerClass.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/JavaElement.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/JavaDomUtils.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/TopLevelClass.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/TypeParameter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/InnerInterface.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/JavaVisibility.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/CompilationUnit.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/JavaReservedWords.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/InitializationBlock.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/TopLevelEnumeration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/PrimitiveTypeWrapper.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/java/FullyQualifiedJavaType.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/OutputUtilities.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/DefaultXmlFormatter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/dom/DefaultJavaFormatter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/Plugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/ShellRunner.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/XmlFormatter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/GeneratedFile.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/JavaFormatter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/PluginAdapter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/ShellCallback.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/CommentGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/GeneratedXmlFile.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/JavaTypeResolver.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/MyBatisGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/ProgressCallback.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/ConnectionFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/GeneratedJavaFile.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/IntrospectedTable.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/IntrospectedColumn.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/FullyQualifiedTable.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/DAOMethodNameCalculator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/api/VerboseProgressCallback.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/ibator-config_1_0.dtd" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/ParserErrorHandler.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/ConfigurationParser.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/ParserEntityResolver.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/IbatorConfigurationParser.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/mybatis-generator-config_1_0.dtd" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/xml/MyBatisGeneratorConfigurationParser.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/Context.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/ModelType.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/GeneratedKey.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/Configuration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/IgnoredColumn.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/ColumnOverride.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/MergeConstants.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/PropertyHolder.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/PropertyRegistry.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/ColumnRenamingRule.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/TableConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/PluginConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/TypedPropertyHolder.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/IgnoredColumnPattern.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/IgnoredColumnException.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/DomainObjectRenamingRule.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/JDBCConnectionConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/SqlMapGeneratorConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/CommentGeneratorConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/JavaTypeResolverConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/ConnectionFactoryConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/JavaModelGeneratorConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/config/JavaClientGeneratorConfiguration.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/InsertMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/AbstractDAOElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/CountByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/DeleteByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/InsertSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/DeleteByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/SelectByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/SelectByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByExampleParmsInnerclassGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByExampleSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/SelectByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByPrimaryKeySelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByPrimaryKeyWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/elements/UpdateByPrimaryKeyWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    </favorite_root>
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/templates" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/templates/IbatisDAOTemplate.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/templates/SpringDAOTemplate.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/templates/AbstractDAOTemplate.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/templates/GenericCIDAOTemplate.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/templates/GenericSIDAOTemplate.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    </favorite_root>
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/dao/DAOGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/model" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/model/ExampleGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/model/BaseRecordGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/model/PrimaryKeyGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/model/RecordWithBLOBsGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/InsertElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/AbstractXmlElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/BaseColumnListElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/BlobColumnListElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/CountByExampleElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/DeleteByExampleElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/InsertSelectiveElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/DeleteByPrimaryKeyElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/ExampleWhereClauseElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/ResultMapWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/SelectByPrimaryKeyElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/ResultMapWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/SelectByExampleWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/UpdateByExampleSelectiveElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/UpdateByExampleWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/SelectByExampleWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/UpdateByExampleWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/UpdateByPrimaryKeySelectiveElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/UpdateByPrimaryKeyWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/elements/UpdateByPrimaryKeyWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    </favorite_root>
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/sqlmap/SqlMapGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/Ibatis2FormattingUtilities.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/IntrospectedTableIbatis2Java2Impl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/ibatis2/IntrospectedTableIbatis2Java5Impl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/model" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/model/ExampleGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/model/BaseRecordGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/model/PrimaryKeyGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/model/SimpleModelGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/model/RecordWithBLOBsGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/InsertElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/AbstractXmlElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/BaseColumnListElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/BlobColumnListElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/CountByExampleElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/DeleteByExampleElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/InsertSelectiveElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/SimpleSelectAllElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/DeleteByPrimaryKeyElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/ExampleWhereClauseElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/ResultMapWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/SelectByPrimaryKeyElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/ResultMapWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/SelectByExampleWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/SimpleSelectByPrimaryKeyElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/UpdateByExampleSelectiveElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/UpdateByExampleWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/SelectByExampleWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/UpdateByExampleWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/UpdateByPrimaryKeySelectiveElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/UpdateByPrimaryKeyWithBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/elements/UpdateByPrimaryKeyWithoutBLOBsElementGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    </favorite_root>
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/XMLMapperGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/MixedMapperGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/xmlmapper/SimpleXMLMapperGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedInsertMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedSelectAllMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedCountByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedDeleteByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedInsertSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedDeleteByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedSelectByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedSelectByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedUpdateByExampleSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedUpdateByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedSelectByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedUpdateByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedUpdateByPrimaryKeySelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedUpdateByPrimaryKeyWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/annotated/AnnotatedUpdateByPrimaryKeyWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      </favorite_root>
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderApplyWhereMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/AbstractJavaProviderMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderCountByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderDeleteByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderInsertSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderSelectByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderUpdateByExampleSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderUpdateByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderSelectByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderUpdateByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/sqlprovider/ProviderUpdateByPrimaryKeySelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      </favorite_root>
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/InsertMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/SelectAllMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/CountByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/DeleteByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/InsertSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/AbstractJavaMapperMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/DeleteByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/SelectByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/SelectByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/UpdateByExampleSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/UpdateByExampleWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/SelectByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/UpdateByExampleWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/UpdateByPrimaryKeySelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/UpdateByPrimaryKeyWithBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/elements/UpdateByPrimaryKeyWithoutBLOBsMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    </favorite_root>
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/JavaMapperGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/MixedClientGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/SqlProviderGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/AnnotatedClientGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/SimpleJavaClientGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/javamapper/SimpleAnnotatedClientGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/ListUtilities.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/MyBatis3FormattingUtilities.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/IntrospectedTableMyBatis3Impl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/mybatis3/IntrospectedTableMyBatis3SimpleImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/XmlConstants.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/RootClassInfo.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/AbstractGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/AbstractXmlGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/AbstractJavaGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/codegen/AbstractJavaClientGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/jdk14" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/jdk14/Jdk14LoggingImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/jdk14/Jdk14LoggingLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j/Log4jImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j/Log4jLoggingLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/slf4j" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/slf4j/Slf4jImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/slf4j/Slf4jLoggerImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/slf4j/Slf4jLoggingLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/slf4j/Slf4jLocationAwareLoggerImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j2" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j2/Log4j2Impl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j2/Log4j2LoggerImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j2/Log4j2LoggingLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/log4j2/Log4j2AbstractLoggerImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/commons" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/commons/JakartaCommonsLoggingImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/commons/JakartaCommonsLoggingLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/Log.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/nologging" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/nologging/NoLoggingImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/nologging/NoLoggingLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/LogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/LogException.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/logging/AbstractLogFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/CachePlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/ToStringPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/RowBoundsPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/MapperConfigPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/SerializablePlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/SqlMapConfigPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/EqualsHashCodePlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/MapperAnnotationPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/VirtualPrimaryKeyPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/RenameExampleClassPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/CaseInsensitiveLikePlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/FluentBuilderMethodsPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/plugins/UnmergeableXmlMappersPlugin.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/MethodParts.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/MethodAndImports.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/FragmentGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/InsertMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/AbstractMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/BasicCountMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/BasicDeleteMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/BasicInsertMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/BasicUpdateMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/BasicSelectOneMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/CountByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/BasicSelectManyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/DeleteByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/InsertSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/SelectByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/UpdateByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/DeleteByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/SelectByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/UpdateByPrimaryKeyMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/SelectDistinctByExampleMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/UpdateByExampleSelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                      <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/elements/UpdateByPrimaryKeySelectiveMethodGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    </favorite_root>
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/DynamicSqlModelGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/DynamicSqlMapperGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/DynamicSqlSupportClassGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/runtime/dynamic/sql/IntrospectedTableMyBatis3DynamicSqlImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                </favorite_root>
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/db" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/db/ActualTableName.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/db/DatabaseDialects.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/db/SqlReservedWords.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/db/DatabaseIntrospector.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/messages" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/messages/Messages.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                    <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/messages/messages.properties" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  </favorite_root>
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/EqualsUtil.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/HashCodeUtil.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/JavaBeansUtil.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/StringUtility.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/util/ClassloaderUtility.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules/Rules.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules/BaseRules.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules/RulesDelegate.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules/FlatModelRules.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules/ConditionalModelRules.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/rules/HierarchicalModelRules.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/types" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/types/JdbcTypeNameTranslator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                  <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/types/JavaTypeResolverDefaultImpl.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                </favorite_root>
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/DomWriter.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/ObjectFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/PluginAggregator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/XmlFileMergerJaxp.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/DefaultShellCallback.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/NullProgressCallback.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/JDBCConnectionFactory.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/DefaultCommentGenerator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/DefaultDAOMethodNameCalculator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/internal/ExtendedDAOMethodNameCalculator.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/exception" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/exception/ShellException.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/exception/XMLParserException.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/org/mybatis/generator/exception/InvalidConfigurationException.class" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+            </favorite_root>
+          </favorite_root>
+        </favorite_root>
+        <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+          <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/maven" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+            <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/maven/org.mybatis.generator" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+              <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/maven/org.mybatis.generator/mybatis-generator-core" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/maven/org.mybatis.generator/mybatis-generator-core/pom.xml" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+                <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/maven/org.mybatis.generator/mybatis-generator-core/pom.properties" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+              </favorite_root>
+            </favorite_root>
+          </favorite_root>
+          <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/NOTICE" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+          <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/LICENSE" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+          <favorite_root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.7.jar!/META-INF/MANIFEST.MF" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        </favorite_root>
+      </favorite_root>
+    </favorites_list>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/controller/KeyAreaController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6213">
+              <caret line="348" column="18" selection-start-line="348" selection-start-column="18" selection-end-line="348" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/ServicePlatformUsageServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/controller/PowerSchedulingController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/service/PowerSchedulingService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/PowerSchedulingServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="62" column="58" lean-forward="true" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/controller/ServicePlatformUsageController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1349">
+              <caret line="85" column="57" selection-start-line="85" selection-start-column="57" selection-end-line="85" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/service/ServicePlatformUsageService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/KeyAreaServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30818">
+              <caret line="1639" column="13" selection-start-line="1639" selection-start-column="13" selection-end-line="1639" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/service/KeyAreaService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1501">
+              <caret line="83" column="53" selection-start-line="83" selection-start-column="53" selection-end-line="83" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindBugs-IDEA-Workspace">
+    <toolWindowEditorPreview>false</toolWindowEditorPreview>
+    <toolWindowGroupBy>BugRank</toolWindowGroupBy>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>area</find>
+      <find>getSemiAnnualDataQualityReport</find>
+      <find>getAbnormalDataAlarmRectificationReport</find>
+      <find>TB_JGPT_STATIS</find>
+      <find>getAbnormalOperationValuatorAnalysis</find>
+      <find>getAbnormalOperatingMileageAnalysis</find>
+      <find>online</find>
+      <find>tb_global_company</find>
+      <find>getSingleOperationAnomalyAnalysisDetailsExcel</find>
+      <find>,g.area_name</find>
+      <find>异常数据</find>
+      <find>实际</find>
+      <find>导入</find>
+      <find>online_time</find>
+      <find>sysdate</find>
+      <find>TerminalServiceImpl.class</find>
+      <find>=sysdate</find>
+      <find>数据</find>
+      <find>upload</find>
+      <find>sum(ACT_POINTS)</find>
+      <find>sum(RUN_TIME)</find>
+      <find>1-sum</find>
+      <find>format</find>
+      <find>notonline</find>
+      <find>login_</find>
+      <find>getEnterpriseSubCenterQuery</find>
+      <find>TB_LOGIN_HISTORY</find>
+      <find>powerScheduling</find>
+      <find>query</find>
+      <find>u.</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>to_date</replace>
+      <replace>tb_area_company@db69</replace>
+      <replace>v.industry=090 and v.business_scope_code = 1400</replace>
+      <replace>industry=090 and business_scope_code = 1400</replace>
+      <replace>.str</replace>
+      <replace>DownloadAct.str</replace>
+      <replace>and c.IS_CHECK !=2 and CHECK_TABLE</replace>
+      <replace>and sh.order_result=0 and sh.AUDIT_TYPE=</replace>
+      <replace />
+      <replace>AbnormalDisposalProcess</replace>
+      <replace>sum(ACCU_POINTS+NOT_ACCU_POINTS)</replace>
+      <replace>sum(RUN_TIME+LOST_TIME)</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/mvc/service/PaymentServiceService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/CaptureDataService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/CaptureDataController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/PaymentServiceServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/TransportationDataAccessController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/MaintenanceManageService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/MaintenanceManageController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/CaptureDataServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/MaintenanceManageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/util/ExcelUtil.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/AreaServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/util/Client.java" />
+        <option value="$PROJECT_DIR$/src/filter/Router.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/TransportationDataAccessImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/TerminalServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/PaymentServiceController.java" />
+        <option value="$PROJECT_DIR$/src/util/DownloadAct.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/PowerSchedulingServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/AreaService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/TerminalService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/CommonService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/CommonController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/CommonServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/util/GeometryHandler.java" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/resources/spring/spring-mvc.xml" />
+        <option value="$PROJECT_DIR$/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/resources/spring/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/src/listenter/SystemInitLister.java" />
+        <option value="$PROJECT_DIR$/src/cache/DataItem.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/GisService.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/resources/jdbc.properties" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/IndustryOperationController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/IndustryOperationService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/IndustryOperationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/KeyAreaService.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/AreaController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/KeyAreaController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/FinanceController.java" />
+        <option value="$PROJECT_DIR$/../twkp/src/main/java/com/twkj/controllers/FinanceController.java" />
+        <option value="$PROJECT_DIR$/../twkp/src/main/java/com/twkj/controllers/FinanceAction.java" />
+        <option value="$PROJECT_DIR$/src/mvc/controller/TerminalController.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/TerminalServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/mvc/service/impl/KeyAreaServiceImpl.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\repo" />
+        <option name="mavenHome" value="E:/java/apache-maven-3.5.0" />
+        <option name="userSettingsFile" value="E:\repo\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="jgfwpt" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="jgfwpt" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="20" />
+    <option name="y" value="300" />
+    <option name="width" value="1945" />
+    <option name="height" value="1105" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="jgfwpt-1.0.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="jgfwpt-1.0.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="jgfwpt-1.0.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="jgfwpt-1.0.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="jgfwpt-1.0.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jgfwpt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jgfwpt" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="jgfwpt-1.0.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="mvc" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="MyBatisLogPluginparameters" value="Parameters:" />
+    <property name="MyBatisLogPluginpreparing" value="Preparing:" />
+    <property name="MyBatisLogPluginrunning" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577438809596" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="spring" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\ideaworkspace\jgfwpt\WebRoot\WEB-INF\lib" />
+      <recent name="E:\ideaworkspace\jgfwpt\src" />
+      <recent name="E:\ideaworkspace\jgfwpt\src\mvc\service" />
+      <recent name="E:\ideaworkspace" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cache" />
+      <recent name="listenter" />
+      <recent name="util" />
+      <recent name="mvc.controller" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="mvc.service.impl" />
+      <recent name="mvc.service" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 7.0.73" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.73" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="jgfwpt:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/jgfwpt" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_jgfwpt_2" />
+        <option name="HTTP_PORT" value="8081" />
+        <option name="JNDI_PORT" value="1091" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="52550" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="58439" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="jgfwpt:war exploded" />
+          <artifact name="jgfwpt:war" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\xlhuang\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="29c28177-dc69-4b0f-a0d1-20a1863002b5" name="Default Changelist" comment="" />
+      <created>1550826517630</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1550826517630</updated>
+      <workItem from="1550826519253" duration="1442000" />
+      <workItem from="1551054847983" duration="20870000" />
+      <workItem from="1551141174639" duration="1697000" />
+      <workItem from="1551143429764" duration="16220000" />
+      <workItem from="1551227419192" duration="1978000" />
+      <workItem from="1551229781397" duration="11932000" />
+      <workItem from="1551314023616" duration="8283000" />
+      <workItem from="1551401571247" duration="5556000" />
+      <workItem from="1551659484845" duration="14510000" />
+      <workItem from="1551746818166" duration="11014000" />
+      <workItem from="1551832418906" duration="11107000" />
+      <workItem from="1551918696604" duration="16627000" />
+      <workItem from="1552005300885" duration="15156000" />
+      <workItem from="1552264555439" duration="12769000" />
+      <workItem from="1552350907374" duration="6095000" />
+      <workItem from="1552437308612" duration="3487000" />
+      <workItem from="1552523818610" duration="2173000" />
+      <workItem from="1552869150106" duration="1798000" />
+      <workItem from="1552955467199" duration="9309000" />
+      <workItem from="1553042143171" duration="14722000" />
+      <workItem from="1553128350257" duration="14413000" />
+      <workItem from="1553214723229" duration="13527000" />
+      <workItem from="1553476190826" duration="2957000" />
+      <workItem from="1553739133596" duration="12663000" />
+      <workItem from="1553819556574" duration="17701000" />
+      <workItem from="1554079179193" duration="8124000" />
+      <workItem from="1554165311605" duration="8505000" />
+      <workItem from="1554251534543" duration="4279000" />
+      <workItem from="1554338118297" duration="5160000" />
+      <workItem from="1554690704555" duration="2862000" />
+      <workItem from="1554943524117" duration="12549000" />
+      <workItem from="1555029400060" duration="2570000" />
+      <workItem from="1555288501857" duration="6772000" />
+      <workItem from="1555374969842" duration="18294000" />
+      <workItem from="1555461235405" duration="3734000" />
+      <workItem from="1555550793653" duration="9737000" />
+      <workItem from="1555633987750" duration="17128000" />
+      <workItem from="1555893318016" duration="9048000" />
+      <workItem from="1555980669434" duration="3197000" />
+      <workItem from="1556074870649" duration="1267000" />
+      <workItem from="1556183815324" duration="351000" />
+      <workItem from="1556238908151" duration="17999000" />
+      <workItem from="1556411819650" duration="1793000" />
+      <workItem from="1556520642749" duration="1350000" />
+      <workItem from="1556585123797" duration="8101000" />
+      <workItem from="1557190020989" duration="1393000" />
+      <workItem from="1557193905119" duration="47000" />
+      <workItem from="1557194170783" duration="19000" />
+      <workItem from="1557195229238" duration="379000" />
+      <workItem from="1557196091058" duration="96000" />
+      <workItem from="1557196389052" duration="28000" />
+      <workItem from="1557196462679" duration="599000" />
+      <workItem from="1557197658645" duration="422000" />
+      <workItem from="1557200134285" duration="652000" />
+      <workItem from="1557295929271" duration="1236000" />
+      <workItem from="1557300168188" duration="26000" />
+      <workItem from="1557301483187" duration="1217000" />
+      <workItem from="1557306162667" duration="19000" />
+      <workItem from="1557367404375" duration="353000" />
+      <workItem from="1557712327831" duration="1210000" />
+      <workItem from="1557886141807" duration="315000" />
+      <workItem from="1557911624103" duration="65000" />
+      <workItem from="1557969054466" duration="228000" />
+      <workItem from="1557972350327" duration="697000" />
+      <workItem from="1558083143778" duration="146000" />
+      <workItem from="1558510661166" duration="581000" />
+      <workItem from="1558511351188" duration="4000" />
+      <workItem from="1558511503088" duration="13000" />
+      <workItem from="1558917902085" duration="7608000" />
+      <workItem from="1558943403705" duration="5183000" />
+      <workItem from="1559003743118" duration="6963000" />
+      <workItem from="1559271737854" duration="331000" />
+      <workItem from="1559705588691" duration="3996000" />
+      <workItem from="1559781493391" duration="6819000" />
+      <workItem from="1560126549348" duration="585000" />
+      <workItem from="1560482236989" duration="1852000" />
+      <workItem from="1560741067747" duration="1512000" />
+      <workItem from="1560753054305" duration="24000" />
+      <workItem from="1560928599032" duration="20000" />
+      <workItem from="1561000462221" duration="603000" />
+      <workItem from="1561014039186" duration="237000" />
+      <workItem from="1561019366036" duration="628000" />
+      <workItem from="1561102061924" duration="752000" />
+      <workItem from="1561361933747" duration="225000" />
+      <workItem from="1562029948329" duration="7896000" />
+      <workItem from="1562208591214" duration="5167000" />
+      <workItem from="1562552546012" duration="3826000" />
+      <workItem from="1562632959295" duration="3955000" />
+      <workItem from="1562825479176" duration="1242000" />
+      <workItem from="1563172291094" duration="3621000" />
+      <workItem from="1563244885364" duration="5783000" />
+      <workItem from="1563497549231" duration="2243000" />
+      <workItem from="1563844133373" duration="17386000" />
+      <workItem from="1563928679839" duration="606000" />
+      <workItem from="1564478627511" duration="307000" />
+      <workItem from="1564628301681" duration="279000" />
+      <workItem from="1564638665144" duration="1684000" />
+      <workItem from="1565140507644" duration="16043000" />
+      <workItem from="1565232934703" duration="138000" />
+      <workItem from="1565233086466" duration="34000" />
+      <workItem from="1565251834447" duration="19000" />
+      <workItem from="1565252480782" duration="14000" />
+      <workItem from="1565331136518" duration="18000" />
+      <workItem from="1565335313178" duration="683000" />
+      <workItem from="1565590224608" duration="868000" />
+      <workItem from="1565598854843" duration="23000" />
+      <workItem from="1565852868123" duration="231000" />
+      <workItem from="1566377187119" duration="1001000" />
+      <workItem from="1566980743134" duration="844000" />
+      <workItem from="1567385354233" duration="4714000" />
+      <workItem from="1568078141731" duration="1571000" />
+      <workItem from="1568081169250" duration="1086000" />
+      <workItem from="1568083527845" duration="2106000" />
+      <workItem from="1568185845676" duration="5820000" />
+      <workItem from="1568248447508" duration="1540000" />
+      <workItem from="1568253003996" duration="8579000" />
+      <workItem from="1568595085472" duration="9445000" />
+      <workItem from="1568680212222" duration="11663000" />
+      <workItem from="1568766609312" duration="759000" />
+      <workItem from="1568772123011" duration="103000" />
+      <workItem from="1568772299459" duration="9000" />
+      <workItem from="1568772340800" duration="13000" />
+      <workItem from="1568786579301" duration="54000" />
+      <workItem from="1568792459058" duration="438000" />
+      <workItem from="1568793244800" duration="50000" />
+      <workItem from="1568795131935" duration="2680000" />
+      <workItem from="1568884498317" duration="416000" />
+      <workItem from="1568949967655" duration="6082000" />
+      <workItem from="1569200336018" duration="9023000" />
+      <workItem from="1569285284766" duration="12896000" />
+      <workItem from="1569371651743" duration="10301000" />
+      <workItem from="1569459467251" duration="3885000" />
+      <workItem from="1569544557485" duration="4709000" />
+      <workItem from="1569564723148" duration="8417000" />
+      <workItem from="1569574749068" duration="807000" />
+      <workItem from="1569717302255" duration="8707000" />
+      <workItem from="1569803780535" duration="4051000" />
+      <workItem from="1570494361194" duration="7686000" />
+      <workItem from="1570581218990" duration="3412000" />
+      <workItem from="1570668474890" duration="8793000" />
+      <workItem from="1570754914431" duration="1441000" />
+      <workItem from="1570778692134" duration="52000" />
+      <workItem from="1571015197751" duration="7850000" />
+      <workItem from="1571099659881" duration="11694000" />
+      <workItem from="1571186096899" duration="9570000" />
+      <workItem from="1571206196521" duration="10022000" />
+      <workItem from="1571273383912" duration="5742000" />
+      <workItem from="1571358895441" duration="7294000" />
+      <workItem from="1571618631813" duration="9795000" />
+      <workItem from="1571641791691" duration="8078000" />
+      <workItem from="1571704395005" duration="10059000" />
+      <workItem from="1571790600985" duration="2995000" />
+      <workItem from="1571877141174" duration="8247000" />
+      <workItem from="1571963792418" duration="7688000" />
+      <workItem from="1571991070394" duration="507000" />
+      <workItem from="1572251657343" duration="6059000" />
+      <workItem from="1572395690093" duration="9820000" />
+      <workItem from="1572482037975" duration="1723000" />
+      <workItem from="1572506574262" duration="615000" />
+      <workItem from="1572578949974" duration="7383000" />
+      <workItem from="1572596740740" duration="349000" />
+      <workItem from="1572598967904" duration="18000" />
+      <workItem from="1572828676350" duration="2694000" />
+      <workItem from="1572915984262" duration="6922000" />
+      <workItem from="1573011304699" duration="906000" />
+      <workItem from="1573016328069" duration="3647000" />
+      <workItem from="1573087867719" duration="324000" />
+      <workItem from="1573095060275" duration="4073000" />
+      <workItem from="1573173178883" duration="8678000" />
+      <workItem from="1573432509044" duration="1848000" />
+      <workItem from="1573526446907" duration="119000" />
+      <workItem from="1573699665624" duration="177000" />
+      <workItem from="1573779316483" duration="9186000" />
+      <workItem from="1574041510208" duration="2316000" />
+      <workItem from="1574055970732" duration="6732000" />
+      <workItem from="1574228989470" duration="619000" />
+      <workItem from="1574297618693" duration="1426000" />
+      <workItem from="1574652707135" duration="502000" />
+      <workItem from="1574842419674" duration="88000" />
+      <workItem from="1574844729858" duration="237000" />
+      <workItem from="1575337311682" duration="584000" />
+      <workItem from="1575438379933" duration="1582000" />
+      <workItem from="1575620197096" duration="3221000" />
+      <workItem from="1575625014951" duration="591000" />
+      <workItem from="1575851514053" duration="7879000" />
+      <workItem from="1575940071180" duration="11304000" />
+      <workItem from="1576048872720" duration="1685000" />
+      <workItem from="1576118398209" duration="478000" />
+      <workItem from="1576120960718" duration="164000" />
+      <workItem from="1576130856773" duration="2120000" />
+      <workItem from="1576198059739" duration="6943000" />
+      <workItem from="1576216187014" duration="705000" />
+      <workItem from="1576218962637" duration="611000" />
+      <workItem from="1577408034501" duration="9161000" />
+      <workItem from="1577666145514" duration="599000" />
+      <workItem from="1577777560120" duration="1069000" />
+      <workItem from="1578903014612" duration="474000" />
+      <workItem from="1578905662972" duration="958000" />
+      <workItem from="1578961848419" duration="71000" />
+      <workItem from="1578972093933" duration="3521000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="882850000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" order="0" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" weight="0.3297587" />
+      <window_info id="Web" order="4" sideWeight="0.50107527" side_tool="true" weight="0.16823056" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info id="JRebel" order="7" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="8" sideWeight="0.49892473" weight="0.3538874" />
+      <window_info anchor="bottom" id="JRebel Executor" order="0" weight="0.3286119" />
+      <window_info anchor="bottom" id="Problems" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Spring" order="2" weight="0.3286119" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3286119" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5013405" side_tool="true" weight="0.65014166" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.47308782" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" weight="0.32956153" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.4893918" />
+      <window_info anchor="bottom" id="Application Servers" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Message" order="11" />
+      <window_info anchor="bottom" id="Find" order="12" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.50708216" />
+      <window_info anchor="bottom" id="Debug" order="14" sideWeight="0.49865952" weight="0.5283286" />
+      <window_info anchor="bottom" id="Cvs" order="15" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="16" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="17" weight="0.3286119" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="18" weight="0.49716714" />
+      <window_info anchor="bottom" id="CheckStyle" order="19" weight="0.3286119" />
+      <window_info anchor="bottom" id="JRebel Console" order="20" sideWeight="0.50067025" side_tool="true" weight="0.37393767" />
+      <window_info anchor="bottom" id="Tail" order="21" />
+      <window_info anchor="bottom" id="MyBatis Log" order="22" weight="0.3286119" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="JSF" order="1" weight="0.32908848" />
+      <window_info anchor="right" id="Capture Analysis" order="2" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Bean Validation" order="5" weight="0.02010724" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32908848" />
+      <window_info anchor="right" id="CDI" order="7" weight="0.3293092" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="8" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="9" weight="0.24932976" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="10" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="11" weight="0.32908848" />
+      <window_info anchor="right" id="Coverage" order="12" side_tool="true" />
+      <window_info anchor="right" id="Key Promoter X" order="13" />
+      <window_info anchor="right" id="Word Book" order="14" weight="0.3297587" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Image Layers" order="0" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" weight="0.3297587" />
+      <window_info id="Web" order="4" sideWeight="0.50107527" side_tool="true" weight="0.16823056" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info id="JRebel" order="7" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="8" sideWeight="0.49892473" visible="true" weight="0.3538874" />
+      <window_info anchor="bottom" id="JRebel Executor" order="0" weight="0.3286119" />
+      <window_info anchor="bottom" id="Problems" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Spring" order="2" weight="0.3286119" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3286119" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5013405" side_tool="true" weight="0.65014166" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.47308782" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" weight="0.32956153" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.4893918" />
+      <window_info anchor="bottom" id="Application Servers" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Message" order="11" />
+      <window_info anchor="bottom" id="Find" order="12" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.50708216" />
+      <window_info anchor="bottom" id="Debug" order="14" sideWeight="0.49865952" weight="0.5283286" />
+      <window_info anchor="bottom" id="Cvs" order="15" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="16" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="17" weight="0.3286119" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="18" weight="0.49716714" />
+      <window_info anchor="bottom" id="CheckStyle" order="19" weight="0.3286119" />
+      <window_info anchor="bottom" id="JRebel Console" order="20" sideWeight="0.50067025" side_tool="true" weight="0.37393767" />
+      <window_info anchor="bottom" id="Tail" order="21" />
+      <window_info anchor="bottom" id="MyBatis Log" order="22" weight="0.3286119" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="JSF" order="1" weight="0.32908848" />
+      <window_info anchor="right" id="Capture Analysis" order="2" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Bean Validation" order="5" weight="0.02010724" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32908848" />
+      <window_info anchor="right" id="CDI" order="7" weight="0.3293092" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="8" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="9" weight="0.24932976" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="10" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="11" weight="0.32908848" />
+      <window_info anchor="right" id="Coverage" order="12" side_tool="true" />
+      <window_info anchor="right" id="Key Promoter X" order="13" />
+      <window_info anchor="right" id="Word Book" order="14" weight="0.3297587" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="sql" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="setValue">
+      <expression>
+        <expression-string>&quot;select (select count(distinct i.CERTIFICATE) from tb_ic_operate@db69 i,tb_global_person_certificate@db69 p where i.CERTIFICATE=p.CERTIFICATE_NUMBER and i.OPERATION_VEHICLENO != replace(p.PLATE_NUMBER,'.','')) as COUNT, tt.* from (select t.*, rownum as rn from (select distinct i.CERTIFICATE,i.OPERATION_VEHICLENO,p.CERTIFICATE_NUMBER,p.PLATE_NUMBER,p.NAME from tb_ic_operate@db69 i,tb_global_person_certificate@db69 p where i.CERTIFICATE=p.CERTIFICATE_NUMBER and i.OPERATION_VEHICLENO != replace(p.PLATE_NUMBER,'.','')order by i.OPERATION_VEHICLENO, p.NAME desc) t where rownum &lt;= 20)tt where tt.rn &gt;0&quot;</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>&quot;select VEHICLE_NO,count(VEHICLE_NO) COUNT,g.area_name from (select to_char(CATCH_TIME, 'yyyy-mm-dd') CATCH_TIME,vehicle_no from tb_hk_not_online@db69 where 1=1 and VEHICLE_NO = '浙AB9219' and CATCH_TIME &gt;= TO_DATE('2019-05-01 00:00:00','yyyy-mm-dd hh24:mi:ss') and CATCH_TIME &lt;= TO_DATE('2019-05-28 23:59:59','yyyy-mm-dd hh24:mi:ss')) ol left join  (select plate_number,area_name from tb_global_vehicle@db69 where BUSINESS_SCOPE_NAME='客运：出租车客运。' AND STATUS_NAME='营运' AND PLATE_NUMBER LIKE '浙A%') g on ol.vehicle_no=g.plate_number where 1=1 group by vehicle_no, g.area_name order by vehicle_no&quot;</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>&quot; select  v.*,to_char(r.RR_TIME,'yyyy-MM-dd hh24:mi:ss') TIME from tb_repair_record@db69 r left join (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE from VW_VEHICLE@db69) v on v.VEHI_NO=r.VEHI_NO where r.VEHI_NO &lt;&gt; ' ' and r.RR_TIME &gt;=to_date('2019-02-25 00:00:00','yyyy-MM-dd hh24:mi:ss') and r.RR_TIME &lt;=to_date('2019-02-25 23:59:59','yyyy-MM-dd hh24:mi:ss') order by r.RR_TIME desc&quot;</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/util/GeometryHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-150">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/repo/org/apache/activemq/activemq-core/5.7.0/activemq-core-5.7.0.jar!/org/apache/activemq/kaha/impl/data/DataItem.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-171">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cache/GisData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/java/jdk1.8.0_131/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="747" selection-start-line="747" selection-end-line="747" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/generatorConfig.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://E:/java/jdk1.8.0_131/src.zip!/javax/management/remote/rmi/RMIConnectionImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/AreaService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/java/jdk1.8.0_131/jre/lib/deploy.jar!/com/sun/deploy/util/SearchPath.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/repo/org/springframework/spring-tx/5.0.3.RELEASE/spring-tx-5.0.3.RELEASE.jar!/org/springframework/transaction/interceptor/TransactionAspectSupport.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="177" selection-start-line="177" selection-end-line="177" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/repo/org/springframework/spring-aop/5.0.3.RELEASE/spring-aop-5.0.3.RELEASE.jar!/org/springframework/aop/support/AopUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="186" selection-start-line="186" selection-end-line="186" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cache/DataItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+          <folding>
+            <element signature="e#367#388#0" expanded="true" />
+            <element signature="e#451#472#0" expanded="true" />
+            <element signature="e#975#976#0" expanded="true" />
+            <element signature="e#1006#1007#0" expanded="true" />
+            <element signature="e#1394#1395#0" expanded="true" />
+            <element signature="e#1417#1418#0" expanded="true" />
+            <element signature="e#1483#1484#0" expanded="true" />
+            <element signature="e#1516#1517#0" expanded="true" />
+            <element signature="e#1568#1569#0" expanded="true" />
+            <element signature="e#1591#1592#0" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1690#1691#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/repo/org/junit/jupiter/junit-jupiter-api/5.5.2/junit-jupiter-api-5.5.2-sources.jar!/org/junit/jupiter/api/extension/TestTemplateInvocationContextProvider.java" />
+    <entry file="file://E:/repo/org/junit/jupiter/junit-jupiter-api/5.5.2/junit-jupiter-api-5.5.2.pom" />
+    <entry file="jar://E:/repo/org/junit/jupiter/junit-jupiter-api/5.5.2/junit-jupiter-api-5.5.2-sources.jar!/org/junit/jupiter/api/condition/EnabledIf.java" />
+    <entry file="jar://E:/repo/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0-sources.jar!/org/opentest4j/IncompleteExecutionException.java" />
+    <entry file="jar://E:/repo/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="145" column="41" selection-start-line="145" selection-start-column="41" selection-end-line="145" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/spring/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/spring/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="40" column="47" lean-forward="true" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/spring/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/index.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listenter/SystemInitLister.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/repo/org/springframework/spring-web/5.0.3.RELEASE/spring-web-5.0.3.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/controller/IndustryOperationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7866">
+          <caret line="428" column="59" selection-start-line="428" selection-start-column="59" selection-end-line="428" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/IndustryOperationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="34" column="117" selection-start-line="34" selection-start-column="117" selection-end-line="34" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/MaintenanceManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/PaymentServiceServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1273">
+          <caret line="75" column="5" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/DownloadAct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="26" column="51" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/controller/AreaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1786">
+          <caret line="114" column="43" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/AreaServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="81" column="28" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="209" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/EnterpriseLetterServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/IndustryOperationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="884" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/CommonServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="130" column="5" selection-start-line="28" selection-start-column="4" selection-end-line="130" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/CaptureDataServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="618">
+          <caret line="300" column="38" selection-start-line="300" selection-start-column="38" selection-end-line="300" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../twkp/src/main/java/com/twkj/controllers/FinanceAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1914#1915#0" expanded="true" />
+            <element signature="e#1976#1977#0" expanded="true" />
+            <element signature="e#2114#2115#0" expanded="true" />
+            <element signature="e#2178#2179#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/GisService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="180" column="9" lean-forward="true" selection-start-line="180" selection-start-column="9" selection-end-line="180" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/controller/TerminalController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3401">
+          <caret line="198" column="37" selection-start-line="198" selection-start-column="37" selection-end-line="198" selection-end-column="37" />
+          <folding>
+            <element signature="e#929#930#0" expanded="true" />
+            <element signature="e#971#972#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/TerminalService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/TerminalServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11837">
+          <caret line="637" column="130" selection-start-line="637" selection-start-column="111" selection-end-line="637" selection-end-column="130" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/controller/KeyAreaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6213">
+          <caret line="348" column="18" selection-start-line="348" selection-start-column="18" selection-end-line="348" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/controller/ServicePlatformUsageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1349">
+          <caret line="85" column="57" selection-start-line="85" selection-start-column="57" selection-end-line="85" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/ServicePlatformUsageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/KeyAreaServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30818">
+          <caret line="1639" column="13" selection-start-line="1639" selection-start-column="13" selection-end-line="1639" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/KeyAreaService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1501">
+          <caret line="83" column="53" selection-start-line="83" selection-start-column="53" selection-end-line="83" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/ServicePlatformUsageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/controller/PowerSchedulingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/PowerSchedulingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mvc/service/impl/PowerSchedulingServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="62" column="58" lean-forward="true" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>jgfwpt:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web (jgfwpt)|Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>jgfwpt</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: commons-codec:commons-codec:1.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.33956388" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.33956388" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

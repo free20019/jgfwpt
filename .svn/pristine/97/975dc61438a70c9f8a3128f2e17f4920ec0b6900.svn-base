@@ -1,0 +1,71 @@
+package mvc.controller;
+
+import mvc.service.ServicePlatformUsageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 8:28
+ */
+//服务平台使用情况分析
+@Controller
+@RequestMapping("/servicePlatformUsage")
+public class ServicePlatformUsageController {
+
+    @Autowired
+    private ServicePlatformUsageService servicePlatformUsageService;
+
+    //维修管理查询
+    @RequestMapping("/getMaintenanceManageInquiry")
+    @ResponseBody
+    public String GetMaintenanceManageInquiry(String realName, String userName, String stime, String etime) throws Exception{
+        System.out.println(realName);
+        realName = java.net.URLDecoder.decode(realName, "UTF-8");
+        System.out.println(realName);
+        return servicePlatformUsageService.getMaintenanceManageInquiry(realName,userName,stime,etime);
+    }
+    //维修管理统计
+    @RequestMapping("/getMaintenanceManageStatistics")
+    @ResponseBody
+    public String GetMaintenanceManageStatistics(String realName, String userName, String stime, String etime){
+        return servicePlatformUsageService.getMaintenanceManageStatistics(realName,userName,stime,etime);
+    }
+
+//    public EnterpriseSubCenterQuery.vue
+
+
+    //企业分中心使用情况分析
+    @RequestMapping("/getCompanyCenter")
+    @ResponseBody
+    public String getCompanyCenter(String userName,String realName,String loginTime,String logoutTime){
+        return servicePlatformUsageService.getCompanyCenter(userName,realName,loginTime,logoutTime);
+    }
+
+    //终端未安装查询
+    @RequestMapping("/getTerminalInstalled")
+    @ResponseBody
+    public String getTerminalInstalled(String plateNumber,String startTime,String endTime,String page,String pageSize){
+        if(page == null || page == "" || page.isEmpty() || page.equals("null") || page.length()>0){
+            page = "1";
+        }
+        pageSize = "10";
+        return servicePlatformUsageService.getTerminalInstalled(plateNumber,startTime,endTime,page,pageSize);
+    }
+
+    //安装情况统计
+    @RequestMapping("/getInstallationStatistics")
+    @ResponseBody
+    public String getInstallationStatistics(){
+        return servicePlatformUsageService.getInstallationStatistics();
+    }
+
+    //安装情况月度分析图表
+    @RequestMapping("/getMonthInstallAnalysis")
+    @ResponseBody
+    public String getMonthInstallAnalysis(String startTime,String endTime){
+        return servicePlatformUsageService.getMonthInstallAnalysis(startTime,endTime);
+    }
+}

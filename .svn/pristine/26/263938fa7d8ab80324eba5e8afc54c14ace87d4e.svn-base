@@ -1,0 +1,126 @@
+package mvc.service.impl;
+
+import mvc.service.ServicePlatformUsageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 8:49
+ */
+@Service
+public class ServicePlatformUsageServiceImpl implements ServicePlatformUsageService {
+
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    protected JdbcTemplate jdbcTemplate1;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    //维修管理查询
+    @Override
+    public String getMaintenanceManageInquiry(String realName, String userName, String stime, String etime) {
+
+        String sql = "select u.USER_NAME,u.REAL_NAME,l.LOGIN_TIME from TB_LOGIN_HISTORY l , TB_USER_WX u where l.USER_ID = u.USER_ID ";
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += "and u.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += "and u.REAL_NAME = '"+realName+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += "and l.LOGIN_TIME > to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            sql += "and l.LOGIN_TIME < to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+
+        System.out.println(sql);
+
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    //维修管理统计
+    @Override
+    public String getMaintenanceManageStatistics(String realName, String userName, String stime, String etime) {
+        String sql = "select w.REAL_NAME,w.USER_NAME,tt.count from TB_USER_WX w,(select USER_ID,count(USER_ID) count from TB_LOGIN_HISTORY GROUP BY USER_ID) tt where w.USER_ID = tt.USER_ID ";
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += "and u.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += "and u.REAL_NAME = '"+realName+"'";
+        }
+        if(stime != null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            sql += "and u.LOGIN_TIME > to_date('"+stime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(etime != null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            sql += "and u.LOGIN_TIME < to_date('"+etime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getCompanyCenter(String userName, String realName, String loginTime, String logoutTime) {
+        String sql = "select l.USER_ID,u.USER_NAME,u.REAL_NAME,l.count from TB_USER u,(select user_id ,count(user_id) as count from TB_LOGIN_HISTORY GROUP BY user_id ) l where u.id = l.user_id";
+        if(userName != null&&!userName.isEmpty()&&!userName.equals("null")&&userName.length()>0){
+            sql += " and u.USER_NAME = '"+userName+"'";
+        }
+        if(realName != null&&!realName.isEmpty()&&!realName.equals("null")&&realName.length()>0){
+            sql += " and u.REAL_NAME = '"+realName+"'";
+        }
+        if(loginTime != null&&!loginTime.isEmpty()&&!loginTime.equals("null")&&loginTime.length()>0){
+            sql += " and u.LOGIN_TIME < to_date('"+loginTime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(logoutTime != null&&!logoutTime.isEmpty()&&!logoutTime.equals("null")&&logoutTime.length()>0){
+            sql += " and u.LOGIN_TIME > to_date('"+logoutTime+"','yyyy-mm-dd hh24:mi:ss')";
+        }
+        return jacksonUtil.toJson(jdbcTemplate1.queryForList(sql));
+    }
+
+    @Override
+    public String getTerminalInstalled(String plateNumber,String startTime,String endTime,String page,String pageSize) {
+        String sql = "select * from (select tt.*,ROWNUM rn from (select * from TB_GLOBAL_VEHICLE where BUSINESS_SCOPE_NAME = '客运：出租车客运。' AND STATUS_NAME = '营运' AND PLATE_NUMBER LIKE '浙A%' and plate_number not in (select vehi_no from TB_VEHICLE group by vehi_no)";
+        if(plateNumber != null&&!plateNumber.isEmpty()&&!plateNumber.equals("null")&&plateNumber.length()>0){
+            sql += " and PLATE_NUMBER = '"+plateNumber+"'";
+        }
+        if(startTime != null&&!startTime.isEmpty()&&!startTime.equals("null")&&startTime.length()>0){
+            sql += " and CREATED_TIME > to_date('" + startTime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        if(endTime != null&&!endTime.isEmpty()&&!endTime.equals("null")&&endTime.length()>0) {
+            sql += " and CREATED_TIME < to_date('" + endTime + "','yyyy-mm-dd hh24:mi:ss')";
+        }
+        sql += ") tt where ROWNUM <=  "+Integer.parseInt(page)*Integer.parseInt(pageSize)+") where rn >= "+(Integer.parseInt(page)-1)*Integer.parseInt(pageSize);
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getInstallationStatistics() {
+        String sql = "select g.c1 \"TotalVehicle\",v.c2 \"InstalledNumber\" from (select count(DISTINCT(PLATE_NUMBER)) as c1 from TB_GLOBAL_VEHICLE) g,(select count(DISTINCT(vehi_no)) as c2 from TB_VEHICLE) v";
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getMonthInstallAnalysis(String startTime,String endTime) {
+        String sql = "select to_char(t.MTN_TIME,'YYYY-MM') as month , sum(1) as sum from (select DISTINCT(vehi_no) ,MTN_TIME from TB_VEHICLE) t where 1 = 1 ";
+        String sql1 = "select count(DISTINCT(VEHI_NO)) from TB_VEHICLE";
+        if(startTime != null&&!startTime.isEmpty()&&!startTime.equals("null")&&startTime.length()>0){
+            sql += " and to_date(t.MTN_TIME,'YYYY-MM') > to_date('"+startTime+"','YYYY-MM')";
+            sql1 += " and to_date(t.MTN_TIME,'YYYY-MM') > to_date('"+startTime+"','YYYY-MM')";
+        }
+        if(endTime != null&&!endTime.isEmpty()&&!endTime.equals("null")&&endTime.length()>0){
+            sql += " and to_date(t.MTN_TIME,'YYYY-MM') < to_date('"+endTime+"','YYYY-MM')";
+            sql1 += " and to_date(t.MTN_TIME,'YYYY-MM') < to_date('"+endTime+"','YYYY-MM')";
+        }
+        sql += "GROUP BY to_char(t.MTN_TIME,'YYYY-MM') ORDER BY month";
+
+        String json = jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+        String json1 = jacksonUtil.toJson(jdbcTemplate.queryForList(sql1));
+        return json+json1;
+    }
+
+
+}

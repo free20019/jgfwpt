@@ -1,0 +1,140 @@
+package mvc.service.impl;
+
+import mvc.service.MaintenanceManageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/22
+ */
+@Service("maintenancemanageService")
+public class MaintenanceManageServiceImpl implements MaintenanceManageService {
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+
+    @Override
+    public String qualityreport(String companyName, String stime, String etime) {
+        String tj1="";
+        String tj2="";
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj1 +=" and v.COMP_NAME='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj1 +=" and r.RR_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj2 +=" and r.RR_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj1 +=" and r.RR_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+            tj2 +=" and r.RR_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+//        String sql = " select COMP_NAME,count(VEHICLE_NO) wxcls,nvl(sum(my),0) my,nvl(sum(jbmy),0) jbmy,nvl(sum(bmy),0) bmy,CONCAT(ROUND(nvl(sum(my),0)*100/nvl(nullif((sum(my)+sum(jbmy)+sum(bmy)),0),1),2),'%') myzb" +
+//                " from (select distinct v.COMP_NAME,r.VEHI_NO VEHICLE_NO,pj.* from tb_repair_record r" +
+//                " left join (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE from VW_VEHICLE) v on v.VEHI_NO=r.VEHI_NO " +
+//                " left join (select r.VEHI_NO, count(case pj.hfjg when '满意' then 1 end) as my, count(case pj.hfjg when '基本满意' then 1 end) as jbmy, count(case pj.hfjg when '不满意' then 1 end) as bmy" +
+//                " from TB_REPAIR_PHONE pj,tb_repair_record r  where r.rr_id = pj.rr_id";
+//        sql +=tj2;
+//        sql+= " group by r.VEHI_NO) pj on r.VEHI_NO = pj.VEHI_NO where v.COMP_NAME <> ' '";
+//        sql += tj1;
+//        sql +=") t group by t.COMP_NAME";
+        String sql = " select COMP_NAME,count(VEHI_NO) wxcls,nvl(sum(my),0) my,nvl(sum(jbmy),0) jbmy,nvl(sum(bmy),0) bmy,CONCAT(ROUND(nvl(sum(my),0)*100/nvl(nullif((sum(my)+sum(jbmy)+sum(bmy)),0),1),2),'%') myzb" +
+                " from (select distinct v.COMP_NAME,r.VEHI_NO,r.rr_id id,pj.* from tb_repair_record r" +
+                " left join (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE from VW_VEHICLE) v on v.VEHI_NO=r.VEHI_NO " +
+                " left join (select pj.rr_id, count(case pj.hfjg when '满意' then 1 end) as my, count(case pj.hfjg when '基本满意' then 1 end) as jbmy, count(case pj.hfjg when '不满意' then 1 end) as bmy" +
+                " from TB_REPAIR_PHONE pj  group by  pj.rr_id) pj on r.rr_id = pj.rr_id where v.COMP_NAME <> ' '";
+        sql += tj1;
+        sql +=") t group by t.COMP_NAME";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String qualityreportechart(String companyName, String stime, String etime) {
+        String tj="";
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj +=" and v.COMP_NAME='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj +=" and r.RR_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj +=" and r.RR_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql = "select to_char(r.RR_TIME, 'yyyy-MM-dd') time,count(r.vehi_no) wxcls, count(case pj.hfjg when '满意' then 1 end) as my," +
+                " count(case pj.hfjg when '基本满意' then 1 end) as jbmy, count(case pj.hfjg when '不满意' then 1 end) as bmy" +
+                " from TB_REPAIR_PHONE pj, tb_repair_record r,VW_VEHICLE v" +
+                " where r.rr_id = pj.rr_id and r.vehi_no=v.vehi_no and v.COMP_NAME <> ' '";
+        sql +=tj;
+        sql+= " group by to_char(r.RR_TIME, 'yyyy-MM-dd') order by to_char(r.RR_TIME, 'yyyy-MM-dd')";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public String recordinquiry(String vehicle, String companyName, String stime, String etime) {
+        String tj="";
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj +=" and v.VEHI_NO='"+vehicle+"'";
+        }
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj +=" and v.COMP_NAME='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj +=" and r.RR_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj +=" and r.RR_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql = " select  v.*,r.*,rm.RM_MALFUNCTION GZLX, us.REAL_NAME,us.USER_NAME,pj.hfjg,pj.hfr,pj.jfyy,pj.user_name ghao,rt.*,ra.*," +
+                "to_char(r.RR_TIME,'yyyy-MM-dd hh24:mi:ss') STIME,to_char(r.RR_TIME_END,'yyyy-MM-dd hh24:mi:ss') ETIME,case when r.RR_TIME_END>SYSDATE then '正在维修' else '已维修' end wxjd" +
+                " from tb_repair_record r" +
+                " left join (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE from VW_VEHICLE) v on v.VEHI_NO=r.VEHI_NO" +
+                " left join TB_REPAIR_MALFUNCTION rm on r.rm_id=rm.rm_id " +
+                " left join tb_user us on r.user_id=us.user_id " +
+                " left join (select pj.*,us.user_name from TB_REPAIR_PHONE pj,(select user_id,user_name from tb_user union all select user_id,user_name from tb_user_wx) us where pj.hfr=us.user_id) pj on r.rr_id=pj.rr_id " +
+                " left join TB_REPAIR_TYPE rt on r.rt_id=rt.rt_id " +
+                " left join TB_REPAIR_ADDR ra on r.ra_id=ra.ra_id  where r.VEHI_NO <> ' '";
+        sql += tj;
+        sql +=  " order by r.RR_TIME desc";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer evaluate(String id, String jobNum, String satisfaction, String remarks) {
+        String sql = " insert into TB_REPAIR_PHONE values ('"+UUID.randomUUID()+
+                "','"+id+"','"+satisfaction+"','"+remarks+"','"+jobNum+"',sysdate,'')";
+        int count = jdbcTemplate.update(sql);
+        return count;
+    }
+
+    @Override
+    public String recordstatistics(String companyName, String stime, String etime) {
+        String tj="";
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj +=" and v.COMP_NAME='"+companyName+"'";
+        }
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj +=" and r.RR_TIME >=to_date('"+stime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj +=" and r.RR_TIME <=to_date('"+etime+"','yyyy-MM-dd hh24:mi:ss')";
+        }
+        String sql = " select v.COMP_NAME, r.VEHI_NO,count(r.VEHI_NO) count from tb_repair_record r" +
+                " left join (SELECT distinct VEHI_NO,VEHI_NUM,COMP_NAME,VEHI_SIM,HOME_TEL,NIGHT_TEL,OWN_NAME,MT_NAME,MDT_SUB_TYPE from VW_VEHICLE) v" +
+                " on v.VEHI_NO=r.VEHI_NO where r.VEHI_NO <> ' '";
+        sql += tj;
+        sql +=" group by r.VEHI_NO,v.COMP_NAME";
+        List<Map<String, Object>>list=jdbcTemplate.queryForList(sql);
+        return jacksonUtil.toJson(list);
+    }
+}

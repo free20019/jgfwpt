@@ -1,0 +1,414 @@
+package mvc.controller;
+
+import mvc.service.IndustryOperationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.DownloadAct;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by xiaxing
+ * At 2019/2/18 9:34
+ */
+//行业运行情况分析
+@Controller
+@RequestMapping("/industryOperation")
+public class IndustryOperationController {
+    @Autowired
+    private IndustryOperationService industryOperationService;
+    private DownloadAct downloadAct = new DownloadAct();
+
+    //单车营运情况
+    @RequestMapping("/getCyclingOperation")
+    @ResponseBody
+    public String getCyclingOperation(HttpServletRequest request) throws UnsupportedEncodingException {
+        String vehiNo = request.getParameter("vehiNo");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        String region = request.getParameter("region");
+        return industryOperationService.getCyclingOperation(vehiNo,stime,etime,currentPage,pageSize,region);
+    }
+
+    //导出单车营运情况分析Excel
+    @RequestMapping("/getCyclingOperationExcel")
+    @ResponseBody
+    public String getCyclingOperationExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String currentPage = "1";
+        String pageSize = "100000";
+        String vehiNo = request.getParameter("vehiNo");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String region = request.getParameter("region");
+        String a[] = {"车牌号码","服务资格证号","上车时间","下车时间","营运时间/分钟","载客里程/公里","空车里程/公里","等候时间/分钟","交易类型","营运金额/元"};//导出列明
+        String b[] = {"CPHM_NEW","YINGYUN","SHANGCHE","XIACHE","YYSJ","JICHENG","KONGSHI","DENGHOU","JIAOYITYPE","JINE"};//导出map中的key
+        String gzb = "单车营运情况分析";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getCyclingOperation(vehiNo,stime,etime,currentPage,pageSize,region);
+
+        List<Map<String, Object>> list = downloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //行业营运情况分析
+    @RequestMapping("/getIndustryOperations")
+    @ResponseBody
+    public String getIndustryOperations(HttpServletRequest request) throws UnsupportedEncodingException {
+        String vehiNo = request.getParameter("vehiNo");
+        String companyName = request.getParameter("companyName");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        return industryOperationService.getIndustryOperations(vehiNo,companyName,stime,etime);
+    }
+
+    //导出行业营运情况分析Excel
+    @RequestMapping("/getIndustryOperationsExcel")
+    @ResponseBody
+    public String getIndustryOperationsExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String vehiNo = request.getParameter("vehiNo");
+        String companyName = request.getParameter("companyName");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String a[] = {"日期","车辆数/辆","营运次数/次","营运金额/元","营运里程/公里","空驶里程/公里","载客时间/分钟","载客等候时间/分钟"};//导出列明
+        String b[] = {"DAY","CPHM","TJCS","JINE","SZLC","KSLC","KSLC","DHSJ"};//导出map中的key
+        String gzb = "行业营运情况分析";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getIndustryOperations(vehiNo,companyName,stime,etime);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //行业平均运行情况分析
+    @RequestMapping("/getIndustryOperation")
+    @ResponseBody
+    public String getIndustryOperation(String stime,String etime){
+        return industryOperationService.getIndustryOperation(stime,etime);
+    }
+
+    //导出行业平均运行情况分析Excel
+    @RequestMapping("/getIndustryOperationExcel")
+    @ResponseBody
+    public String getIndustryOperationExcel(HttpServletRequest request, HttpServletResponse response,String stime,String etime) throws IOException {
+        String a[] = {"日期","单车平均营运收益/元","单车平均载客里程/公里","单车平均空驶里程/公里","单车平均载客时间/分钟","单车平均载客等候时间/分钟"};//导出列明
+        String b[] = {"DAY","JINE","SZLC","KSLC","YSSC","DHSJ"};//导出map中的key
+        String gzb = "行业平均运行情况分析";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getIndustryOperation(stime,etime);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //运力需求热点分析
+    @RequestMapping("/getTransportationCapacityHotspot")
+    @ResponseBody
+    public String getTransportationCapacityHotspot(){
+        return industryOperationService.getTransportationCapacityHotspot();
+    }
+
+    //企业车辆营运情况分析
+    @RequestMapping("/getVehicleOperation")
+    @ResponseBody
+    public String getVehicleOperation(HttpServletRequest request) throws UnsupportedEncodingException {
+        String companyName = request.getParameter("companyName");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        return industryOperationService.getVehicleOperation(companyName,stime,etime);
+    }
+
+    //导出企业车辆营运情况分析Excel
+    @RequestMapping("/getVehicleOperationExcel")
+    @ResponseBody
+    public String getVehicleOperationExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String companyName = request.getParameter("companyName");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String a[] = {"公司","营运车辆数/辆","营运数/次","营运金额/元","总里程/公里","载客里程/公里","空驶里程/公里","实载率","载客时间/分钟","载客等候时间/分钟"};//导出列明
+        String b[] = {"ZGS","VEHINUMBER","TJCS","JINE","ZLC","SZLC","KSLC","RATE","YSSC","DHSJ"};//导出map中的key
+        String gzb = "企业车辆营运情况分析";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getVehicleOperation(companyName,stime,etime);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //驾驶员收入情况分析
+    @RequestMapping("/getIncomeAnalysis")
+    @ResponseBody
+    public String getIncomeAnalysis(HttpServletRequest request){
+        String cardNumber = request.getParameter("cardNumber");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        return industryOperationService.getIncomeAnalysis(cardNumber,stime,etime);
+    }
+
+    //导出驾驶员收入情况分析Excel
+    @RequestMapping("/getIncomeAnalysisExcel")
+    @ResponseBody
+    public String getIncomeAnalysisExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String cardNumber = request.getParameter("cardNumber");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String a[] = {"服务资格证号","驾驶员姓名","营运次数/次","营运金额/元","总里程/公里","载客里程/公里","空驶里程/公里","实载率","载客时间/分钟","载客等候时间/分钟"};//导出列明
+        String b[] = {"YINGYUN","NAME","YYCS","JINE","ZLC","JICHENG","KONGSHI","RATE","ZKSJ","DHSJ"};//导出map中的key
+        String gzb = "驾驶员收入情况分析";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getIncomeAnalysis(cardNumber,stime,etime);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //车辆运行排行
+    @RequestMapping("/getVehicleRunningRanking")
+    @ResponseBody
+    public String getVehicleRunningRanking(HttpServletRequest request) throws UnsupportedEncodingException {
+        String companyName = request.getParameter("companyName");
+        String cardNumber = request.getParameter("cardNumber");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String region = request.getParameter("region");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        return industryOperationService.getVehicleRunningRanking(companyName,cardNumber,stime,etime,region,currentPage,pageSize);
+    }
+
+    //导出车辆运行排行Excel
+    @RequestMapping("/getVehicleRunningRankingExcel")
+    @ResponseBody
+    public String getVehicleRunningRankingExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String companyName = request.getParameter("companyName");
+        String cardNumber = request.getParameter("cardNumber");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String region = request.getParameter("region");
+        String currentPage = "1";
+        String pageSize = "100000";
+        String a[] = {"公司","车牌号码","SIM卡号","营运次数/次","营运金额/元","总里程/公里","载客里程/公里","空驶里程/公里","实载率","载客时间/分钟","载客等候时间/分钟"};//导出列明
+        String b[] = {"BA_NAME","CP","VEHI_SIM","TJCS","JINE","ZLC","SZLC","KSLC","RATE","YSSC","DHSJ"};//导出map中的key
+        String gzb = "车辆运行排行";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getVehicleRunningRanking(companyName,cardNumber,stime,etime,region,currentPage,pageSize);
+        List<Map<String, Object>> list = downloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //OD营运数据分析
+    @RequestMapping("/getODOperationDataAnalysis")
+    @ResponseBody
+    public String getODOperationDataAnalysis(HttpServletRequest request) throws UnsupportedEncodingException {
+        String SJD = request.getParameter("SJD");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String QD = request.getParameter("QD");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        if(QD!=null&&!QD.isEmpty()&&QD.length()>0&&!QD.equals("")){
+            if(SJD.equals("0")){
+                SJD = "全天";
+            }
+            if(QD.equals("0")){
+                QD = "火车东站";
+            }
+            if(QD.equals("1")){
+                QD = "城站火车站";
+            }
+            if(QD.equals("2")){
+                QD = "萧山机场";
+            }
+        }
+        return industryOperationService.getODOperationDataAnalysis(SJD,stime,etime,QD,currentPage,pageSize);
+    }
+
+    //导出OD营运数据分析Excel
+    @RequestMapping("/getODOperationDataAnalysisExcel")
+    @ResponseBody
+    public String getODOperationDataAnalysisExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String currentPage = "1";
+        String pageSize = "100000";
+        String SJD = request.getParameter("SJD");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String QD = request.getParameter("QD");
+        if(QD!=null&&!QD.isEmpty()&&QD.length()>0&&!QD.equals("")){
+            if(SJD.equals("0")){
+                SJD = "全天";
+            }
+            if(QD.equals("0")){
+                QD = "火车东站";
+            }
+            if(QD.equals("1")){
+                QD = "城站火车站";
+            }
+            if(QD.equals("2")){
+                QD = "萧山机场";
+            }
+        }
+        String a[] = {"车牌号码","终端编号","营运资格服务证","上车时间","下车时间","计程/公里","等候时间/分钟","交易金额/元","空驶/公里","交易类型","TAC交易认证码","POS机号"};//导出列明
+        String b[] = {"CPHM_NEW","ZHONGDUANNO","YINGYUN","SCSJ","XCSJ","JICHENG","DENGHOU","JINE","KONGSHI","JIAOYITYPE","TAC","POS"};//导出map中的key
+        String gzb = "OD营运数据分析";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getODOperationDataAnalysisExcel(SJD,stime,etime,QD,currentPage,pageSize);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //OD流向统计
+    @RequestMapping("/getODFlowStatistics")
+    @ResponseBody
+    public String getODFlowStatistics(HttpServletRequest request) throws UnsupportedEncodingException {
+        String SJD = request.getParameter("SJD");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String QD = request.getParameter("QD");
+        if(SJD.equals("0")){
+            SJD = "全天";
+        }
+        if(QD.equals("0")){
+            QD = "火车东站";
+        }
+        if(QD.equals("1")){
+            QD = "城站火车站";
+        }
+        if(QD.equals("2")){
+            QD = "萧山机场";
+        }
+        return industryOperationService.getODFlowStatistics(SJD,stime,etime,QD);
+    }
+
+    //导出OD流向统计Excel
+    @RequestMapping("/getODFlowStatisticsExcel")
+    @ResponseBody
+    public String getODFlowStatisticsExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String SJD = request.getParameter("SJD");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String QD = request.getParameter("QD");
+        if(SJD.equals("0")){
+            SJD = "全天";
+        }
+        if(QD.equals("0")){
+            QD = "火车东站";
+        }
+        if(QD.equals("1")){
+            QD = "城站火车站";
+        }
+        if(QD.equals("2")){
+            QD = "萧山机场";
+        }
+        String a[] = {"目的地","车辆数/辆"};//导出列明
+        String b[] = {"AREA_NAME","COUNT_NUM"};//导出map中的key
+        String gzb = "OD流向统计";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getODFlowStatistics(SJD,stime,etime,QD);
+        List<Map<String, Object>> list = downloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //OD流向图
+    @RequestMapping("/getODFlowDiagram")
+    @ResponseBody
+    public String getODFlowDiagram (HttpServletRequest request) throws UnsupportedEncodingException {
+        String SJD = request.getParameter("SJD");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String QD = request.getParameter("QD");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        if(SJD.equals("0")){
+            SJD = "全天";
+        }
+        if(QD.equals("0")){
+            QD = "火车东站";
+        }
+        if(QD.equals("1")){
+            QD = "城站火车站";
+        }
+        if(QD.equals("2")){
+            QD = "萧山机场";
+        }
+        return industryOperationService.getODFlowDiagram(SJD,stime,etime,QD,currentPage,pageSize);
+    }
+
+    //夜间停放位置分析
+    @RequestMapping("/getParkingPlaceAtNight")
+    @ResponseBody
+    public String getParkingPlaceAtNight(HttpServletRequest request){
+        String time = request.getParameter("time");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        return industryOperationService.getParkingPlaceAtNight(time,currentPage,pageSize);
+    }
+
+    //驾驶员违法统计
+    @RequestMapping("/getDriverIllegalStatistics")
+    @ResponseBody
+    public String getDriverIllegalStatistics(HttpServletRequest request) throws UnsupportedEncodingException {
+        String vehicle = request.getParameter("vehicle");
+        String partyName = request.getParameter("partyName");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        String region = request.getParameter("region");
+        return industryOperationService.getDriverIllegalStatistics(vehicle,partyName,stime,etime,currentPage,pageSize,region);
+    }
+
+    //导出驾驶员违法统计Excel
+    @RequestMapping("/getDriverIllegalStatisticsExcel")
+    @ResponseBody
+    public String getDriverIllegalStatisticsExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String vehicle = request.getParameter("vehicle");
+        String partyName = request.getParameter("partyName");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String region = request.getParameter("region");
+        String currentPage = "1";
+        String pageSize = "100000";
+        String a[] = {"当事人姓名","车牌号码","扣分","违章时间","执法时间","案件原因","执法部门","执法区域","经营许可证号"};//导出列明
+        String b[] = {"PARTY_NAME","AUTO_NUM1","INTEGRAL1","ILLEGAL_TIME1","LEGAL_TIME1","CASE_REASON","ORGAN","AREA","LIENCE_NUM"};//导出map中的key
+        String gzb = "驾驶员违法统计";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getDriverIllegalStatistics(vehicle,partyName,stime,etime,currentPage,pageSize,region);
+        List<Map<String, Object>> list = downloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //投诉查询
+    @RequestMapping("/getComplaintsStatistics")
+    @ResponseBody
+    public String getComplaintsStatistics(HttpServletRequest request) throws UnsupportedEncodingException {
+        String typeComplaint = request.getParameter("typeComplaint");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String currentPage = request.getParameter("currentPage");
+        String pageSize = request.getParameter("pageSize");
+        return industryOperationService.getComplaintsStatistics(typeComplaint,stime,etime,currentPage,pageSize);
+    }
+
+    //导出投诉查询Excel
+    @RequestMapping("/getComplaintsStatisticsExcel")
+    @ResponseBody
+    public String getComplaintsStatisticsExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String typeComplaint = request.getParameter("typeComplaint");
+        String stime = request.getParameter("stime");
+        String etime = request.getParameter("etime");
+        String currentPage = "1";
+        String pageSize = "100000";
+        String a[] = {"投诉人","投诉类型","联系方式","投诉车辆","处理详情","投诉时间","处理时间"};//导出列明
+        String b[] = {"CALL_NAME","BUSINESS_ITEMTYPE_NAME","CALLER_ID","VEHICLE_PLATE_NUMBER","BUSINESS_STATUS_NAME","ARCHIVE_TIME","ACCEPT_TIME"};//导出map中的key
+        String gzb = "投诉查询";//导出sheet名和导出的文件名
+        String msg = industryOperationService.getComplaintsStatistics(typeComplaint,stime,etime,currentPage,pageSize);
+        List<Map<String, Object>> list = downloadAct.str2list(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+}

@@ -1,0 +1,32 @@
+package mvc.service.impl;
+
+import mvc.service.CommonService;
+import mvc.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import util.JacksonUtil;
+
+/**
+ * Created by donghuibin on 2019-02-15
+ * At 13:27
+ */
+@Service("commonService")
+public class CommonServiceImpl implements CommonService {
+	@Autowired
+	protected JdbcTemplate jdbcTemplate;
+
+	private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+	@Override
+	public String getVehicle() {
+		String sql = "select distinct vehicle_no from tb_alarm_jtwx@db69 where vehicle_no <>' '";
+		return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+	}
+
+    @Override
+    public String getCompany() {
+		String sql = "select distinct comp_name from VW_VEHICLE@db69 where comp_name <>' '";
+		return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+}

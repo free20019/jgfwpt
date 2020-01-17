@@ -1,0 +1,24 @@
+package mvc.service;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/03/19
+ */
+public interface AreaService {
+    String findarea();
+
+    Integer addarea(String name, String describe, String coordinates, String size);
+
+    Integer updatearea(String id, String name, String describe, String coordinates, String size);
+
+    Integer deletearea(String id);
+
+    String returnCompany(String company, String area);
+
+    Integer addreturncompany(String company, String area, String time);
+
+    Integer updatereturncompany(String id, String company, String area, String time);
+
+    Integer deletereturncompany(String id);
+}

@@ -1,0 +1,153 @@
+package mvc.controller;
+
+import mvc.service.TerminalService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.DownloadAct;
+import util.JacksonUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2019/02/18
+ */
+
+@Controller
+@RequestMapping("/terminal")
+public class TerminalController {
+
+	@Autowired
+	private TerminalService terminalService;
+	private DownloadAct downloadAct = new DownloadAct();
+	private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+	@RequestMapping("/vehicle")
+	@ResponseBody
+	public String getVehicle(){
+		return terminalService.getVehicle();
+	}
+	//主机故障查询
+	@RequestMapping("/hostfailure")
+	@ResponseBody
+	public String getHostfailure(String lPNumber, String time, String faultType){
+		return terminalService.getHostfailure(lPNumber, time, faultType);
+	}
+	//主机故障导出
+	@RequestMapping("/hostfailuredc")
+	@ResponseBody
+	public String getHostfailuredc(HttpServletRequest request,HttpServletResponse response, String lPNumber, String time, String faultType) throws IOException {
+		String a[] = {"车牌号","业户","主机无通讯","定位异常","空重车异常","紧急报警异常","计价器异常"};//导出列明
+		String b[] = {"VEHICLE_NO","COMP_NAME","HOST_NO_COMMUNICATION","NO_GPS","EMPTY_HEAVY","EMERGENCY_ALARM","JJQ_ALARM"};//导出map中的key
+		String gzb = "主机故障";//导出sheet名和导出的文件名
+		String msg = terminalService.getHostfailure(lPNumber, time, faultType);
+		List<Map<String, Object>> list = downloadAct.strlist(msg);
+		if(list.size()>0){
+			list=findDetail(list);
+		}
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//主机故障审核
+	@RequestMapping("/audit")
+	@ResponseBody
+	public Integer audit(String vehicle, String time,Integer type,Integer sh){
+		return terminalService.audit(vehicle,time,type,sh);
+	}
+	//终端异常告警查询
+	@RequestMapping("/terminalerror")
+	@ResponseBody
+	public String terminalerror(){
+		return terminalService.terminalerror();
+	}
+	//终端异常告警导出
+	@RequestMapping("/terminalerrordc")
+	@ResponseBody
+	public String terminalerrordc(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String a[] = {"主机无通讯","定位异常-非精确","定位异常-无定位","空车","紧急告警","计价器异常","视频短线","视频黑频","视频移位","视频下载"};//导出列明
+		String b[] = {"HOST_NO_COMMUNICATION","GPS_INACCURATE","NO_GPS","EMPTY_HEAVY","EMERGENCY_ALARM","JJQ_ALARM","spdx","sphp","spyw","spxz"};//导出map中的key
+		String gzb = "终端异常告警";//导出sheet名和导出的文件名
+		String msg = terminalService.terminalerror();
+		List<Map<String, Object>> list = downloadAct.strlist(msg);
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//完好率统计分析查询
+	@RequestMapping("/goodrate")
+	@ResponseBody
+	public String goodrate(String companyName,String stime,String etime){
+		return terminalService.goodrate(companyName,stime,etime);
+	}
+	//完好率统计分析导出
+	@RequestMapping("/goodratedc")
+	@ResponseBody
+	public String goodratedc(HttpServletRequest request,HttpServletResponse response,String companyName,String stime,String etime) throws IOException {
+		String a[] = {"公司名称","故障车辆数","故障率","已维修车辆数","修车率"};//导出列明
+		String b[] = {"COMP_NAME","GZZS","GZL","WXZS","XCL"};//导出map中的key
+		String gzb = "完好率统计分析";//导出sheet名和导出的文件名
+		String msg = terminalService.goodrate(companyName,stime,etime);
+		List<Map<String, Object>> list = (List<Map<String, Object>>) parseJSON2Map(msg).get("list");
+		downloadAct.download(request,response,a,b,gzb,list);
+		return null;
+	}
+	//将查询出的0,1字段转化为无故障，故障
+	private List<Map<String, Object>> findDetail(List<Map<String, Object>> list) {
+		for(int i=0;i<list.size();i++){
+			if(String.valueOf(list.get(i).get("HOST_NO_COMMUNICATION")).equals("1")){
+				list.get(i).put("HOST_NO_COMMUNICATION","故障");
+			}else{
+				list.get(i).put("HOST_NO_COMMUNICATION","无故障");
+			}
+			if(String.valueOf(list.get(i).get("GPS_INACCURATE")).equals("1")||String.valueOf(list.get(i).get("NO_GPS")).equals("1")){
+				list.get(i).put("NO_GPS","故障");
+			}else{
+				list.get(i).put("NO_GPS","无故障");
+			}
+			if(String.valueOf(list.get(i).get("EMPTY_HEAVY")).equals("1")){
+				list.get(i).put("EMPTY_HEAVY","故障");
+			}else{
+				list.get(i).put("EMPTY_HEAVY","无故障");
+			}
+			if(String.valueOf(list.get(i).get("JJQ_ALARM")).equals("1")){
+				list.get(i).put("JJQ_ALARM","故障");
+			}else{
+				list.get(i).put("JJQ_ALARM","无故障");
+			}
+			if(String.valueOf(list.get(i).get("EMERGENCY_ALARM")).equals("1")){
+				list.get(i).put("EMERGENCY_ALARM","故障");
+			}else{
+				list.get(i).put("EMERGENCY_ALARM","无故障");
+			}
+		}
+		return list;
+	}
+	//json to map
+	public static Map<String, Object> parseJSON2Map(String jsonStr){
+		Map<String, Object> map = new HashMap<String, Object>();
+		JSONObject json = JSONObject.fromObject(jsonStr);
+		for(Object k : json.keySet()){
+			Object v = json.get(k);
+			if(v instanceof JSONArray){
+				List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+				Iterator<JSONObject> it = ((JSONArray)v).iterator();
+				while(it.hasNext()){
+					JSONObject json2 = it.next();
+					list.add(parseJSON2Map(json2.toString()));
+				}
+				map.put(k.toString(), list);
+			} else {
+				map.put(k.toString(), v);
+			}
+		}
+		return map;
+	}
+
+}
