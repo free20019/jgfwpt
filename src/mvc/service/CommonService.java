@@ -18,10 +18,11 @@ public interface CommonService  {
 
     void getFile(HttpServletRequest request, HttpServletResponse response, String key);
 
+    void downLoad(HttpServletRequest request, HttpServletResponse response, String key) throws Exception;
+
     String getAllCompany();
 
     String getKeyArea();
 
     String getIllegalTypeOrPoint(String field, String table);
-
 }

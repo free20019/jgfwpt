@@ -9,8 +9,11 @@ import util.JacksonUtil;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,16 +77,23 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public void getFile(HttpServletRequest request, HttpServletResponse response, String key) {
+	    if("".equals(key)){
+	        return ;
+        }
 		try {
-//			InputStream in = commonDao.getImage(key);
 //			if(in == null){
-				String path = "E:/hk/hk_pic/"+key;
+//				String path = "E:/hk/hk_pic/"+key;
+				String path = key;
 				File pf = new File(path);
 				FileInputStream fin = new FileInputStream(pf);
 				ServletOutputStream fout =  response.getOutputStream();
 				byte bts [] = new byte[fin.available()];
-				fin.read(bts);
-				fout.write(bts);
+                int length = 0;
+				if (fin != null) {
+					while ((length = fin.read(bts)) != -1) {
+						fout.write(bts, 0, length);
+					}
+				}
 				fin.close();
 				fout.close();
 
@@ -110,6 +120,36 @@ public class CommonServiceImpl implements CommonService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void downLoad(HttpServletRequest request,  HttpServletResponse response, String key) throws Exception {
+		boolean isOnLine =true;
+		File f = new File(key);
+		if (!f.exists()) {
+			response.sendError(404, "File not found!");
+			return;
+		}
+		BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
+		byte[] buf = new byte[1024];
+		int len = 0;
+
+		response.reset(); // 非常重要
+		if (isOnLine) { // 在线打开方式
+			URL u = new URL("file:///" + key);
+			response.setContentType(u.openConnection().getContentType());
+			response.setHeader("Content-Disposition", "inline; filename=" + f.getName());
+			// 文件名应该编码成UTF-8
+		} else { // 纯下载方式
+			response.setContentType("application/x-msdownload");
+			response.setHeader("Content-Disposition", "attachment; filename=" + f.getName());
+		}
+		OutputStream out = response.getOutputStream();
+		while ((len = br.read(buf)) > 0) {
+			out.write(buf, 0, len);
+		}
+		br.close();
+		out.close();
 	}
 
 	@Override

@@ -76,6 +76,12 @@ public class CommonController {
 		commonService.getFile(request, response, key);
 	}
 
+	@RequestMapping(value = "/download")
+	public void download(HttpServletRequest request, HttpServletResponse response,
+					@RequestParam("key") String key) throws Exception {
+		commonService.downLoad(request, response, key);
+	}
+
 	@RequestMapping("/allcompany")
 	@ResponseBody
 	public String getAllCompany(){

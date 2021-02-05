@@ -1,5 +1,7 @@
 package mvc.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author: xianlehuang
  * @Description:
@@ -50,4 +52,15 @@ public interface AreaService {
 
     String stopstatistics(String vehicle, String companyName, String area, String stime, String etime);
 
+    String loveApproval(String vehicle, String companyName, String area, String stime, String etime, String type, String phone, String address);
+
+    Integer loveApprovalAudit(String id, String jobNum, String reason, String issh);
+
+    String getThisTableField(String field);
+
+    String getDecommissioningAssistanceApproval(String vehicle, String companyName, String assist, String stime, String etime, String type);
+
+    Integer decommissioningAssistanceAudit(String id, String jobNum, String reason, String issh);
+
+    String auditManage(HttpServletRequest request);
 }

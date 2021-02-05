@@ -4,10 +4,11 @@ import mvc.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import util.DownloadAct;
 import util.JacksonUtil;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * @author: xianlehuang
@@ -558,4 +559,147 @@ public class AreaServiceImpl implements AreaService {
         return jacksonUtil.toJson(list);
     }
 
+    @Override
+    public String loveApproval(String vehicle, String companyName, String area, String stime, String etime, String type, String phone, String address) {
+        String tj="";
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj+=" and a.DISP_TIME >=to_date('"+stime+"','yyyy-MM-dd HH24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj+=" and a.DISP_TIME <=to_date('"+etime+"','yyyy-MM-dd HH24:mi:ss')";
+        }
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj+=" and a.VEHI_NO1 ='"+vehicle+"'";
+        }
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj+=" and a.COMP_NAME1 ='"+companyName+"'";
+        }
+        if(phone!=null&&!phone.isEmpty()&&!phone.equals("null")&&phone.length()>0){
+            tj+=" and a.CUST_TEL like '%"+phone+"%'";
+        }
+        if(address!=null&&!address.isEmpty()&&!address.equals("null")&&address.length()>0){
+            tj+=" and a.ADDRESS like '%"+address+"%'";
+        }
+        if(area!=null&&!area.isEmpty()&&!area.equals("null")&&area.length()>0){
+            if(area.equals("主城区")){
+                tj += " and (v.AREA_NAME like '%上城%' or v.AREA_NAME like '%下城%' "
+                        + "or v.AREA_NAME like '%江干%' or v.AREA_NAME like '%拱墅%' "
+                        + "or v.AREA_NAME like '%下沙%' "
+                        + "or v.AREA_NAME like '%西湖%' or v.AREA_NAME like '%滨江%')";
+            } else {
+                tj += " and v.AREA_NAME like '%"+area+"%'";
+            }
+        }
+        if(type!=null&&!type.isEmpty()&&!type.equals("null")&&type.length()>0){
+            tj +=" and a.AUDIT_STATUS='"+type+"'";
+        }
+        String sql = "select a.*,v.AREA_NAME, u.real_name, u.user_name, u.user_id from TB_DISPATCH_LOVE a " +
+                " left join (select v.* from tb_global_vehicle@db69 v where v.industry=090 and v.business_scope_code = 1400  AND v.STATUS_NAME='营运' AND v.PLATE_NUMBER LIKE '浙A%') v on a.VEHI_NO1=v.PLATE_NUMBER" +
+                " left join tb_user u on a.AUDIT_USERID=u.user_id" +
+                " where a.del_flag='0' and a.ADD_WAYS=1";
+        sql += tj;
+        sql +=" order by a.disp_time desc";
+        List<Map<String, Object>> list=jdbcTemplate.queryForList(sql);
+        if(list !=null){
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).put("DISP_TIME",list.get(i).get("DISP_TIME")==null?"":list.get(i).get("DISP_TIME").toString().substring(0,19));
+                list.get(i).put("DB_TIME",list.get(i).get("DB_TIME")==null?"":list.get(i).get("DB_TIME").toString().substring(0,19));
+                list.get(i).put("AUDIT_DATE",list.get(i).get("AUDIT_DATE")==null?"":list.get(i).get("AUDIT_DATE").toString().substring(0,19));
+                list.get(i).put("AUDIT_STATUS",list.get(i).get("AUDIT_STATUS")==null?"":String.valueOf(list.get(i).get("AUDIT_STATUS")).equals("2")?"未审核":(String.valueOf(list.get(i).get("AUDIT_STATUS")).equals("0")?"审核通过":"审核不通过"));
+
+            }
+        }
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer loveApprovalAudit(String id, String jobNum, String reason, String issh) {
+        int count=0;
+        String sql="update TB_DISPATCH_LOVE set AUDIT_USERID='"+jobNum+"',audit_reason='"+reason+"'," +
+                "AUDIT_DATE=sysdate,audit_status='"+issh+"' where DISP_ID in ("+id+")";
+        count=jdbcTemplate.update(sql);
+        return count;
+    }
+
+    @Override
+    public String getThisTableField(String field) {
+        String sql = "select distinct "+field+" from TB_SW_XCGJ@db69 where "+field+" is not null order by "+field;
+        return jacksonUtil.toJson(jdbcTemplate.queryForList(sql));
+    }
+
+    @Override
+    public String getDecommissioningAssistanceApproval(String vehicle, String companyName, String assist, String stime, String etime, String type) {
+        String tj="";
+        if(stime!=null&&!stime.isEmpty()&&!stime.equals("null")&&stime.length()>0){
+            tj+=" and a.ACCEPT_DATE >=to_date('"+stime+"','yyyy-MM-dd HH24:mi:ss')";
+        }
+        if(etime!=null&&!etime.isEmpty()&&!etime.equals("null")&&etime.length()>0){
+            tj+=" and a.ACCEPT_DATE <=to_date('"+etime+"','yyyy-MM-dd HH24:mi:ss')";
+        }
+        if(vehicle!=null&&!vehicle.isEmpty()&&!vehicle.equals("null")&&vehicle.length()>0){
+            tj+=" and a.VEHI_NO ='"+vehicle+"'";
+        }
+        if(companyName!=null&&!companyName.isEmpty()&&!companyName.equals("null")&&companyName.length()>0){
+            tj+=" and a.COMP ='"+companyName+"'";
+        }
+        if(assist!=null&&!assist.isEmpty()&&!assist.equals("null")&&assist.length()>0){
+            tj+=" and a.TYPE like '%"+assist+"%'";
+        }
+        if(type!=null&&!type.isEmpty()&&!type.equals("null")&&type.length()>0){
+            tj+=" and a.STATE='"+type+"'";
+        }
+        String sql = "select a.*,v.AREA_NAME, u.real_name, u.user_name, u.user_id from TB_SW_XCGJ@db69 a " +
+                " left join (select v.* from tb_global_vehicle@db69 v where v.industry=090 and v.business_scope_code = 1400  AND v.STATUS_NAME='营运' AND v.PLATE_NUMBER LIKE '浙A%') v on a.VEHI_NO=v.PLATE_NUMBER" +
+                " left join tb_user u on a.sh_gh=u.user_id" +
+                " where 1=1";
+        sql += tj;
+        sql +=" order by a.ACCEPT_DATE desc";
+        List<Map<String, Object>> list=jdbcTemplate.queryForList(sql);
+        if(list !=null){
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).put("ACCEPT_DATE",list.get(i).get("ACCEPT_DATE")==null?"":list.get(i).get("ACCEPT_DATE").toString().substring(0,19));
+                list.get(i).put("NOTICE_DATE",list.get(i).get("NOTICE_DATE")==null?"":list.get(i).get("NOTICE_DATE").toString().substring(0,19));
+                list.get(i).put("RECEIVE_DATE",list.get(i).get("RECEIVE_DATE")==null?"":list.get(i).get("RECEIVE_DATE").toString().substring(0,19));
+                list.get(i).put("STATE",list.get(i).get("STATE")==null?"":String.valueOf(list.get(i).get("STATE")).equals("0")?"未审核":(String.valueOf(list.get(i).get("STATE")).equals("1")?"审核通过":"审核不通过"));
+                list.get(i).put("TYPE",list.get(i).get("TYPE")==null?"":String.valueOf(list.get(i).get("TYPE")).equals("1")?"营运数据协查":(String.valueOf(list.get(i).get("TYPE")).equals("2")?"行车轨迹协查":""));
+            }
+        }
+        return jacksonUtil.toJson(list);
+    }
+
+    @Override
+    public Integer decommissioningAssistanceAudit(String id, String jobNum, String reason, String issh) {
+        int count=0;
+        String sql="update TB_SW_XCGJ@db69 set SH_GH='"+jobNum+"',FAILREASON='"+reason+"'," +
+                "STATE='"+issh+"' where id='"+id+"'";
+        count=jdbcTemplate.update(sql);
+        return count;
+    }
+
+    @Override
+    public String auditManage(HttpServletRequest request) {
+        HashMap<String, Object> map = new LinkedHashMap<>();
+        //车辆转入审批
+        map.put("车辆转入审批", DownloadAct.strlist(vehicletransfer("", "", "", "", "", "2", "0")).size());
+
+        //车牌号变更审批
+        map.put("车牌号变更审批",DownloadAct.strlist(licensechange("","","","","","2")).size());
+
+        //车辆报停审批
+        map.put("车辆报停审批",DownloadAct.strlist(vehicleparking("","","","","2")).size());
+
+        //车辆转出审批
+        map.put("车辆转出审批",DownloadAct.strlist(vehicletransfer("", "", "", "", "", "2", "1")).size());
+
+        //数据接入审批
+        map.put("数据接入审批",DownloadAct.strlist(dataAccess("", "", "", "", "", "2")).size());
+
+        //爱心业务用车记录审批
+        map.put("爱心业务用车记录审批",DownloadAct.strlist(loveApproval("","","","","","2","","")).size());
+
+        //停运协查审批
+        map.put("停运协查审批",DownloadAct.strlist(getDecommissioningAssistanceApproval("","","","","","0")).size());
+
+        return jacksonUtil.toJson(map);
+    }
 }

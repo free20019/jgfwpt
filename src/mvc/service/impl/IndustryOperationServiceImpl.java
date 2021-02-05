@@ -826,10 +826,11 @@ public class IndustryOperationServiceImpl implements IndustryOperationService {
         if(number!=null&&!number.equals("null")&&number>=0){
             tj2 += " and rownum <="+number;
         }
-        String sql = "select (select count(*) count from (select distinct a.AREA_ID, a.AREA_NAME" +
+        String sql = "select (select count(*) count from (select * from (select distinct a.AREA_ID, a.AREA_NAME" +
                 " from tb_taxi_end_hot@db69 a,TB_ORDER_AREA_PLUS b" +
-                " where a.AREA_ID = b.AREA_ID";
+                " where a.AREA_ID = b.AREA_ID(+)";
         sql +=tj;
+        sql +=") where 1=1";
         sql +=tj2;
         sql += " )) as count,tt.* from (select t.*,rownum as rn from ( select a.*,b.AREA_COORDINATES from" +
                 " (select a.AREA_ID,a.AREA_NAME,sum(a.AREA_COUNT) AREA_COUNT from tb_taxi_end_hot@db69 a where 1=1 ";

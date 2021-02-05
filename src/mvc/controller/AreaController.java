@@ -195,4 +195,58 @@ public class AreaController {
         return areaService.stopstatistics(vehicle, companyName, area, stime, etime);
     }
 
+    //爱心业务用车记录查询
+    @RequestMapping("/loveApproval")
+    @ResponseBody
+    public String loveApproval(String vehicle, String companyName, String area, String stime, String etime, String type, String phone, String address){
+        return areaService.loveApproval(vehicle, companyName, area, stime, etime, type, phone, address);
+    }
+
+    //爱心业务用车记录导出
+    @RequestMapping("/loveApprovalExcel")
+    @ResponseBody
+    public String loveApprovalExcel(HttpServletRequest request, HttpServletResponse response, String vehicle, String companyName, String area, String stime, String etime, String type, String phone, String address) throws IOException {
+        String a[] = {"生成时间","录入人员","客户姓名","手机号码","驾驶员姓名","车费金额","调度区域","详细地址","目的地址","用车时间","所派车辆","区域","司机联系方式","SIM卡","所属公司","用车模式","特殊人群","陪同情况","用车需求","附加信息","所在区域","审核时间","审核人员","审核原因","审核状态"};//导出列明
+        String b[] = {"DB_TIME","COMMIT_PERSON","CUST_NAME","CUST_TEL","JSYXM","CF","DDQY","ADDRESS","DEST_ADDRESS","DISP_TIME","VEHI_NO1","AREA_NAME","SJDH1","SIM_NUM1","COMP_NAME1","YCMS","TSRQ","PTQK","YCXQ","NOTE","SZQY","AUDIT_DATE","REAL_NAME","AUDIT_REASON","AUDIT_STATUS"};//导出map中的key
+        String gzb = "爱心业务用车记录";//导出sheet名和导出的文件名
+        String msg = areaService.loveApproval(vehicle, companyName, area, stime, etime, type, phone, address);
+        List<Map<String, Object>> list = DownloadAct.strlist(msg);
+        downloadAct.download(request,response,a,b,gzb,list);
+        return null;
+    }
+
+    //爱心业务用车记录审批
+    @RequestMapping("/loveApprovalAudit")
+    @ResponseBody
+    public Integer loveApprovalAudit(String id,String jobNum,String reason, String issh){
+        return areaService.loveApprovalAudit(id,jobNum,reason,issh);
+    }
+
+    //停运协查审批下拉栏
+    @RequestMapping("/getThisTableField")
+    @ResponseBody
+    public String getThisTableField(String field){
+        return areaService.getThisTableField(field);
+    }
+
+    //停运协查审批查询
+    @RequestMapping("/getDecommissioningAssistanceApproval")
+    @ResponseBody
+    public String getDecommissioningAssistanceApproval(String vehicle, String companyName, String assist, String stime, String etime, String type){
+        return areaService.getDecommissioningAssistanceApproval(vehicle, companyName, assist, stime, etime, type);
+    }
+
+    //停运协查审批
+    @RequestMapping("/decommissioningAssistanceAudit")
+    @ResponseBody
+    public Integer decommissioningAssistanceAudit(String id,String jobNum,String reason, String issh){
+        return areaService.decommissioningAssistanceAudit(id,jobNum,reason,issh);
+    }
+
+    //审批管理
+    @RequestMapping("/auditManage")
+    @ResponseBody
+    public String auditManage(HttpServletRequest request){
+        return areaService.auditManage(request);
+    }
 }
